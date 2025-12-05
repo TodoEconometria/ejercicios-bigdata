@@ -1,6 +1,6 @@
 # 👨‍🎓 Guía Completa para Alumnos
 
-Esta guía contiene **TODO** lo que necesitas saber para trabajar en este repositorio.
+Esta guía contiene todo lo que necesitas saber para trabajar en este repositorio.
 
 ---
 
