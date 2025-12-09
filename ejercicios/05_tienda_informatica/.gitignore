@@ -1,0 +1,45 @@
+# Base de datos SQLite
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Archivos CSV de datos
+datos/*.csv
+datos/**/*.csv
+
+# Archivos ZIP de datos
+*.zip
+
+# Carpeta completa de datos (excepto .gitkeep)
+datos/csv_tienda_informatica/
+
+# Archivos de logs
+logs/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Entornos virtuales
+venv/
+.venv/
+ENV/
+
+# Archivos temporales
+*.tmp
+*.bak
+*~
+
+# Soluciones de alumnos (solo en el fork)
+soluciones/
+entregas/
+mi_solucion/
