@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Datos de Taxis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { padding: 20px; }
+        .plot-container { margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Análisis Exploratorio de Datos de Taxis de NYC</h1>
+        
+        <hr>
+        
+        <h2>Primeras 5 Filas de Datos</h2>
+        <p>Estos son los primeros registros del conjunto de datos.</p>
+        <div class="table-responsive">
+            <!-- Aquí se insertará la tabla de datos desde Python -->
+            {{ table|safe }}
+        </div>
+        
+        <hr>
+        
+        <h2>Visualización de Datos</h2>
+        <p>A continuación se muestra un histograma interactivo.</p>
+        <div class="plot-container">
+            <!-- Aquí se insertará el gráfico de Plotly desde Python -->
+            {{ plot_div|safe }}
+        </div>
+        
+    </div>
+</body>
+</html>

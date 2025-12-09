@@ -1,8 +1,6 @@
+flask
 pandas
-sqlalchemy
-pyarrow
-dask[dataframe]
-pyspark
-matplotlib
-seaborn
+plotly
+numpy
 requests
+gunicorn

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Taxis de NYC - Aurora Esther FZ</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <style>
+        :root {
+            --color-fondo: #f0f2f5;
+            --color-tarjeta: #ffffff;
+            --color-texto-principal: #1c2b36;
+            --color-texto-secundario: #5a6e7f;
+            --sombra-tarjeta: 0 6px 12px rgba(0, 0, 0, 0.1);
+            --color-acento: #f39c12;
+        }
+        body { padding: 20px; background-color: var(--color-fondo); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .container-fluid { padding: 30px; }
+        h1 { font-weight: 700; }
+        h1 i { color: var(--color-acento); }
+        .plot-card { margin-bottom: 30px; border: none; border-radius: 12px; padding: 20px; background-color: var(--color-tarjeta); box-shadow: var(--sombra-tarjeta); }
+        .stats-table { background-color: var(--color-tarjeta); border-radius: 12px; padding: 20px; box-shadow: var(--sombra-tarjeta); }
+        .table thead th { border-bottom: 2px solid var(--color-texto-principal); color: var(--color-texto-principal); }
+        .table td, .table th { vertical-align: middle; }
+        .table-striped tbody tr:nth-of-type(odd) { background-color: rgba(0,0,0,.03); }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1 class="text-center mb-4"><i class="fas fa-taxi"></i> Dashboard de Taxis de NYC</h1>
+        
+        <!-- Sección de Estadísticas Detalladas -->
+        <div class="stats-table mb-5">
+            <h2 class="text-center mb-4">Resumen Estadístico (Total de Viajes: {{ estadisticas.total_viajes }})</h2>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover text-center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Métrica</th>
+                            <th>Promedio (Media)</th>
+                            <th>Mediana</th>
+                            <th>Mínimo</th>
+                            <th>Máximo</th>
+                            <th>Desv. Estándar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Distancia (millas)</strong></td>
+                            <td>{{ estadisticas.resumen_distancia.mean }}</td>
+                            <td>{{ estadisticas.resumen_distancia.median }}</td>
+                            <td>{{ estadisticas.resumen_distancia.min }}</td>
+                            <td>{{ estadisticas.resumen_distancia.max }}</td>
+                            <td>{{ estadisticas.resumen_distancia.std }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tarifa ($)</strong></td>
+                            <td>{{ estadisticas.resumen_tarifa.mean }}</td>
+                            <td>{{ estadisticas.resumen_tarifa.median }}</td>
+                            <td>{{ estadisticas.resumen_tarifa.min }}</td>
+                            <td>{{ estadisticas.resumen_tarifa.max }}</td>
+                            <td>{{ estadisticas.resumen_tarifa.std }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Duración (minutos)</strong></td>
+                            <td>{{ estadisticas.resumen_duracion.mean }}</td>
+                            <td>{{ estadisticas.resumen_duracion.median }}</td>
+                            <td>{{ estadisticas.resumen_duracion.min }}</td>
+                            <td>{{ estadisticas.resumen_duracion.max }}</td>
+                            <td>{{ estadisticas.resumen_duracion.std }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Sección de Gráficos -->
+        <div class="row">
+            <div class="col-lg-8"><div class="plot-card">{{ grafico1 | safe }}</div></div>
+            <div class="col-lg-4"><div class="plot-card">{{ grafico3 | safe }}</div></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7"><div class="plot-card">{{ grafico4 | safe }}</div></div>
+            <div class="col-lg-5"><div class="plot-card">{{ grafico5 | safe }}</div></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12"><div class="plot-card">{{ grafico2 | safe }}</div></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12"><div class="plot-card">{{ grafico6 | safe }}</div></div>
+        </div>
+    </div>
+</body>
+</html>

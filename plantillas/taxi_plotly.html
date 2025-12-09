@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Taxis de NYC</title>
+    
+    <!-- Librerías de Estilos e Iconos -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- Librería de Gráficos -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <style>
+        /* Paleta de colores y fuentes */
+        :root {
+            --color-fondo: #f0f2f5;
+            --color-tarjeta: #ffffff;
+            --color-texto-principal: #1c2b36;
+            --color-texto-secundario: #5a6e7f;
+            --color-acento: #f39c12; /* Un amarillo taxi */
+            --sombra-tarjeta: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        body { 
+            padding: 20px; 
+            background-color: var(--color-fondo);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container { 
+            background-color: var(--color-tarjeta); 
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: var(--sombra-tarjeta);
+        }
+
+        h1 { 
+            color: var(--color-texto-principal); 
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        h1 i {
+            color: var(--color-acento);
+            margin-right: 15px;
+        }
+
+        h2 {
+            color: var(--color-texto-principal);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            color: var(--color-texto-secundario);
+        }
+
+        .lead {
+            color: var(--color-texto-secundario);
+        }
+
+        .plot-card { 
+            margin-bottom: 30px; 
+            border: none;
+            border-radius: 8px; 
+            padding: 20px; 
+            background-color: #fff;
+            box-shadow: var(--sombra-tarjeta);
+            transition: transform 0.2s;
+        }
+        
+        .plot-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center"><i class="fas fa-taxi"></i>Análisis de Datos de Taxis de NYC</h1>
+        <p class="lead text-center">Exploración de viajes, ingresos y propinas por hora.</p>
+        <hr>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="plot-card">
+                    <h2 class="text-center"><i class="fas fa-list-ol"></i>Número de Viajes por Hora</h2>
+                    <div id="grafico1"></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="plot-card">
+                    <h2 class="text-center"><i class="fas fa-dollar-sign"></i>Ingresos Totales por Hora</h2>
+                    <div id="grafico2"></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="plot-card">
+                    <h2 class="text-center"><i class="fas fa-hand-holding-usd"></i>Propina Media por Hora</h2>
+                    <div id="grafico3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function renderPlotlyGraph(graphDivId, graphData) {
+            if (graphData && Object.keys(graphData).length > 0) {
+                // Hacemos los gráficos transparentes para que cojan el color de fondo de la tarjeta
+                graphData.layout.paper_bgcolor = 'rgba(0,0,0,0)';
+                graphData.layout.plot_bgcolor = 'rgba(0,0,0,0)';
+                Plotly.newPlot(graphDivId, graphData.data, graphData.layout, {responsive: true});
+            } else {
+                document.getElementById(graphDivId).innerHTML = '<p class="text-center text-muted">No hay datos disponibles para este gráfico.</p>';
+            }
+        }
+
+        var grafico1_data = {{ grafico1 | safe }};
+        var grafico2_data = {{ grafico2 | safe }};
+        var grafico3_data = {{ grafico3 | safe }};
+
+        renderPlotlyGraph('grafico1', grafico1_data);
+        renderPlotlyGraph('grafico2', grafico2_data);
+        renderPlotlyGraph('grafico3', grafico3_data);
+    </script>
+</body>
+</html>
