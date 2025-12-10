@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Taxis NYC</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #1a237e, #283593);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            height: 450px;
+        }
+
+        .chart-title {
+            color: #1a237e;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e8eaf6;
+            padding-bottom: 10px;
+        }
+
+        .filters-panel {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .footer {
+            background: #1a237e;
+            color: white;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-taxi me-2"></i>
+                Dashboard - Análisis de Taxis NYC
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="mb-4">
+            <h1 class="text-primary">
+                <i class="fas fa-chart-line me-2"></i>
+                Análisis de Viajes en Taxi - Nueva York
+            </h1>
+            <p class="text-muted">
+                Dashboard interactivo para explorar y analizar datos de viajes en taxi de NYC
+            </p>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters-panel">
+            <h4 class="chart-title">
+                <i class="fas fa-filter me-2"></i>
+                Filtros
+            </h4>
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label">Distancia Mínima: <span id="minDistanceValue">0</span> millas</label>
+                    <input type="range" class="form-range" id="minDistance" min="0" max="50" value="0" step="0.5">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Distancia Máxima: <span id="maxDistanceValue">50</span> millas</label>
+                    <input type="range" class="form-range" id="maxDistance" min="0" max="50" value="50" step="0.5">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Pasajeros Mínimos: <span id="minPassengersValue">0</span></label>
+                    <input type="range" class="form-range" id="minPassengers" min="0" max="6" value="0">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Pasajeros Máximos: <span id="maxPassengersValue">6</span></label>
+                    <input type="range" class="form-range" id="maxPassengers" min="0" max="6" value="6">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <button id="applyFilters" class="btn btn-primary">
+                        <i class="fas fa-sync-alt me-2"></i>
+                        Aplicar Filtros
+                    </button>
+                    <button id="resetFilters" class="btn btn-outline-secondary">
+                        <i class="fas fa-redo me-2"></i>
+                        Reiniciar
+                    </button>
+                    <span id="filterInfo" class="badge bg-info ms-2">Mostrando todos los datos</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estadísticas -->
+        <h3 class="mt-4 mb-3">
+            <i class="fas fa-chart-bar me-2"></i>
+            Estadísticas Principales
+        </h3>
+
+        <div class="row">
+            <div class="col-md-2 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon text-primary">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="stat-value text-primary" id="total_viajes">
+                        {{ "{:,}".format(stats.total_viajes) }}
+                    </div>
+                    <div class="stat-label">
+                        Total de Viajes
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon text-warning">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <div class="stat-value text-warning" id="distancia_promedio">
+                        {{ "%.2f"|format(stats.distancia_promedio) }}
+                    </div>
+                    <div class="stat-label">
+                        Distancia Promedio
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon text-success">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-value text-success" id="tarifa_promedio">
+                        ${{ "%.2f"|format(stats.tarifa_promedio) }}
+                    </div>
+                    <div class="stat-label">
+                        Tarifa Promedio
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon text-info">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <div class="stat-value text-info" id="pasajeros_mas_frecuentes">
+                        {{ stats.pasajeros_mas_frecuentes }}
+                    </div>
+                    <div class="stat-label">
+                        Pasajeros Más Frecuentes
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon text-danger">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-value text-danger" id="valores_nulos">
+                        {{ "{:,}".format(stats.valores_nulos) }}
+                    </div>
+                    <div class="stat-label">
+                        Valores Nulos
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: #8c564b;">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="stat-value" style="color: #8c564b;" id="ingreso_total">
+                        ${{ "%.2f"|format(stats.ingreso_total) }}
+                    </div>
+                    <div class="stat-label">
+                        Ingreso Total
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficos -->
+        <h3 class="mt-5 mb-3">
+            <i class="fas fa-chart-area me-2"></i>
+            Visualizaciones
+        </h3>
+
+        <div class="row">
+            <!-- Gráfico 1: Distribución de distancias -->
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <h5 class="chart-title">Distribución de Distancias de Viaje</h5>
+                    <div id="distanciaChart"></div>
+                </div>
+            </div>
+
+            <!-- Gráfico 2: Distribución de tarifas -->
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <h5 class="chart-title">Distribución de Tarifas</h5>
+                    <div id="tarifaChart"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <!-- Gráfico 3: Pasajeros por viaje -->
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <h5 class="chart-title">Distribución de Pasajeros por Viaje</h5>
+                    <div id="pasajerosChart"></div>
+                </div>
+            </div>
+
+            <!-- Gráfico 4: Viajes por hora -->
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <h5 class="chart-title">Viajes por Hora del Día</h5>
+                    <div id="horasChart"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfico 5: Distancia vs Tarifa -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="chart-container">
+                    <h5 class="chart-title">Relación entre Distancia y Tarifa</h5>
+                    <div id="distanciaTarifaChart"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información adicional -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="chart-container">
+                    <h5 class="chart-title">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Información del Dataset
+                    </h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Total de registros:</strong> {{ "{:,}".format(stats.total_viajes) }}</p>
+                            <p><strong>Distancia máxima:</strong> {{ "%.2f"|format(stats.distancia_maxima) }} millas</p>
+                            <p><strong>Tarifa máxima:</strong> ${{ "%.2f"|format(stats.tarifa_maxima) }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Propina promedio:</strong> ${{ "%.2f"|format(stats.propina_promedio) }}</p>
+                            <p><strong>Duración promedio:</strong> {{ "%.1f"|format(stats.duracion_promedio) }} minutos</p>
+                            <p><strong>Pasajeros menos frecuentes:</strong> {{ stats.pasajeros_menos_frecuentes }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Dashboard de Análisis de Taxis NYC</h5>
+                    <p>Proyecto de Análisis Exploratorio de Datos</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>Desarrollado con Flask, Plotly y Bootstrap</p>
+                    <p class="small">Datos: NYC Taxi & Limousine Commission</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Datos iniciales de gráficos
+        const chartsData = {{ charts|tojson|safe }};
+
+        // Función para formatear números
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Inicializar gráficos
+        function initializeCharts() {
+            console.log("Inicializando gráficos...");
+
+            // Gráfico 1: Distribución de distancias (Histograma)
+            if (chartsData.distancia) {
+                const trace1 = {
+                    x: chartsData.distancia.x,
+                    type: 'histogram',
+                    nbinsx: chartsData.distancia.nbinsx,
+                    marker: {
+                        color: chartsData.distancia.color,
+                        opacity: 0.7
+                    },
+                    name: 'Distancia'
+                };
+
+                const layout1 = {
+                    title: chartsData.distancia.title,
+                    xaxis: { title: chartsData.distancia.xaxis_title },
+                    yaxis: { title: chartsData.distancia.yaxis_title },
+                    hovermode: 'closest'
+                };
+
+                Plotly.newPlot('distanciaChart', [trace1], layout1);
+            }
+
+            // Gráfico 2: Distribución de tarifas (Box Plot)
+            if (chartsData.tarifa) {
+                const trace2 = {
+                    y: chartsData.tarifa.y,
+                    type: 'box',
+                    name: 'Tarifa',
+                    marker: {
+                        color: chartsData.tarifa.color
+                    }
+                };
+
+                const layout2 = {
+                    title: chartsData.tarifa.title,
+                    yaxis: { title: chartsData.tarifa.yaxis_title }
+                };
+
+                Plotly.newPlot('tarifaChart', [trace2], layout2);
+            }
+
+            // Gráfico 3: Pasajeros por viaje (Bar Chart)
+            if (chartsData.pasajeros) {
+                const trace3 = {
+                    x: chartsData.pasajeros.x,
+                    y: chartsData.pasajeros.y,
+                    type: 'bar',
+                    marker: {
+                        color: chartsData.pasajeros.color
+                    },
+                    name: 'Pasajeros'
+                };
+
+                const layout3 = {
+                    title: chartsData.pasajeros.title,
+                    xaxis: { title: chartsData.pasajeros.xaxis_title },
+                    yaxis: { title: chartsData.pasajeros.yaxis_title }
+                };
+
+                Plotly.newPlot('pasajerosChart', [trace3], layout3);
+            }
+
+            // Gráfico 4: Viajes por hora (Line Chart)
+            if (chartsData.horas) {
+                const trace4 = {
+                    x: chartsData.horas.x,
+                    y: chartsData.horas.y,
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    line: {
+                        color: chartsData.horas.color,
+                        width: 2
+                    },
+                    marker: {
+                        size: 8,
+                        color: chartsData.horas.color
+                    },
+                    name: 'Viajes por Hora'
+                };
+
+                const layout4 = {
+                    title: chartsData.horas.title,
+                    xaxis: {
+                        title: chartsData.horas.xaxis_title,
+                        tickmode: 'linear',
+                        dtick: 1
+                    },
+                    yaxis: { title: chartsData.horas.yaxis_title }
+                };
+
+                Plotly.newPlot('horasChart', [trace4], layout4);
+            }
+
+            // Gráfico 5: Distancia vs Tarifa (Scatter Plot)
+            if (chartsData.distancia_vs_tarifa) {
+                const trace5 = {
+                    x: chartsData.distancia_vs_tarifa.x,
+                    y: chartsData.distancia_vs_tarifa.y,
+                    type: 'scatter',
+                    mode: 'markers',
+                    marker: {
+                        color: chartsData.distancia_vs_tarifa.color,
+                        size: 5,
+                        opacity: 0.6
+                    },
+                    name: 'Viajes'
+                };
+
+                const layout5 = {
+                    title: chartsData.distancia_vs_tarifa.title,
+                    xaxis: { title: chartsData.distancia_vs_tarifa.xaxis_title },
+                    yaxis: { title: chartsData.distancia_vs_tarifa.yaxis_title }
+                };
+
+                Plotly.newPlot('distanciaTarifaChart', [trace5], layout5);
+            }
+        }
+
+        // Actualizar gráficos con nuevos datos
+        function updateCharts(charts) {
+            // Actualizar gráfico de distancias
+            if (charts.distancia) {
+                const update1 = {
+                    x: [charts.distancia.x]
+                };
+                Plotly.restyle('distanciaChart', update1);
+            }
+
+            // Actualizar gráfico de tarifas
+            if (charts.tarifa) {
+                const update2 = {
+                    y: [charts.tarifa.y]
+                };
+                Plotly.restyle('tarifaChart', update2);
+            }
+
+            // Actualizar gráfico de pasajeros
+            if (charts.pasajeros) {
+                const update3 = {
+                    x: [charts.pasajeros.x],
+                    y: [charts.pasajeros.y]
+                };
+                Plotly.restyle('pasajerosChart', update3);
+            }
+
+            // Actualizar gráfico de horas
+            if (charts.horas) {
+                const update4 = {
+                    x: [charts.horas.x],
+                    y: [charts.horas.y]
+                };
+                Plotly.restyle('horasChart', update4);
+            }
+
+            // Actualizar gráfico de distancia vs tarifa
+            if (charts.distancia_vs_tarifa) {
+                const update5 = {
+                    x: [charts.distancia_vs_tarifa.x],
+                    y: [charts.distancia_vs_tarifa.y]
+                };
+                Plotly.restyle('distanciaTarifaChart', update5);
+            }
+        }
+
+        // Actualizar estadísticas
+        function updateStatistics(stats) {
+            document.getElementById('total_viajes').textContent = formatNumber(stats.total_viajes);
+            document.getElementById('distancia_promedio').textContent = stats.distancia_promedio.toFixed(2);
+            document.getElementById('tarifa_promedio').textContent = '$' + stats.tarifa_promedio.toFixed(2);
+            document.getElementById('pasajeros_mas_frecuentes').textContent = stats.pasajeros_mas_frecuentes;
+            document.getElementById('valores_nulos').textContent = formatNumber(stats.valores_nulos);
+            document.getElementById('ingreso_total').textContent = '$' + stats.ingreso_total.toFixed(2);
+        }
+
+        // Aplicar filtros
+        function applyFilters() {
+            const minDistance = parseFloat(document.getElementById('minDistance').value);
+            const maxDistance = parseFloat(document.getElementById('maxDistance').value);
+            const minPassengers = parseInt(document.getElementById('minPassengers').value);
+            const maxPassengers = parseInt(document.getElementById('maxPassengers').value);
+
+            // Mostrar loading
+            document.getElementById('filterInfo').textContent = 'Aplicando filtros...';
+            document.getElementById('filterInfo').className = 'badge bg-warning ms-2';
+
+            fetch('/api/filter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    min_distance: minDistance,
+                    max_distance: maxDistance,
+                    min_passengers: minPassengers,
+                    max_passengers: maxPassengers
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                updateStatistics(data.stats);
+                updateCharts(data.charts);
+
+                // Actualizar información del filtro
+                const filterInfo = document.getElementById('filterInfo');
+                filterInfo.textContent = `Mostrando ${formatNumber(data.filtered_count)} de ${formatNumber(data.original_count)} registros`;
+                filterInfo.className = 'badge bg-success ms-2';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('filterInfo').textContent = 'Error aplicando filtros';
+                document.getElementById('filterInfo').className = 'badge bg-danger ms-2';
+            });
+        }
+
+        // Reiniciar filtros
+        function resetFilters() {
+            document.getElementById('minDistance').value = 0;
+            document.getElementById('maxDistance').value = 50;
+            document.getElementById('minPassengers').value = 0;
+            document.getElementById('maxPassengers').value = 6;
+
+            updateSliderValues();
+            applyFilters();
+        }
+
+        // Actualizar valores de los sliders
+        function updateSliderValues() {
+            document.getElementById('minDistanceValue').textContent = document.getElementById('minDistance').value;
+            document.getElementById('maxDistanceValue').textContent = document.getElementById('maxDistance').value;
+            document.getElementById('minPassengersValue').textContent = document.getElementById('minPassengers').value;
+            document.getElementById('maxPassengersValue').textContent = document.getElementById('maxPassengers').value;
+        }
+
+        // Event listeners cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar gráficos
+            initializeCharts();
+
+            // Actualizar valores de sliders
+            updateSliderValues();
+
+            // Event listeners para sliders
+            document.getElementById('minDistance').addEventListener('input', function() {
+                document.getElementById('minDistanceValue').textContent = this.value;
+            });
+
+            document.getElementById('maxDistance').addEventListener('input', function() {
+                document.getElementById('maxDistanceValue').textContent = this.value;
+            });
+
+            document.getElementById('minPassengers').addEventListener('input', function() {
+                document.getElementById('minPassengersValue').textContent = this.value;
+            });
+
+            document.getElementById('maxPassengers').addEventListener('input', function() {
+                document.getElementById('maxPassengersValue').textContent = this.value;
+            });
+
+            // Event listeners para botones
+            document.getElementById('applyFilters').addEventListener('click', applyFilters);
+            document.getElementById('resetFilters').addEventListener('click', resetFilters);
+
+            // Aplicar filtros automáticamente al cambiar sliders
+            const sliders = ['minDistance', 'maxDistance', 'minPassengers', 'maxPassengers'];
+            sliders.forEach(sliderId => {
+                document.getElementById(sliderId).addEventListener('change', applyFilters);
+            });
+        });
+    </script>
+</body>
+</html>
