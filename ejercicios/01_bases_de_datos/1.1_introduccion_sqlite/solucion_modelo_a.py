@@ -21,8 +21,13 @@ from pathlib import Path
 # ═══════════════════════════════════════════════════════════════════
 
 # Ruta a la carpeta con los CSVs (ajusta según tu estructura)
-BASE_DIR = Path(__file__).parent.parent.parent.parent
-RUTA_CSVs = BASE_DIR / ".profesor" / ".datos" / "csv_tienda_informatica"
+#BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+#RUTA_CSVs = BASE_DIR / "datos" / "csv_tienda_informatica"
+
+# .../ejercicios-bigdata/ejercicios/01_bases_de_datos/1.1_introduccion_sqlite/solucion_modelo_a.py
+BASE_DIR = Path(__file__).resolve().parents[3]  # → ejercicios-bigdata
+
+RUTA_CSVs = BASE_DIR / "datos" / "csv_tienda_informatica" / "csv_tienda_informatica"
 RUTA_DB = Path(__file__).parent / "tienda_modelo_a.db"
 
 print(f"📂 Buscando CSVs en: {RUTA_CSVs}")
@@ -85,7 +90,6 @@ def cargar_csv_a_tabla(ruta_csv, conexion):
     except Exception as e:
         print(f"   └─ ❌ Error: {e}\n")
         return (nombre_tabla, 0)
-
 
 # ═══════════════════════════════════════════════════════════════════
 # SCRIPT PRINCIPAL

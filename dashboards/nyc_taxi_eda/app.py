@@ -11,8 +11,9 @@ import os
 app = Flask(__name__)
 
 # Ruta al archivo de datos
-DATA_PATH = os.path.join('..', '..', 'datos', 'nyc_taxi.csv')
 
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+DATA_PATH = os.path.join(BASE_DIR, "datos", "nyc_taxi.csv")
 def cargar_datos():
     """Carga y prepara los datos para análisis"""
     try:
