@@ -2,7 +2,7 @@ import os
 import requests
 import gzip
 import shutil
-
+# CARLOS MALPICA
 # URL del dataset (Enero 2021) - Usamos una fuente alternativa confiable (DataTalksClub)
 # El archivo viene comprimido en GZIP (.gz)
 DATA_URL = "https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz"
