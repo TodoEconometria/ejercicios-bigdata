@@ -26,7 +26,7 @@ import re
 # ═══════════════════════════════════════════════════════════════════
 
 BASE_DIR = Path(__file__).parent.parent.parent.parent
-RUTA_CSVs = BASE_DIR / ".profesor" / ".datos" / "csv_tienda_informatica"
+RUTA_CSVs = BASE_DIR / "datos" / "csv_tienda_informatica"
 RUTA_DB = Path(__file__).parent / "tienda_modelo_b.db"
 
 print(f"📂 Buscando CSVs en: {RUTA_CSVs}")
