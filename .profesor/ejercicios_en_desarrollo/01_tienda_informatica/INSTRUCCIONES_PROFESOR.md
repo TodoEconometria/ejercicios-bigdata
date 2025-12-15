@@ -1,5 +1,20 @@
 # 👨‍🏫 Instrucciones para el Profesor - Ejercicio 01
 
+> ⚠️ **IMPORTANTE - Protección de Rama Activa**
+>
+> La rama `main` del repositorio público está **PROTEGIDA**.
+> **NO puedes hacer `git push origin main` directo.**
+>
+> **Flujo obligatorio:**
+> 1. Trabajas en `desarrollo` (repo privado)
+> 2. Push a `desarrollo/desarrollo`
+> 3. Creas Pull Request: desarrollo → main
+> 4. Mergeas el PR (desde GitHub Web o con `gh pr merge`)
+>
+> **¿Por qué?** Evita errores, permite revisión, historial limpio.
+
+---
+
 ## 📋 Resumen del Ejercicio
 
 **Ejercicio 01**: Base de Datos Relacional - Tienda Informática
@@ -498,16 +513,29 @@ git commit -m "PUBLISH: Ejercicio 1.1 para alumnos"
 # ✅ PASO 4: Sube a repo privado primero (backup)
 git push desarrollo desarrollo
 
-# ✅ PASO 5: Cambia a rama main
-git checkout main
+# ✅ PASO 5: Publicar a repo PÚBLICO
+# NOTA: La rama main está PROTEGIDA (no se puede push directo)
+# Debes crear un Pull Request
 
-# ✅ PASO 6: Trae los cambios de desarrollo
-git merge desarrollo --no-edit
+# Opción A: Desde GitHub Web (MÁS RÁPIDO)
+# 1. Ve a: https://github.com/TodoEconometria/ejercicios-bigdata-profesor
+# 2. Click "Compare & pull request" (banner amarillo)
+# 3. Base: TodoEconometria/ejercicios-bigdata (main)
+#    Compare: TodoEconometria/ejercicios-bigdata-profesor (desarrollo)
+# 4. Click "Create pull request"
+# 5. Click "Merge pull request" → "Confirm merge"
 
-# ✅ PASO 7: Sube a repo PÚBLICO (lo que ven los alumnos)
-git push origin main
+# Opción B: Desde terminal con gh
+gh pr create --repo TodoEconometria/ejercicios-bigdata \
+  --base main \
+  --head TodoEconometria:desarrollo \
+  --title "PUBLISH: Ejercicio 1.1 para alumnos" \
+  --body "Publicar ejercicio 1.1"
 
-# ✅ PASO 8: Vuelve a desarrollo (tu rama de trabajo)
+# Luego mergear el PR:
+gh pr merge --repo TodoEconometria/ejercicios-bigdata --merge
+
+# ✅ PASO 6: Vuelve a desarrollo (tu rama de trabajo)
 git checkout desarrollo
 
 # 🎉 LISTO! Los alumnos pueden ver el ejercicio en GitHub
@@ -653,11 +681,18 @@ git commit -m "FIX: Corregir instrucciones ejercicio 1.1"
 # ✅ PASO 4: Sube a repo privado
 git push desarrollo desarrollo
 
-# ✅ PASO 5: Publica al repo público
-git checkout main
-git merge desarrollo --no-edit
-git push origin main
-git checkout desarrollo
+# ✅ PASO 5: Publica al repo público (vía PR)
+# NOTA: main está protegida, usar PR
+
+# Opción A: GitHub Web
+# 1. Ve a https://github.com/TodoEconometria/ejercicios-bigdata-profesor
+# 2. "Compare & pull request" → Crear PR → Merge
+
+# Opción B: Terminal
+gh pr create --repo TodoEconometria/ejercicios-bigdata \
+  --base main --head TodoEconometria:desarrollo \
+  --title "FIX: Corregir ejercicio 1.1" --body "Correcciones"
+gh pr merge --repo TodoEconometria/ejercicios-bigdata --merge
 
 # 🎉 LISTO! Cambios publicados
 ```
@@ -842,11 +877,10 @@ Tu entrega tiene problemas significativos que requieren que rehagas varias parte
 └─────────────────────────────────────────┘
               ↓
 ┌─────────────────────────────────────────┐
-│  2. TÚ PUBLICAS (main)                  │
-│     git checkout main                   │
-│     git merge desarrollo                │
-│     git push origin main                │
-│     git checkout desarrollo             │
+│  2. TÚ PUBLICAS (main) - VÍA PR         │
+│     git push desarrollo desarrollo      │
+│     gh pr create → Merge PR             │
+│     (main está protegida)               │
 └─────────────────────────────────────────┘
               ↓
 ┌─────────────────────────────────────────┐

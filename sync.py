@@ -166,13 +166,15 @@ def sync_push():
 
 
 def sync_publicar():
-    """Publica cambios de rama desarrollo a main público."""
+    """Publica cambios de rama desarrollo a main público vía Pull Request."""
     print("=" * 60)
-    print("[PUBLICAR] DESARROLLO -> MAIN PUBLICO")
+    print("[PUBLICAR] DESARROLLO -> MAIN PUBLICO (VIA PR)")
     print("=" * 60)
 
+    print("\n[INFO] La rama main está PROTEGIDA - requiere Pull Request")
+    print("[INFO] Este comando te guiará en el proceso...\n")
+
     current_branch = get_current_branch()
-    print(f"\n[INFO] Rama actual: {current_branch}")
 
     # Verificar que no hay cambios sin commitear
     result = subprocess.run(
@@ -187,28 +189,49 @@ def sync_publicar():
         run_command("git status", "")
         return False
 
-    # Cambiar a main
-    if not run_command("git checkout main", "Cambiando a rama main"):
+    # Asegurarse de estar en desarrollo
+    if current_branch != "desarrollo":
+        if not run_command("git checkout desarrollo", "Cambiando a rama desarrollo"):
+            return False
+
+    # Push desarrollo al remoto privado
+    print("[PASO 1/3] Subiendo desarrollo al repo privado...")
+    if not run_command("git push desarrollo desarrollo", ""):
         return False
 
-    # Merge desarrollo en main (fast-forward)
-    if not run_command("git merge desarrollo --no-edit", "Mergeando desarrollo en main"):
-        print("\n[WARN] Si hay conflictos, resuélvelos y luego:")
-        print("    git add .")
-        print("    git commit")
-        print("    git push origin main")
-        print("    git checkout desarrollo")
+    # Merge local para actualizar main
+    print("\n[PASO 2/3] Actualizando tu main local...")
+    if not run_command("git checkout main", ""):
         return False
 
-    # Push a origin/main (público)
-    if not run_command("git push origin main", "Publicando en origin/main (público)"):
+    if not run_command("git merge desarrollo --no-edit", ""):
+        print("[ERROR] Error en merge. Resuelve conflictos y vuelve a intentar.")
+        run_command("git checkout desarrollo", "")
         return False
 
-    # Volver a desarrollo
-    if not run_command("git checkout desarrollo", "Volviendo a rama desarrollo"):
-        return False
+    run_command("git checkout desarrollo", "")
 
-    print("\n[OK] Cambios publicados exitosamente en repo público")
+    # Instrucciones para publicar
+    print("\n[PASO 3/3] Publicar al repo público:")
+    print("=" * 60)
+    print("\nLa rama main está protegida. Usa UNO de estos métodos:\n")
+
+    print("OPCIÓN A - GitHub Web (MÁS RÁPIDO):")
+    print("1. Ve a: https://github.com/TodoEconometria/ejercicios-bigdata-profesor")
+    print("2. Click 'Contribute' → 'Open pull request'")
+    print("3. Click 'Create pull request' → 'Merge pull request'")
+
+    print("\nOPCIÓN B - Línea de comandos (gh CLI):")
+    print("gh pr create --repo TodoEconometria/ejercicios-bigdata \\")
+    print("  --base main --head TodoEconometria:desarrollo \\")
+    print("  --title 'SYNC: Publicar cambios' --body 'Sync desde desarrollo'")
+    print("\nLuego mergear:")
+    print("gh pr merge --repo TodoEconometria/ejercicios-bigdata --merge")
+
+    print("\n" + "=" * 60)
+    print("[OK] Desarrollo actualizado en repo privado")
+    print("[MANUAL] Completa el PASO 3 para publicar al repo público")
+
     return True
 
 

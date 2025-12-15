@@ -118,3 +118,4 @@ evaluaciones/
 # ❌ EVITAR:     Mensajes largos con múltiples líneas
 #
 # Razón: Mensajes cortos = tooltips pequeños en GitHub
+datos/csv_tienda_informatica/
