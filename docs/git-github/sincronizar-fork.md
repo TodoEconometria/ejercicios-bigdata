@@ -9,15 +9,20 @@
 
 Cuando haces fork, obtienes una **copia en ese momento**. Durante el curso agregare ejercicios nuevos, pero **tu fork NO se actualiza solo**.
 
-```
-SEMANA 1: Hiciste Fork
-  Repo Profesor: [01] [02]
-  Tu Fork:       [01] [02] ✅
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#e1f5ff','primaryTextColor':'#000','primaryBorderColor':'#0277bd','lineColor':'#f57f17','secondaryColor':'#fff9c4','tertiaryColor':'#ffebee'}}}%%
+timeline
+    title Problema de Sincronización del Fork
+    section Semana 1
+        Hiciste Fork
+            : Repo Profesor [01] [02]
+            : Tu Fork [01] [02] ✅
+    section Semana 3
+        Profesor agregó ejercicios
+            : Repo Profesor [01] [02] [03] [04] [05]
+            : Tu Fork [01] [02] ❌
+            : Te faltan [03] [04] [05]
 
-SEMANA 3: Profesor agrego ejercicios
-  Repo Profesor: [01] [02] [03] [04] [05]
-  Tu Fork:       [01] [02] ❌ (te faltan 03, 04, 05)
-```
 
 ---
 
@@ -36,31 +41,24 @@ https://github.com/TU_USUARIO/ejercicios-bigdata
 
 **Paso 2:** Buscar el banner de sincronizacion
 
-Cuando hay cambios nuevos, veras un banner:
+Cuando hay cambios nuevos, veras un banner así:
 
-```
-┌────────────────────────────────────────────────────┐
-│  ⚠️ This branch is 15 commits behind                │
-│     TodoEconometria:main                            │
-│                                                     │
-│     [Sync fork ▼]  ← CLICK AQUI                    │
-└────────────────────────────────────────────────────┘
-```
+!!! example "Banner en GitHub"
+    ```
+    ⚠️ This branch is 15 commits behind TodoEconometria:main
+
+    [Sync fork ▼]  ← CLICK AQUI
+    ```
 
 **Paso 3:** Click en "Sync fork" → "Update branch"
 
-```
-┌────────────────────────────────────────────────────┐
-│  Sync fork                                          │
-│  ┌────────────────────────────────────────────┐   │
-│  │ This will update your branch with the      │   │
-│  │ latest changes from TodoEconometria:main   │   │
-│  │                                             │   │
-│  │  [Update branch] ← CLICK AQUI              │   │
-│  │  [Discard commits]                          │   │
-│  └────────────────────────────────────────────┘   │
-└────────────────────────────────────────────────────┘
-```
+!!! example "Opciones de sincronización"
+    **Sync fork**
+
+    This will update your branch with the latest changes from TodoEconometria:main
+
+    **[Update branch]** ← CLICK AQUI
+    [Discard commits]
 
 **Paso 4:** Actualizar tu copia local
 
@@ -92,135 +90,103 @@ git push origin tu-apellido-ejercicio
 
 ### Como funciona la sincronizacion
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    FLUJO DE SINCRONIZACION                      │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  INICIO - Estado actual                                         │
-│  ━━━━━━━━━━━━━━━━━━━━━━━━━                                      │
-│                                                                  │
-│  📚 Repo Profesor (upstream)         🌐 Tu Fork (origin)        │
-│  ┌──────────────────────┐            ┌──────────────────────┐  │
-│  │ main:                │            │ main:                │  │
-│  │ [01][02][03][04][05] │            │ [01][02]             │  │
-│  │         ↑            │            │                      │  │
-│  │    Tiene nuevos!     │            │  Desactualizado!     │  │
-│  └──────────────────────┘            └──────────────────────┘  │
-│                                                                  │
-│  💻 Tu PC (local)                                               │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │ main: [01][02]                                           │  │
-│  │ garcia-ejercicio: [01][02] + TUS ARCHIVOS ✅             │  │
-│  └──────────────────────────────────────────────────────────┘  │
-│                                                                  │
-│  ═══════════════════════════════════════════════════════════   │
-│                                                                  │
-│  PASO 1: git checkout main                                      │
-│  ━━━━━━━━━━━━━━━━━━━━━━━━━━                                     │
-│                                                                  │
-│  💻 Tu PC - Te mueves a rama main                              │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │ ✓ main: [01][02]                     ← Estas aqui        │  │
-│  │   garcia-ejercicio: [01][02] + TUS ARCHIVOS              │  │
-│  └──────────────────────────────────────────────────────────┘  │
-│                                                                  │
-│  ═══════════════════════════════════════════════════════════   │
-│                                                                  │
-│  PASO 2: git fetch upstream + git merge upstream/main           │
-│  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━       │
-│                                                                  │
-│  📚 Repo Profesor ────────────────────────> 💻 Tu PC main      │
-│  ┌──────────────────────┐                  ┌────────────────┐  │
-│  │ [01][02][03][04][05] │ ─ Descarga ───>  │ [01][02]       │  │
-│  └──────────────────────┘    [03][04][05]  │ [03][04][05] ✨│  │
-│                                             └────────────────┘  │
-│                                                                  │
-│  💻 Tu PC despues del merge                                     │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │ ✓ main: [01][02][03][04][05]         ← Actualizado! ✅   │  │
-│  │   garcia-ejercicio: [01][02] + TUS ARCHIVOS              │  │
-│  └──────────────────────────────────────────────────────────┘  │
-│                                                                  │
-│  ═══════════════════════════════════════════════════════════   │
-│                                                                  │
-│  PASO 3: git checkout garcia-ejercicio                          │
-│  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━                          │
-│                                                                  │
-│  💻 Tu PC - Te mueves a tu rama de trabajo                     │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │   main: [01][02][03][04][05]                             │  │
-│  │ ✓ garcia-ejercicio: [01][02] + TUS ARCHIVOS ← Estas aqui │  │
-│  └──────────────────────────────────────────────────────────┘  │
-│                                                                  │
-│  ═══════════════════════════════════════════════════════════   │
-│                                                                  │
-│  PASO 4: git merge main                                         │
-│  ━━━━━━━━━━━━━━━━━━━━━━                                         │
-│                                                                  │
-│  💻 Combina main con tu rama de trabajo                        │
-│                                                                  │
-│  main: [01][02][03][04][05]                                     │
-│            │                                                     │
-│            │ merge (combinar)                                   │
-│            ↓                                                     │
-│  garcia-ejercicio: [01][02] + TUS ARCHIVOS                      │
-│                    [03][04][05] ✨                              │
-│                                                                  │
-│  💻 Tu PC despues del merge                                     │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │   main: [01][02][03][04][05]                             │  │
-│  │ ✓ garcia-ejercicio: [01-05] + TUS ARCHIVOS ✅            │  │
-│  │                      ↑                                    │  │
-│  │           Tienes todo: ejercicios nuevos + tu trabajo!   │  │
-│  └──────────────────────────────────────────────────────────┘  │
-│                                                                  │
-│  ═══════════════════════════════════════════════════════════   │
-│                                                                  │
-│  PASO 5: git push origin garcia-ejercicio                       │
-│  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━                         │
-│                                                                  │
-│  💻 Tu PC ──────────────────────────────> 🌐 Tu Fork           │
-│  ┌─────────────────────────┐             ┌──────────────────┐  │
-│  │ garcia-ejercicio:       │   Subir     │ garcia-ejercicio:│  │
-│  │ [01-05] + TUS ARCHIVOS  │ ─────────>  │ [01-05] + TUS   │  │
-│  └─────────────────────────┘             │     ARCHIVOS ✅  │  │
-│                                           └──────────────────┘  │
-│                                                                  │
-│  ✅ RESULTADO FINAL                                             │
-│  ━━━━━━━━━━━━━━━━━━                                             │
-│                                                                  │
-│  ✓ Tienes los ejercicios nuevos [03][04][05]                   │
-│  ✓ Tu trabajo esta intacto                                     │
-│  ✓ Todo subido a GitHub                                        │
-│  ✓ Listo para crear Pull Request                               │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
+sequenceDiagram
+    actor Tú
+    participant Local as 💻 Tu PC<br/>(main: 01, 02)
+    participant TuBranch as 💻 Tu PC<br/>(tu-rama: 01, 02 + TU CÓDIGO)
+    participant Origin as 🌐 Tu Fork GitHub<br/>(01, 02)
+    participant Upstream as 👨‍🏫 Repo Profesor<br/>(01, 02, 03, 04, 05)
+
+    Note over Tú,Upstream: ESTADO INICIAL - Tu fork desactualizado
+
+    rect rgb(255, 243, 224)
+    Note over Tú,Upstream: PASO 1: Cambiar a rama main
+    Tú->>Local: git checkout main
+    activate Local
+    Note over Local: Ahora estás en main
+    end
+
+    rect rgb(232, 245, 233)
+    Note over Tú,Upstream: PASO 2: Descargar y fusionar cambios del profesor
+    Tú->>Upstream: git fetch upstream
+    Upstream-->>Local: Descarga [03, 04, 05]
+    Tú->>Local: git merge upstream/main
+    Note over Local: main: 01, 02, 03, 04, 05 ✅
+    deactivate Local
+    end
+
+    rect rgb(237, 231, 246)
+    Note over Tú,Upstream: PASO 3: Cambiar a tu rama de trabajo
+    Tú->>TuBranch: git checkout tu-rama
+    activate TuBranch
+    Note over TuBranch: Ahora estás en tu-rama
+    end
+
+    rect rgb(255, 249, 196)
+    Note over Tú,Upstream: PASO 4: Traer cambios a tu rama
+    Tú->>TuBranch: git merge main
+    Note over TuBranch: tu-rama: 01-05 + TU CÓDIGO ✅
+    deactivate TuBranch
+    end
+
+    rect rgb(225, 245, 254)
+    Note over Tú,Upstream: PASO 5: Subir todo a GitHub
+    Tú->>Origin: git push origin tu-rama
+    Note over Origin: tu-rama: 01-05 + TU CÓDIGO ✅
+    end
+
+    rect rgb(200, 230, 201)
+    Note over Tú,Upstream: ✅ RESULTADO - Tienes todo sin perder tu trabajo
+    end
 ```
 
 ---
 
-## Diagrama Interactivo (Mermaid)
+## Vista Simplificada del Proceso
 
 ```mermaid
-graph TD
-    A[👨‍🏫 Repo Profesor<br/>upstream/main<br/>01 02 03 04 05]
-    B[🌐 Tu Fork GitHub<br/>origin/main<br/>01 02]
-    C[💻 Tu PC - main<br/>01 02]
-    D[💻 Tu PC - garcia-ejercicio<br/>01 02 + TUS ARCHIVOS]
+%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#e1f5ff','primaryTextColor':'#000','primaryBorderColor':'#0277bd','secondaryColor':'#fff9c4','tertiaryColor':'#e8f5e9','noteBkgColor':'#fff3e0','noteTextColor':'#000'}}}%%
+flowchart TB
+    subgraph Antes["❌ ANTES - Desactualizado"]
+        direction LR
+        A1["👨‍🏫 Repo Profesor<br/><br/>📦 Ejercicios:<br/>[01] [02] [03] [04] [05]"]
+        A2["🌐 Tu Fork<br/><br/>📦 Tus ejercicios:<br/>[01] [02]<br/><br/>⚠️ Te faltan 3 ejercicios"]
+        A3["💻 Tu PC<br/><br/>📂 tu-rama:<br/>[01] [02] + TU CÓDIGO"]
+    end
 
-    C2[💻 Tu PC - main<br/>01 02 03 04 05 ✅]
-    D2[💻 Tu PC - garcia-ejercicio<br/>01-05 + TUS ARCHIVOS ✅]
-    B2[🌐 Tu Fork GitHub<br/>garcia-ejercicio<br/>01-05 + TUS ARCHIVOS ✅]
+    subgraph Proceso["🔄 PROCESO DE SINCRONIZACIÓN"]
+        direction TB
+        P1["① git fetch upstream<br/>Descargar cambios del profesor"]
+        P2["② git merge upstream/main<br/>Aplicar a tu main local"]
+        P3["③ git merge main<br/>Traer a tu rama de trabajo"]
+        P4["④ git push origin tu-rama<br/>Subir todo a GitHub"]
 
-    A -->|PASO 2: fetch + merge| C2
-    C2 -->|PASO 4: merge| D2
-    D2 -->|PASO 5: push| B2
+        P1 --> P2 --> P3 --> P4
+    end
 
-    style A fill:#e1f5ff,stroke:#0277bd,stroke-width:3px
-    style C2 fill:#e8f5e9,stroke:#388e3c,stroke-width:3px
-    style D2 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:3px
-    style B2 fill:#fff9c4,stroke:#f57f17,stroke-width:3px
+    subgraph Despues["✅ DESPUÉS - Actualizado"]
+        direction LR
+        D1["👨‍🏫 Repo Profesor<br/><br/>📦 Ejercicios:<br/>[01] [02] [03] [04] [05]"]
+        D2["🌐 Tu Fork<br/><br/>📦 Tus ejercicios:<br/>[01-05] + TU CÓDIGO<br/><br/>✅ Completamente actualizado"]
+        D3["💻 Tu PC<br/><br/>📂 tu-rama:<br/>[01-05] + TU CÓDIGO<br/><br/>🎯 Listo para trabajar"]
+    end
+
+    Antes --> Proceso --> Despues
+
+    style A1 fill:#e1f5ff,stroke:#0277bd,stroke-width:2px
+    style A2 fill:#ffebee,stroke:#c62828,stroke-width:2px
+    style A3 fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+
+    style P1 fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    style P2 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style P3 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style P4 fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+
+    style D1 fill:#e1f5ff,stroke:#0277bd,stroke-width:2px
+    style D2 fill:#c8e6c9,stroke:#2e7d32,stroke-width:3px
+    style D3 fill:#c8e6c9,stroke:#2e7d32,stroke-width:3px
 ```
 
 ---
@@ -288,69 +254,60 @@ git push origin garcia-ejercicio-1.1
 
 ## Que Pasa Cuando el Profesor Agrega Ejercicios?
 
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'git0':'#e1f5ff','git1':'#fff9c4','git2':'#ffebee'}}}%%
+gitGraph
+    commit id: "01: Intro SQLite" tag: "Semana 1"
+    commit id: "02: Limpieza Datos"
+    branch tu-fork
+    checkout tu-fork
+    commit id: "✅ Hiciste Fork" type: HIGHLIGHT
+
+    checkout main
+    commit id: "03: Dask & Parquet" tag: "Semana 3"
+    commit id: "04: PySpark"
+    commit id: "05: Dashboard"
+
+    checkout tu-fork
+    commit id: "❌ Desactualizado" type: REVERSE
+    commit id: "⚠️ Te faltan 03, 04, 05" type: REVERSE
 ```
-┌─────────────────────────────────────────────────────────────┐
-│        QUE PASA CUANDO EL PROFESOR AGREGA EJERCICIOS?      │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  SEMANA 1 - Hiciste tu Fork                                 │
-│  ┌────────────────────────────┐                             │
-│  │ Repo Profesor               │                             │
-│  │ ├── ejercicio_01/           │                             │
-│  │ └── ejercicio_02/           │                             │
-│  └────────────────────────────┘                             │
-│              │ Fork                                          │
-│              ↓                                               │
-│  ┌────────────────────────────┐                             │
-│  │ Tu Fork                     │                             │
-│  │ ├── ejercicio_01/           │                             │
-│  │ └── ejercicio_02/           │ ✅ Sincronizados            │
-│  └────────────────────────────┘                             │
-│                                                              │
-│  ═══════════════════════════════════════════════════════    │
-│                                                              │
-│  SEMANA 3 - Profesor agrego ejercicios 03, 04, 05          │
-│  ┌────────────────────────────┐                             │
-│  │ Repo Profesor               │                             │
-│  │ ├── ejercicio_01/           │                             │
-│  │ ├── ejercicio_02/           │                             │
-│  │ ├── ejercicio_03/ ← NUEVO   │                             │
-│  │ ├── ejercicio_04/ ← NUEVO   │                             │
-│  │ └── ejercicio_05/ ← NUEVO   │                             │
-│  └────────────────────────────┘                             │
-│                                                              │
-│  ┌────────────────────────────┐                             │
-│  │ Tu Fork                     │                             │
-│  │ ├── ejercicio_01/           │                             │
-│  │ └── ejercicio_02/           │ ❌ Desactualizado!          │
-│  │                             │    (te faltan 03, 04, 05)   │
-│  └────────────────────────────┘                             │
-│                                                              │
-│  ⚠️ Tu fork NO se actualiza solo, debes sincronizarlo!      │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
-```
+
+!!! warning "El fork NO se actualiza automáticamente"
+    Cuando el profesor agrega ejercicios nuevos al repositorio original, **tu fork en GitHub NO recibe esos cambios automáticamente**. Debes sincronizarlo manualmente siguiendo los pasos de esta guía.
 
 ---
 
 ## Regla de Oro para Evitar Problemas
 
-!!! success "Trabaja SOLO en la carpeta `entregas/`"
+```mermaid
+%%{init: {'theme':'base'}}%%
+flowchart LR
+    subgraph Bien["✅ BIEN - Edita solo aquí"]
+        direction TB
+        B1["📁 entregas/1.1_sqlite/tu_apellido_nombre/<br/><br/>├── ANALISIS_DATOS.md<br/>├── resumen_eda.md<br/>└── REFLEXION.md<br/><br/>✅ Aquí haces tus cambios"]
+    end
 
-    ```
-    ✅ BIEN - Edita solo aqui:
-    entregas/1.1_sqlite/tu_apellido_nombre/
-    ├── ANALISIS_DATOS.md
-    ├── resumen_eda.md
-    └── REFLEXION.md
+    subgraph Mal["❌ MAL - NO toques esto"]
+        direction TB
+        M1["📁 ejercicios/01_bases_de_datos/<br/><br/>├── README.md ← NO TOCAR<br/>├── eda_exploratorio.py ← Solo ejecutar<br/><br/>🔒 Archivos del profesor"]
+    end
 
-    ❌ MAL - NO toques esto:
-    ejercicios/01_bases_de_datos/1.1_introduccion_sqlite/
-    ├── README.md              ← NO TOCAR
-    ├── eda_exploratorio.py    ← Solo ejecutar, NO modificar
-    ```
+    Bien -.->|Sin conflictos| OK["🎉 Sincronización<br/>perfecta"]
+    Mal -.->|Causa conflictos| NOK["⚠️ Problemas<br/>al sincronizar"]
 
-**Si solo editas archivos en `entregas/TU_CARPETA/`, NUNCA tendras conflictos.**
+    style Bien fill:#c8e6c9,stroke:#2e7d32,stroke-width:3px
+    style Mal fill:#ffcdd2,stroke:#c62828,stroke-width:3px
+    style B1 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style M1 fill:#ffebee,stroke:#d32f2f,stroke-width:2px
+    style OK fill:#a5d6a7,stroke:#43a047,stroke-width:2px
+    style NOK fill:#ef9a9a,stroke:#e53935,stroke-width:2px
+```
+
+!!! success "Regla de Oro"
+    **Si solo editas archivos en `entregas/TU_CARPETA/`, NUNCA tendrás conflictos.**
+
+    El profesor actualiza `ejercicios/`, tú trabajas en `entregas/`. Cero problemas.
 
 ---
 
@@ -455,26 +412,30 @@ git fetch upstream && git merge upstream/main
 
 ### 3. Frecuencia recomendada
 
+```mermaid
+%%{init: {'theme':'base'}}%%
+gantt
+    title 📅 Calendario de Sincronización Semanal
+    dateFormat YYYY-MM-DD
+    section Lunes
+    Sincronizar antes de clase :milestone, m1, 2024-01-01, 0d
+    git fetch upstream :active, 2024-01-01, 1h
+    git merge upstream/main :active, 2024-01-01, 30m
+    section Martes a Jueves
+    Trabajar en ejercicios :2024-01-02, 3d
+    Commits locales :2024-01-02, 3d
+    section Viernes
+    Push de tu avance :milestone, m2, 2024-01-05, 0d
+    git push origin tu-rama :crit, 2024-01-05, 1h
+    section Domingo
+    Verificar actualizaciones (opcional) :done, 2024-01-07, 30m
 ```
-┌────────────────────────────────────────┐
-│  📅 CALENDARIO DE SINCRONIZACION       │
-├────────────────────────────────────────┤
-│                                         │
-│  Lunes: Sincronizar antes de clase     │
-│  └─ git fetch upstream                 │
-│     git merge upstream/main            │
-│                                         │
-│  Durante la semana:                    │
-│  └─ Trabajar normalmente en ejercicios │
-│                                         │
-│  Viernes: Push de tu avance            │
-│  └─ git push origin main               │
-│                                         │
-│  Domingo (opcional):                   │
-│  └─ Verificar si hay actualizaciones   │
-│                                         │
-└────────────────────────────────────────┘
-```
+
+!!! tip "Recomendación de frecuencia"
+    - **Lunes**: Sincroniza antes de clase para tener los últimos ejercicios
+    - **Durante la semana**: Trabaja normalmente, haz commits frecuentes
+    - **Viernes**: Sube tu avance a GitHub
+    - **Domingo (opcional)**: Verifica si hay actualizaciones nuevas
 
 ---
 
