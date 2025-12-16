@@ -9,32 +9,31 @@
 
 Cuando haces fork, obtienes una **copia en ese momento**. Durante el curso agregare ejercicios nuevos, pero **tu fork NO se actualiza solo**.
 
+
 ```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#e1f5ff','primaryTextColor':'#000','primaryBorderColor':'#0277bd','lineColor':'#f57f17','secondaryColor':'#fff9c4','tertiaryColor':'#ffebee'}}}%%
-timeline
-    title Problema de Sincronización del Fork
-    section Semana 1
-        Hiciste Fork
-            : Repo Profesor [01] [02]
-            : Tu Fork [01] [02] ✅
-    section Semana 3
-        Profesor agregó ejercicios
-            : Repo Profesor [01] [02] [03] [04] [05]
-            : Tu Fork [01] [02] ❌
-            : Te faltan [03] [04] [05]
+%%{init: {'theme':'base'}}%%
+flowchart TB
+    subgraph S1["SEMANA 1 - Hiciste Fork"]
+        direction LR
+        Prof1["Repo Profesor<br/>[01] [02]"]
+        Fork1["Tu Fork<br/>[01] [02]"]
+        Prof1 -.->|Fork| Fork1
+    end
 
+    subgraph S3["SEMANA 3 - Profesor agrego ejercicios"]
+        direction LR
+        Prof3["Repo Profesor<br/>[01] [02] [03] [04] [05]"]
+        Fork3["Tu Fork<br/>[01] [02]<br/>Te faltan [03] [04] [05]"]
+    end
 
----
+    S1 --> S3
 
-## Solucion Facil (Recomendada para Principiantes)
-
-### Desde GitHub Web
-
-!!! tip "Metodo mas sencillo"
-    Este es el metodo recomendado si no te sientes comodo con la terminal.
-
-**Paso 1:** Ve a tu fork en GitHub
-
+    style S1 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    style S3 fill:#ffebee,stroke:#c62828,stroke-width:2px
+    style Prof1 fill:#e1f5ff,stroke:#0277bd,stroke-width:2px
+    style Fork1 fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    style Prof3 fill:#e1f5ff,stroke:#0277bd,stroke-width:2px
+    style Fork3 fill:#ffcdd2,stroke:#d32f2f,stroke-width:3px
 ```
 https://github.com/TU_USUARIO/ejercicios-bigdata
 ```
