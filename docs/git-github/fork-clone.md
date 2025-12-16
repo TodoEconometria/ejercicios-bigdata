@@ -12,34 +12,26 @@ Guia completa para crear tu copia del repositorio y trabajar con ella.
 !!! info "GitHub"
     **GitHub** = Nube donde guardas tu codigo (como Dropbox, pero para codigo)
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                  GIT vs GITHUB                              │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  GIT (Programa en tu PC)                                    │
-│  ┌──────────────────────────────────────┐                 │
-│  │  Tu computadora                       │                 │
-│  │  ┌─────────────────────────────────┐ │                 │
-│  │  │  📁 Carpeta con tu codigo       │ │                 │
-│  │  │  ├── ejercicio1.py              │ │                 │
-│  │  │  ├── ejercicio2.py              │ │                 │
-│  │  │  └── .git/  ← Historial local  │ │                 │
-│  │  └─────────────────────────────────┘ │                 │
-│  └──────────────────────────────────────┘                 │
-│                      │                                       │
-│                      │ git push (subir)                     │
-│                      ↓                                       │
-│  GITHUB (En Internet)                                       │
-│  ┌──────────────────────────────────────┐                 │
-│  │  🌐 github.com                        │                 │
-│  │  ┌─────────────────────────────────┐ │                 │
-│  │  │  📦 Tu repositorio online       │ │                 │
-│  │  │  (Visible en el navegador)      │ │                 │
-│  │  └─────────────────────────────────┘ │                 │
-│  └──────────────────────────────────────┘                 │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+%%{init: {'theme':'base'}}%%
+flowchart TB
+    subgraph Local["💻 GIT - Tu Computadora"]
+        direction TB
+        PC["📁 Carpeta con tu código<br/><br/>├── ejercicio1.py<br/>├── ejercicio2.py<br/>└── .git/ ← Historial local"]
+    end
+
+    subgraph Cloud["🌐 GITHUB - Internet (github.com)"]
+        direction TB
+        Repo["📦 Tu repositorio online<br/><br/>Visible en el navegador<br/>Respaldo en la nube"]
+    end
+
+    PC -->|git push<br/>Subir cambios| Cloud
+    Cloud -->|git pull<br/>Descargar cambios| PC
+
+    style Local fill:#e8f5e9,stroke:#388e3c,stroke-width:3px
+    style Cloud fill:#e1f5ff,stroke:#0277bd,stroke-width:3px
+    style PC fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    style Repo fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
 ```
 
 ---
@@ -55,35 +47,29 @@ Un **fork** es hacer TU PROPIA COPIA del repositorio del profesor en GitHub.
 - :pencil2: Ahora puedes escribir en TU copia sin afectar el original
 - :outbox_tray: Cuando termines, le muestras tu trabajo al profesor (Pull Request)
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              QUE ES UN FORK? (Explicacion Visual)          │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  REPOSITORIO ORIGINAL (Del Profesor)                        │
-│  ┌────────────────────────────────────────────┐            │
-│  │  👨‍🏫 TodoEconometria/ejercicios-bigdata     │            │
-│  │  ├── ejercicio_01/                          │            │
-│  │  ├── ejercicio_02/                          │            │
-│  │  └── datos/                                 │            │
-│  │                                              │            │
-│  │  🔒 NO puedes modificar esto directamente   │            │
-│  └────────────────────────────────────────────┘            │
-│                        │                                     │
-│                        │ 🍴 HACER FORK                       │
-│                        │ (Click en boton "Fork")             │
-│                        ↓                                     │
-│  TU FORK (Tu Copia Personal en GitHub)                      │
-│  ┌────────────────────────────────────────────┐            │
-│  │  👤 TU_USUARIO/ejercicios-bigdata           │            │
-│  │  ├── ejercicio_01/                          │            │
-│  │  ├── ejercicio_02/                          │            │
-│  │  └── datos/                                 │            │
-│  │                                              │            │
-│  │  ✅ Esta copia SI puedes modificarla        │            │
-│  └────────────────────────────────────────────┘            │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+%%{init: {'theme':'base'}}%%
+flowchart TD
+    subgraph Original["👨‍🏫 REPOSITORIO ORIGINAL (Profesor)"]
+        direction TB
+        RepoProf["TodoEconometria/ejercicios-bigdata<br/><br/>📁 ejercicio_01/<br/>📁 ejercicio_02/<br/>📁 datos/<br/><br/>🔒 NO puedes modificar directamente"]
+    end
+
+    ForkAction{{"🍴 HACER FORK<br/>(Click en botón 'Fork')"}}
+
+    subgraph TuCopia["👤 TU FORK (Tu Copia Personal)"]
+        direction TB
+        RepoTuyo["TU_USUARIO/ejercicios-bigdata<br/><br/>📁 ejercicio_01/<br/>📁 ejercicio_02/<br/>📁 datos/<br/><br/>✅ Esta copia SÍ puedes modificarla"]
+    end
+
+    Original --> ForkAction
+    ForkAction -->|Crea una copia<br/>completa e independiente| TuCopia
+
+    style Original fill:#e1f5ff,stroke:#0277bd,stroke-width:3px
+    style TuCopia fill:#c8e6c9,stroke:#2e7d32,stroke-width:3px
+    style ForkAction fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    style RepoProf fill:#ffebee,stroke:#c62828,stroke-width:2px
+    style RepoTuyo fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
 ```
 
 ---
@@ -232,39 +218,35 @@ upstream  https://github.com/TodoEconometria/ejercicios-bigdata.git (push)
 !!! info "upstream"
     **upstream** = Repositorio original del profesor (de donde descargas actualizaciones)
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│               ORIGIN vs UPSTREAM                            │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  UPSTREAM (Profesor)                                        │
-│  ┌────────────────────────────────────┐                    │
-│  │  TodoEconometria/ejercicios-bigdata │                    │
-│  │  - Repo original                    │                    │
-│  │  - Solo lectura (para ti)           │                    │
-│  │  - Descargas actualizaciones de aqui│                    │
-│  └────────────────────────────────────┘                    │
-│                        │                                     │
-│                        │ Fork                               │
-│                        ↓                                     │
-│  ORIGIN (Tu Fork)                                           │
-│  ┌────────────────────────────────────┐                    │
-│  │  TU_USUARIO/ejercicios-bigdata      │                    │
-│  │  - Tu copia en GitHub               │                    │
-│  │  - Lectura y escritura              │                    │
-│  │  - Subes tus cambios aqui           │                    │
-│  └────────────────────────────────────┘                    │
-│                        │                                     │
-│                        │ Clone                              │
-│                        ↓                                     │
-│  LOCAL (Tu PC)                                              │
-│  ┌────────────────────────────────────┐                    │
-│  │  ejercicios-bigdata/                │                    │
-│  │  - Carpeta en tu computadora        │                    │
-│  │  - Trabajas aqui                    │                    │
-│  └────────────────────────────────────┘                    │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+%%{init: {'theme':'base'}}%%
+flowchart TB
+    subgraph Upstream["⬆️ UPSTREAM (Profesor)"]
+        direction TB
+        UP["TodoEconometria/ejercicios-bigdata<br/><br/>✓ Repo original<br/>✓ Solo lectura para ti<br/>✓ Descargas actualizaciones de aquí"]
+    end
+
+    subgraph Origin["🌐 ORIGIN (Tu Fork en GitHub)"]
+        direction TB
+        OR["TU_USUARIO/ejercicios-bigdata<br/><br/>✓ Tu copia en GitHub<br/>✓ Lectura y escritura<br/>✓ Subes tus cambios aquí"]
+    end
+
+    subgraph Local["💻 LOCAL (Tu PC)"]
+        direction TB
+        LOC["ejercicios-bigdata/<br/><br/>✓ Carpeta en tu computadora<br/>✓ Trabajas aquí<br/>✓ Haces commits locales"]
+    end
+
+    Upstream -->|"🍴 Fork"| Origin
+    Origin -->|"📥 Clone<br/>(git clone)"| Local
+    Local -->|"📤 Push<br/>(git push origin)"| Origin
+    Upstream -->|"🔄 Fetch<br/>(git fetch upstream)"| Local
+
+    style Upstream fill:#e1f5ff,stroke:#0277bd,stroke-width:3px
+    style Origin fill:#fff9c4,stroke:#f57f17,stroke-width:3px
+    style Local fill:#e8f5e9,stroke:#388e3c,stroke-width:3px
+    style UP fill:#bbdefb,stroke:#1976d2,stroke-width:2px
+    style OR fill:#fff59d,stroke:#f9a825,stroke-width:2px
+    style LOC fill:#c8e6c9,stroke:#43a047,stroke-width:2px
 ```
 
 ---
