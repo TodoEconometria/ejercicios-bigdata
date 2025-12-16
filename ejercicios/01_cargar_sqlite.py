@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 from sqlalchemy import create_engine
-
+fcyhxfrhsrur
 # --- CONFIGURACIÓN DE RUTAS ---
 # Es importante ser ordenado con las rutas.
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
