@@ -1,0 +1,392 @@
+
+--- case-accessory.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 8 entries, 0 to 7
+Data columns (total 4 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   name         8 non-null      object 
+ 1   price        1 non-null      float64
+ 2   type         8 non-null      object 
+ 3   form_factor  8 non-null
+ float64
+dtypes: float64(2), object(2)
+memory usage: 388.0+ bytes
+
+--- case-fan.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 2181 entries, 0 to 2180
+Data columns (total 8 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   name         2181 non-null   object 
+ 1   price        918 non-null    float64
+ 2   size         2181 non-null   int64  
+ 3   color        2160 non-null   object 
+ 4   rpm          2123 non-null   object 
+ 5   airflow      2090 non-null   object 
+ 6   noise_level  2047 non-null   object 
+ 7   pwm          2181 non-null   bool   
+dtypes: bool(1), float64(1), int64(1), object(5)
+memory usage: 121.5+ KB
+
+--- case.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 5486 entries, 0 to 5485
+Data columns (total 8 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   name              5486 non-null   object 
+ 1   price             1040 non-null   float64
+ 2   type              5486 non-null   object 
+ 3   color             5451 non-null   object 
+ 4   psu               511 non-null    float64
+ 5   side_panel        3534 non-null   object 
+ 6   external_volume   4052 non-null   float64
+ 7   internal_35_bays  5486 non-null   int64  
+dtypes: float64(3), int64(1), object(4)
+memory usage: 343.0+ KB
+
+--- cpu-cooler.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 2166 entries, 0 to 2165
+Data columns (total 6 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   name         2166 non-null   object 
+ 1   price        819 non-null    float64
+ 2   rpm          2049 non-null   object 
+ 3   noise_level  1960 non-null   object 
+ 4   color        1250 non-null   object 
+ 5   size         876 non-null    float64
+dtypes: float64(2), object(4)
+memory usage: 101.7+ KB
+
+--- cpu.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1353 entries, 0 to 1352
+Data columns (total 8 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   name         1353 non-null   object 
+ 1   price        599 non-null    float64
+ 2   core_count   1353 non-null   int64  
+ 3   core_clock   1353 non-null   float64
+ 4   boost_clock  670 non-null    float64
+ 5   tdp          1353 non-null   int64  
+ 6   graphics     580 non-null    object 
+ 7   smt          1353 non-null   bool   
+dtypes: bool(1), float64(3), int64(2), object(2)
+memory usage: 75.4+ KB
+
+--- external-hard-drive.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 519 entries, 0 to 518
+Data columns (total 7 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   name          519 non-null    object 
+ 1   price         218 non-null    float64
+ 2   type          519 non-null    object 
+ 3   interface     509 non-null    object 
+ 4   capacity      519 non-null    int64  
+ 5   price_per_gb  218 non-null    float64
+ 6   color         241 non-null    object 
+dtypes: float64(2), int64(1), object(4)
+memory usage: 28.5+ KB
+
+--- fan-controller.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 37 entries, 0 to 36
+Data columns (total 7 columns):
+ #   Column           Non-Null Count  Dtype  
+---  ------           --------------  -----  
+ 0   name             37 non-null     object 
+ 1   price            4 non-null      float64
+ 2   channels         37 non-null     int64  
+ 3   channel_wattage  35 non-null     float64
+ 4   pwm              37 non-null     bool   
+ 5   form_factor      37 non-null     object 
+ 6   color            4 non-null      object 
+dtypes: bool(1), float64(2), int64(1), object(3)
+memory usage: 1.9+ KB
+
+--- headphones.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 2746 entries, 0 to 2745
+Data columns (total 8 columns):
+ #   Column              Non-Null Count  Dtype  
+---  ------              --------------  -----  
+ 0   name                2746 non-null   object 
+ 1   price               671 non-null    float64
+ 2   type                2746 non-null   object 
+ 3   frequency_response  2154 non-null   object 
+ 4   microphone          2746 non-null   bool   
+ 5   wireless            2746 non-null   bool   
+ 6   enclosure_type      2746 non-null   object 
+ 7   color               2732 non-null   object 
+dtypes: bool(2), float64(1), object(5)
+memory usage: 134.2+ KB
+
+--- internal-hard-drive.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 5705 entries, 0 to 5704
+Data columns (total 8 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   name          5705 non-null   object 
+ 1   price         2164 non-null   float64
+ 2   capacity      5705 non-null   float64
+ 3   price_per_gb  2164 non-null   float64
+ 4   type          5675 non-null   object 
+ 5   cache         1866 non-null   float64
+ 6   form_factor   5705 non-null   object 
+ 7   interface     5705 non-null   object 
+dtypes: float64(4), object(4)
+memory usage: 356.7+ KB
+
+--- keyboard.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 2970 entries, 0 to 2969
+Data columns (total 8 columns):
+ #   Column           Non-Null Count  Dtype  
+---  ------           --------------  -----  
+ 0   name             2970 non-null   object 
+ 1   price            666 non-null    float64
+ 2   style            2970 non-null   object 
+ 3   switches         1685 non-null   object 
+ 4   backlit          1562 non-null   object 
+ 5   tenkeyless       2970 non-null   bool   
+ 6   connection_type  2967 non-null   object 
+ 7   color            2955 non-null   object 
+dtypes: bool(1), float64(1), object(6)
+memory usage: 165.5+ KB
+
+--- memory.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 11734 entries, 0 to 11733
+Data columns (total 8 columns):
+ #   Column              Non-Null Count  Dtype  
+---  ------              --------------  -----  
+ 0   name                11734 non-null  object 
+ 1   price               3015 non-null   float64
+ 2   speed               11734 non-null  object 
+ 3   modules             11734 non-null  object 
+ 4   price_per_gb        3015 non-null   float64
+ 5   color               11102 non-null  object 
+ 6   first_word_latency  11734 non-null  float64
+ 7   cas_latency         11734 non-null  float64
+dtypes: float64(4), object(4)
+memory usage: 733.5+ KB
+
+--- monitor.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 4216 entries, 0 to 4215
+Data columns (total 8 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   name           4216 non-null   object 
+ 1   price          1216 non-null   float64
+ 2   screen_size    4216 non-null   float64
+ 3   resolution     4216 non-null   object 
+ 4   refresh_rate   3359 non-null   float64
+ 5   response_time  3529 non-null   float64
+ 6   panel_type     3454 non-null   object 
+ 7   aspect_ratio   4216 non-null   object 
+dtypes: float64(4), object(4)
+memory usage: 263.6+ KB
+
+--- motherboard.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 4358 entries, 0 to 4357
+Data columns (total 7 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   name          4358 non-null   object 
+ 1   price         731 non-null    float64
+ 2   socket        4358 non-null   object 
+ 3   form_factor   4358 non-null   object 
+ 4   max_memory    4358 non-null   int64  
+ 5   memory_slots  4358 non-null   int64  
+ 6   color         4058 non-null   object 
+dtypes: float64(1), int64(2), object(4)
+memory usage: 238.5+ KB
+
+--- mouse.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 2355 entries, 0 to 2354
+Data columns (total 7 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   name              2355 non-null   object 
+ 1   price             773 non-null    float64
+ 2   tracking_method   2355 non-null   object 
+ 3   connection_type   2350 non-null   object 
+ 4   max_dpi           1754 non-null   float64
+ 5   hand_orientation  2226 non-null   object 
+ 6   color             2351 non-null   object 
+dtypes: float64(2), object(5)
+memory usage: 128.9+ KB
+
+--- optical-drive.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 227 entries, 0 to 226
+Data columns (total 8 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   name       227 non-null    object 
+ 1   price      36 non-null     float64
+ 2   bd         73 non-null     float64
+ 3   dvd        201 non-null    float64
+ 4   cd         202 non-null    float64
+ 5   bd_write   55 non-null     object 
+ 6   dvd_write  202 non-null    object 
+ 7   cd_write   199 non-null    object 
+dtypes: float64(4), object(4)
+memory usage: 14.3+ KB
+
+--- os.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 62 entries, 0 to 61
+Data columns (total 4 columns):
+ #   Column      Non-Null Count  Dtype  
+---  ------      --------------  -----  
+ 0   name        62 non-null     object 
+ 1   price       10 non-null     float64
+ 2   mode        62 non-null     object 
+ 3   max_memory  62 non-null     int64  
+dtypes: float64(1), int64(1), object(2)
+memory usage: 2.1+ KB
+
+--- power-supply.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 2805 entries, 0 to 2804
+Data columns (total 7 columns):
+ #   Column      Non-Null Count  Dtype  
+---  ------      --------------  -----  
+ 0   name        2805 non-null   object 
+ 1   price       666 non-null    float64
+ 2   type        2805 non-null   object 
+ 3   efficiency  2445 non-null   object 
+ 4   wattage     2805 non-null   int64  
+ 5   modular     2805 non-null   object 
+ 6   color       1165 non-null   object 
+dtypes: float64(1), int64(1), object(5)
+memory usage: 153.5+ KB
+
+--- sound-card.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 77 entries, 0 to 76
+Data columns (total 8 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   name           77 non-null     object 
+ 1   price          14 non-null     float64
+ 2   channels       77 non-null     float64
+ 3   digital_audio  71 non-null     float64
+ 4   snr            54 non-null     float64
+ 5   sample_rate    71 non-null     float64
+ 6   chipset        44 non-null     object 
+ 7   interface      77 non-null     object 
+dtypes: float64(5), object(3)
+memory usage: 4.9+ KB
+
+--- speakers.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 268 entries, 0 to 267
+Data columns (total 6 columns):
+ #   Column              Non-Null Count  Dtype  
+---  ------              --------------  -----  
+ 0   name                268 non-null    object 
+ 1   price               109 non-null    float64
+ 2   configuration       268 non-null    float64
+ 3   wattage             230 non-null    float64
+ 4   frequency_response  242 non-null    object 
+ 5   color               115 non-null    object 
+dtypes: float64(3), object(3)
+memory usage: 12.7+ KB
+
+--- thermal-paste.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 149 entries, 0 to 148
+Data columns (total 3 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   name    149 non-null    object 
+ 1   price   67 non-null     float64
+ 2   amount  149 non-null    float64
+dtypes: float64(2), object(1)
+memory usage: 3.6+ KB
+
+--- ups.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 683 entries, 0 to 682
+Data columns (total 4 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   name         683 non-null    object 
+ 1   price        325 non-null    float64
+ 2   capacity_w   680 non-null    float64
+ 3   capacity_va  680 non-null    float64
+dtypes: float64(3), object(1)
+memory usage: 21.5+ KB
+
+--- video-card.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 5811 entries, 0 to 5810
+Data columns (total 8 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   name         5811 non-null   object 
+ 1   price        1028 non-null   float64
+ 2   chipset      5811 non-null   object 
+ 3   memory       5811 non-null   float64
+ 4   core_clock   5690 non-null   float64
+ 5   boost_clock  3406 non-null   float64
+ 6   color        5525 non-null   object 
+ 7   length       5151 non-null   float64
+dtypes: float64(5), object(3)
+memory usage: 363.3+ KB
+
+--- webcam.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 65 entries, 0 to 64
+Data columns (total 7 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   name         65 non-null     object 
+ 1   price        51 non-null     float64
+ 2   resolutions  65 non-null     object 
+ 3   connection   65 non-null     object 
+ 4   focus_type   60 non-null     object 
+ 5   os           65 non-null     object 
+ 6   fov          54 non-null     float64
+dtypes: float64(2), object(5)
+memory usage: 3.7+ KB
+
+--- wired-network-card.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 133 entries, 0 to 132
+Data columns (total 4 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   name       133 non-null    object 
+ 1   price      74 non-null     float64
+ 2   interface  133 non-null    object 
+ 3   color      35 non-null     object 
+dtypes: float64(1), object(3)
+memory usage: 4.3+ KB
+
+--- wireless-network-card.csv ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 340 entries, 0 to 339
+Data columns (total 5 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   name       340 non-null    object 
+ 1   price      121 non-null    float64
+ 2   protocol   340 non-null    object 
+ 3   interface  340 non-null    object 
+ 4   color      73 non-null     object 
+dtypes: float64(1), object(4)
+memory usage: 13.4+ KB

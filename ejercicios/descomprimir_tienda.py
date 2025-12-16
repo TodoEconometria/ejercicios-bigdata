@@ -1,16 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Script para descomprimir csv_tienda_informatica.zip
-
-INSTRUCCIONES:
-1. Descarga manualmente el archivo desde Google Drive/Classroom
-2. Guardalo como: C:\Users\jmarc\PycharmProjects\ejercicios-bigdata\datos\csv_tienda_informatica.zip
-3. Ejecuta este script: python ejercicios/descomprimir_tienda.py
-
-El script:
-- Descomprime el contenido en datos/csv_tienda_informatica/
-- Elimina el archivo ZIP después de descomprimir
-"""
 
 import os
 import zipfile

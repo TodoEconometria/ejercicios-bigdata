@@ -1,0 +1,255 @@
+================================================================================
+INFORME DE ANÁLISIS - TIENDA DE INFORMÁTICA
+================================================================================
+
+RESUMEN GENERAL:
+--------------------------------------------------------------------------------
+Total de productos: 48593
+Total de categorías: 25
+Total de fabricantes: 533
+Total de colores: 168
+
+CATEGORÍAS:
+--------------------------------------------------------------------------------
+  [ 1] CASE-ACCESSORY                 →    1 productos
+  [ 2] CASE-FAN                       → 2181 productos
+  [ 3] CASE                           → 4336 productos
+  [ 4] CPU-COOLER                     → 1590 productos
+  [ 5] CPU                            → 1353 productos
+  [ 6] EXTERNAL-HARD-DRIVE            →  519 productos
+  [ 7] FAN-CONTROLLER                 →   27 productos
+  [ 8] HEADPHONES                     →  671 productos
+  [ 9] INTERNAL-HARD-DRIVE            → 5702 productos
+  [10] KEYBOARD                       →  666 productos
+  [11] MEMORY                         → 11172 productos
+  [12] MONITOR                        → 4216 productos
+  [13] MOTHERBOARD                    → 4090 productos
+  [14] MOUSE                          → 1956 productos
+  [15] OPTICAL-DRIVE                  →  209 productos
+  [16] OS                             →   62 productos
+  [17] POWER-SUPPLY                   → 2805 productos
+  [18] SOUND-CARD                     →   75 productos
+  [19] SPEAKERS                       →  215 productos
+  [20] THERMAL-PASTE                  →   82 productos
+  [21] UPS                            →  683 productos
+  [22] VIDEO-CARD                     → 5725 productos
+  [23] WEBCAM                         →   62 productos
+  [24] WIRED-NETWORK-CARD             →   74 productos
+  [25] WIRELESS-NETWORK-CARD          →  121 productos
+
+TOP 20 FABRICANTES (por cantidad de productos):
+--------------------------------------------------------------------------------
+  ASUS                 → 2320 productos (precio medio: $450.29)
+  CORSAIR              → 2220 productos (precio medio: $324.94)
+  GSKILL               → 1941 productos (precio medio: $77.04)
+  MSI                  → 1882 productos (precio medio: $493.48)
+  GIGABYTE             → 1792 productos (precio medio: $501.86)
+  KINGSTON             → 1719 productos (precio medio: $103.93)
+  TEAMGROUP            → 1379 productos (precio medio: $115.64)
+  INTEL                → 1360 productos (precio medio: $228.77)
+  CRUCIAL              →  984 productos (precio medio: $62.65)
+  GEIL                 →  925 productos (precio medio: $22.44)
+  SAMSUNG              →  907 productos (precio medio: $282.41)
+  MUSHKIN              →  871 productos (precio medio: $120.80)
+  ASROCK               →  867 productos (precio medio: $155.76)
+  EVGA                 →  851 productos (precio medio: $737.03)
+  THERMALTAKE          →  826 productos (precio medio: $481.02)
+  SEAGATE              →  810 productos (precio medio: $1414.87)
+  ADATA                →  747 productos (precio medio: $240.34)
+  COOLERMASTER         →  720 productos (precio medio: $512.64)
+  WESTERN              →  719 productos (precio medio: $803.59)
+  ACER                 →  717 productos (precio medio: $118.82)
+
+COLORES DISPONIBLES:
+--------------------------------------------------------------------------------
+  [ 1] BLACK / WHITE        → 1046 productos
+  [ 2] BLACK                → 11795 productos
+  [ 3] WHITE                → 1873 productos
+  [ 4] WHITE / SILVER       →  146 productos
+  [ 5] BLACK / SILVER       → 3284 productos
+  [ 6] MULTICOLOR           →   67 productos
+  [ 7] BROWN                →   50 productos
+  [ 8] WHITE / BLACK        →  440 productos
+  [ 9] GRAY                 →  343 productos
+  [10] BROWN / BLACK        →  191 productos
+  [11] BLACK / MULTICOLOR   →   22 productos
+  [12] BLACK / GRAY         →  469 productos
+  [13] BLACK / TRANSPARENT  →    7 productos
+  [14] PINK / WHITE         →   14 productos
+  [15] WHITE / GRAY         →   81 productos
+  [16] BLACK / TRANSLUCENT BLACK →    1 productos
+  [17] ORANGE               →   58 productos
+  [18] BLACK / RED          → 2303 productos
+  [19] WHITE / TRANSPARENT  →    1 productos
+  [20] PINK                 →   84 productos
+  [21] BLACK / TRANSLUCENT WHITE →    3 productos
+  [22] BLACK / CLEAR        →   29 productos
+  [23] CLEAR                →  161 productos
+  [24] BLACK / BROWN        →    9 productos
+  [25] BLUE                 →  243 productos
+  [26] GRAY / BLACK         →  141 productos
+  [27] BLUE / BLACK         →   88 productos
+  [28] BLACK / TEAL         →    8 productos
+  [29] BLACK / BLUE         → 1543 productos
+  [30] WHITE / TRANSLUCENT WHITE →    3 productos
+  [31] RED / BLACK          →  371 productos
+  [32] TURQUOISE            →    2 productos
+  [33] GREEN                →  912 productos
+  [34] YELLOW / BLACK       →   27 productos
+  [35] BLACK / YELLOW       →  464 productos
+  [36] SILVER / BLACK       →  784 productos
+  [37] TRANSPARENT          →   47 productos
+  [38] TRANSLUCENT GRAY     →   12 productos
+  [39] BLACK / PURPLE       →   39 productos
+  [40] BLACK / ORANGE       →  431 productos
+  [41] TRANSLUCENT BLACK    →   19 productos
+  [42] PURPLE               →   24 productos
+  [43] BLACK / GREEN        →  769 productos
+  [44] YELLOW               →   45 productos
+  [45] GRAY / WHITE         →   28 productos
+  [46] SILVER               →  662 productos
+  [47] RED                  →  709 productos
+  [48] TRANSLUCENT WHITE    →    1 productos
+  [49] WHITE / BLUE         →   85 productos
+  [50] BLACK / PINK         →   12 productos
+  [51] TEAL / WHITE         →   10 productos
+  [52] UV BLUE              →    2 productos
+  [53] BLUE / WHITE         →  162 productos
+  [54] UV GREEN             →    1 productos
+  [55] TRANSLUCENT BLUE     →   18 productos
+  [56] WHITE / RED          →   31 productos
+  [57] YELLOW / GRAY        →    1 productos
+  [58] GRAY / BLUE          →    6 productos
+  [59] TRANSLUCENT YELLOW   →    1 productos
+  [60] CLEAR / BLUE         →    1 productos
+  [61] GREEN / BLACK        →  252 productos
+  [62] GREEN / BROWN        →    1 productos
+  [63] SILVER / BROWN       →    9 productos
+  [64] CYAN / BLACK         →    2 productos
+  [65] ORANGE / BLACK       →   13 productos
+  [66] PINK / BLACK         →   19 productos
+  [67] ORANGE / SILVER      →    2 productos
+  [68] WHITE / PURPLE       →   13 productos
+  [69] SILVER / MULTICOLOR  →    1 productos
+  [70] PURPLE / BLUE        →    2 productos
+  [71] WHITE / BROWN        →    4 productos
+  [72] TURQUOISE / BLACK    →    2 productos
+  [73] BLUE / RED           →    2 productos
+  [74] BEIGE                →    8 productos
+  [75] BLACK / GOLD         →  552 productos
+  [76] WHITE / PINK         →    7 productos
+  [77] PINK / SILVER        →    3 productos
+  [78] GOLD / WHITE         →    2 productos
+  [79] GOLD / BLACK         →   18 productos
+  [80] PURPLE / BLACK       →    6 productos
+  [81] GRAY / ORANGE        →    3 productos
+  [82] GUNMETAL             →    8 productos
+  [83] BLUE / YELLOW        →    2 productos
+  [84] RED / BLUE           →    4 productos
+  [85] BLACK / BLACK        →    5 productos
+  [86] GOLD                 →  154 productos
+  [87] WHITE / GREEN        →    2 productos
+  [88] BLUE / SILVER        →  184 productos
+  [89] BEIGE / GRAY         →    1 productos
+  [90] YELLOW / RED         →    1 productos
+  [91] GRAY / SILVER        →   78 productos
+  [92] WHITE / MULTICOLOR   →    3 productos
+  [93] GREEN / SILVER       →   39 productos
+  [94] GREEN / WHITE        →    4 productos
+  [95] GREEN / BLUE         →   43 productos
+  [96] RED / SILVER         →  230 productos
+  [97] RED / WHITE          →   86 productos
+  [98] SILVER / GRAY        →   13 productos
+  [99] CAMO                 →    6 productos
+  [100] BEIGE / BROWN        →    1 productos
+  [101] BROWN / BEIGE        →    2 productos
+  [102] BROWN / SILVER       →   10 productos
+  [103] ORANGE / BROWN       →    2 productos
+  [104] SILVER / BEIGE       →    2 productos
+  [105] TEAL / SILVER        →    6 productos
+  [106] WHITE / ORANGE       →    3 productos
+  [107] SILVER / TEAL        →    1 productos
+  [108] TEAL                 →    2 productos
+  [109] PINK / PURPLE        →    1 productos
+  [110] ORANGE / RED         →    2 productos
+  [111] PURPLE / GREEN       →    4 productos
+  [112] PINK / GRAY          →    4 productos
+  [113] BLACK / COPPER       →   14 productos
+  [114] GREEN / GOLD         →    4 productos
+  [115] BLUE / PINK          →    3 productos
+  [116] COPPER / BLACK       →    1 productos
+  [117] WHITE / BEIGE        →    2 productos
+  [118] GREEN / PURPLE       →    1 productos
+  [119] GRAY / GREEN         →    1 productos
+  [120] RED / AMBER          →    2 productos
+  [121] ORANGE / WHITE       →   16 productos
+  [122] SILVER / WHITE       →   51 productos
+  [123] PURPLE / PINK        →    1 productos
+  [124] PURPLE / WHITE       →    1 productos
+  [125] BEIGE / GREEN        →    2 productos
+  [126] WHITE / GOLD         →   20 productos
+  [127] PLATINUM             →    4 productos
+  [128] SILVER / RED         →   37 productos
+  [129] BLACK / CAMO         →   39 productos
+  [130] GRAY / RED           →    8 productos
+  [131] SILVER / GREEN       →    7 productos
+  [132] WHITE / CAMO         →    2 productos
+  [133] CAMO / BLACK         →    1 productos
+  [134] SILVER / CAMO        →    5 productos
+  [135] BLUE / ORANGE        →    1 productos
+  [136] SILVER / BLUE        →    5 productos
+  [137] BROWN / GRAY         →   10 productos
+  [138] GRAY / BROWN         →    2 productos
+  [139] SILVER / ORANGE      →    2 productos
+  [140] SILVER / GOLD        →    1 productos
+  [141] SILVER / COPPER      →    1 productos
+  [142] BROWN / RED          →    1 productos
+  [143] BEIGE / RED          →    1 productos
+  [144] BROWN / YELLOW       →    1 productos
+  [145] BLACK / BEIGE        →    4 productos
+  [146] BLUE / GREEN         →    1 productos
+  [147] GRAY / YELLOW        →    1 productos
+  [148] TRANSPARENT / BLACK  →    8 productos
+  [149] BLACK / CYAN         →    1 productos
+  [150] TRANSLUCENT BLACK / BLACK →    2 productos
+  [151] PURPLE / YELLOW      →    1 productos
+  [152] TRANSLUCENT GRAY / GREEN →    1 productos
+  [153] WHITE / YELLOW       →    1 productos
+  [154] PURPLE / MULTICOLOR  →    1 productos
+  [155] PURPLE / SILVER      →    1 productos
+  [156] WHITE / COPPER       →    1 productos
+  [157] WHITE / WHITE        →    1 productos
+  [158] CLEAR / BLACK        →    9 productos
+  [159] BLUE / GRAY          →    1 productos
+  [160] GOLD / BLUE          →    1 productos
+  [161] BLUE / GOLD          →    1 productos
+  [162] SILVER / YELLOW      →    1 productos
+  [163] GREEN / COPPER       →    1 productos
+  [164] WI-FI 6E             →    7 productos
+  [165] WI-FI 6              →   11 productos
+  [166] WI-FI 4              →   50 productos
+  [167] WI-FI 5              →   52 productos
+  [168] WI-FI 3              →    1 productos
+
+MUESTRA DE PRODUCTOS (primeros 20):
+--------------------------------------------------------------------------------
+ID:     1 | NZXT Hue                                           | $   29.95 | CASE-ACCESSORY
+ID:     2 | Corsair iCUE SP120 RGB ELITE 3-Pack                | $   69.98 | CASE-FAN
+ID:     3 | Lian Li Uni Fan SL-Infinity 3-Pack                 | $   84.99 | CASE-FAN
+ID:     4 | Noctua NF-A12x25 PWM chromax.black.swap            | $   34.95 | CASE-FAN
+ID:     5 | Lian Li Uni Fan SL-Infinity 3-Pack                 | $   69.45 | CASE-FAN
+ID:     6 | ARCTIC P12 PST 5-Pack                              | $   29.99 | CASE-FAN
+ID:     7 | Corsair iCUE LINK QX120 RGB Starter Kit 3-Pack     | $  149.99 | CASE-FAN
+ID:     8 | Lian Li UNI FAN SL V2 3-Pack                       | $   82.99 | CASE-FAN
+ID:     9 | Lian Li UNI FAN SL V2 3-Pack                       | $   79.98 | CASE-FAN
+ID:    10 | Thermalright TL-C12C-S 3-Pack                      | $   13.90 | CASE-FAN
+ID:    11 | Lian Li Uni Fan SL-Infinity                        | $   29.99 | CASE-FAN
+ID:    12 | Lian Li Uni Fan SL-Infinity                        | $   26.99 | CASE-FAN
+ID:    13 | Noctua A14 PWM chromax.black.swap                  | $   26.95 | CASE-FAN
+ID:    14 | Corsair iCUE LINK QX120 RGB Starter Kit 3-Pack     | $  156.99 | CASE-FAN
+ID:    15 | be quiet! Silent Wings Pro 4                       | $   30.90 | CASE-FAN
+ID:    16 | Noctua A12x25 PWM                                  | $   32.95 | CASE-FAN
+ID:    17 | Thermalright TL-C12C 3-Pack                        | $   12.90 | CASE-FAN
+ID:    18 | NZXT F120 RGB 3-Pack                               | $   77.33 | CASE-FAN
+ID:    19 | ARCTIC P12                                         | $    9.14 | CASE-FAN
+ID:    20 | Lian Li UNI FAN SL-INF Reverse Blade               | $   33.68 | CASE-FAN

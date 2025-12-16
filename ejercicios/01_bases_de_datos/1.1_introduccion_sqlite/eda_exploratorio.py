@@ -1,15 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Script de Análisis Exploratorio de Datos (EDA)
-Ejercicio 1.1 - Introducción a SQLite
 
-Este script analiza todos los archivos CSV de la tienda de informática
-y genera un reporte completo de calidad y estructura de datos.
-
-Autor: [Tu nombre]
-Fecha: 2025-12-15
-"""
 
 import pandas as pd
 import glob
