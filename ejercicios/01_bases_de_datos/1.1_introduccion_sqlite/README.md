@@ -1,9 +1,5 @@
 # 📝 Ejercicio 1.1: Introducción a SQLite - Cargar Datos desde CSV
 
-> **📤 ¿Cómo entregar este ejercicio?** Lee las instrucciones completas aquí: [INSTRUCCIONES_ENTREGA.md](./INSTRUCCIONES_ENTREGA.md)
-
----
-
 ## 🎯 Objetivos de Aprendizaje
 
 Al completar este ejercicio serás capaz de:
