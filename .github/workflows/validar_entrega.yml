@@ -1,0 +1,187 @@
+name: Validar Entrega
+
+on:
+  pull_request:
+    paths:
+      - 'entregas/**'
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validar-estructura:
+    name: Validar Estructura de Entrega
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Obtener archivos modificados
+        id: files
+        run: |
+          echo "changed_files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep '^entregas/' | tr '\n' ' ')" >> $GITHUB_OUTPUT
+
+      - name: Detectar tipo de ejercicio
+        id: detect
+        run: |
+          CHANGED_FILES="${{ steps.files.outputs.changed_files }}"
+
+          if echo "$CHANGED_FILES" | grep -q "entregas/1.1_sqlite/"; then
+            echo "tipo=1.1_sqlite" >> $GITHUB_OUTPUT
+            echo "codigo=1.1_sqlite" >> $GITHUB_OUTPUT
+          elif echo "$CHANGED_FILES" | grep -q "dashboards/"; then
+            echo "tipo=dashboard" >> $GITHUB_OUTPUT
+            echo "codigo=dashboard" >> $GITHUB_OUTPUT
+          else
+            echo "tipo=desconocido" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Validar Ejercicio 1.1 - SQLite
+        if: steps.detect.outputs.tipo == '1.1_sqlite'
+        run: |
+          echo "Validando ejercicio 1.1 - SQLite"
+
+          CHANGED_FILES="${{ steps.files.outputs.changed_files }}"
+          ERRORS=0
+
+          # Extraer carpeta del alumno
+          ALUMNO_DIR=$(echo "$CHANGED_FILES" | grep -oP 'entregas/1.1_sqlite/\K[^/]+' | head -1)
+
+          if [ -z "$ALUMNO_DIR" ]; then
+            echo "ERROR: No se detectó carpeta de alumno en entregas/1.1_sqlite/"
+            exit 1
+          fi
+
+          echo "Validando entrega de: $ALUMNO_DIR"
+
+          # Verificar formato del nombre (apellido_nombre en minúsculas)
+          if ! echo "$ALUMNO_DIR" | grep -qE '^[a-z]+_[a-z]+$'; then
+            echo "ERROR: El nombre de carpeta debe ser 'apellido_nombre' en minúsculas"
+            echo "  Ejemplo correcto: garcia_maria"
+            echo "  Tu carpeta: $ALUMNO_DIR"
+            ERRORS=$((ERRORS + 1))
+          fi
+
+          # Verificar archivos obligatorios
+          REQUIRED_FILES=(
+            "entregas/1.1_sqlite/$ALUMNO_DIR/ANALISIS_DATOS.md"
+            "entregas/1.1_sqlite/$ALUMNO_DIR/resumen_eda.md"
+            "entregas/1.1_sqlite/$ALUMNO_DIR/REFLEXION.md"
+          )
+
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "ERROR: Falta el archivo obligatorio: $file"
+              ERRORS=$((ERRORS + 1))
+            else
+              echo "OK: Encontrado $file"
+            fi
+          done
+
+          # Verificar que no se suban archivos prohibidos
+          FORBIDDEN_PATTERNS=(
+            "*.db"
+            "*.sqlite"
+            "*.csv"
+            "*.xlsx"
+            "*.xls"
+          )
+
+          for pattern in "${FORBIDDEN_PATTERNS[@]}"; do
+            if echo "$CHANGED_FILES" | grep -q "$pattern"; then
+              echo "ERROR: No se permiten archivos $pattern en las entregas"
+              echo "  Archivos detectados:"
+              echo "$CHANGED_FILES" | grep "$pattern"
+              ERRORS=$((ERRORS + 1))
+            fi
+          done
+
+          # Verificar contenido mínimo de archivos
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ -f "$file" ]; then
+              LINES=$(wc -l < "$file")
+              if [ "$LINES" -lt 10 ]; then
+                echo "ADVERTENCIA: $file parece estar vacío o incompleto (solo $LINES líneas)"
+              fi
+            fi
+          done
+
+          # Verificar que ANALISIS_DATOS.md contenga secciones esperadas
+          if [ -f "entregas/1.1_sqlite/$ALUMNO_DIR/ANALISIS_DATOS.md" ]; then
+            REQUIRED_SECTIONS=(
+              "Resumen Ejecutivo"
+              "Análisis de Estructura"
+              "Análisis de Calidad"
+              "Diagrama ER"
+              "Conclusiones"
+            )
+
+            for section in "${REQUIRED_SECTIONS[@]}"; do
+              if ! grep -qi "$section" "entregas/1.1_sqlite/$ALUMNO_DIR/ANALISIS_DATOS.md"; then
+                echo "ADVERTENCIA: No se encontró la sección '$section' en ANALISIS_DATOS.md"
+              fi
+            done
+          fi
+
+          # Verificar que REFLEXION.md contenga respuestas
+          if [ -f "entregas/1.1_sqlite/$ALUMNO_DIR/REFLEXION.md" ]; then
+            QUESTION_COUNT=$(grep -c "^##" "entregas/1.1_sqlite/$ALUMNO_DIR/REFLEXION.md" || true)
+            if [ "$QUESTION_COUNT" -lt 6 ]; then
+              echo "ADVERTENCIA: REFLEXION.md parece incompleto (se esperan 6 preguntas, encontradas: $QUESTION_COUNT)"
+            fi
+          fi
+
+          echo ""
+          echo "========================================="
+          if [ $ERRORS -eq 0 ]; then
+            echo "VALIDACION EXITOSA"
+            echo "Todos los archivos obligatorios están presentes"
+            echo "Estructura de carpetas correcta"
+            echo ""
+            echo "El profesor revisará el contenido de tu entrega."
+          else
+            echo "VALIDACION FALLIDA"
+            echo "Se encontraron $ERRORS errores"
+            echo ""
+            echo "Por favor corrige los errores y actualiza el PR."
+            exit 1
+          fi
+
+      - name: Comentar resultado en PR
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tipo = '${{ steps.detect.outputs.tipo }}';
+            const changed_files = '${{ steps.files.outputs.changed_files }}';
+
+            let message = '## Validación Automática de Entrega\n\n';
+
+            if (tipo === '1.1_sqlite') {
+              const alumno_match = changed_files.match(/entregas\/1\.1_sqlite\/([^\/]+)/);
+              const alumno = alumno_match ? alumno_match[1] : 'desconocido';
+
+              message += `**Ejercicio:** 1.1 - Introducción a SQLite\n`;
+              message += `**Carpeta:** \`entregas/1.1_sqlite/${alumno}/\`\n\n`;
+              message += `### Archivos detectados:\n\n`;
+
+              const files = changed_files.split(' ').filter(f => f.includes(alumno));
+              files.forEach(file => {
+                message += `- \`${file}\`\n`;
+              });
+
+              message += `\n---\n\n`;
+              message += `Si la validación pasó, el profesor revisará tu entrega.\n`;
+              message += `Si falló, corrige los errores y haz push de nuevo.\n`;
+            } else {
+              message += `**Tipo:** ${tipo}\n\n`;
+              message += `Archivos modificados:\n${changed_files}\n`;
+            }
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            });

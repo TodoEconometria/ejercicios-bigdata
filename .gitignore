@@ -71,6 +71,56 @@ datos/*.gif
 !datos/README.md
 !datos/*.py
 
+# =============================================================================
+# ENTREGAS DE ALUMNOS - Protección contra subir archivos no deseados
+# =============================================================================
+# Los alumnos NO deben subir datos, logs, venv, ni credenciales
+# Solo código fuente, SQL, documentación, requirements.txt
+
+# Datos generados por alumnos
+entregas/**/data/
+entregas/**/*.csv
+entregas/**/*.xlsx
+entregas/**/*.parquet
+entregas/**/*.json
+entregas/**/*.xml
+
+# Bases de datos de alumnos
+entregas/**/*.db
+entregas/**/*.sqlite
+entregas/**/*.sqlite3
+
+# Logs de alumnos
+entregas/**/logs/
+entregas/**/*.log
+
+# Credenciales (permitir .env.example, bloquear .env)
+entregas/**/.env
+!entregas/**/.env.example
+
+# Virtual environments de alumnos
+entregas/**/venv/
+entregas/**/env/
+entregas/**/.venv/
+
+# Python cache de alumnos
+entregas/**/__pycache__/
+entregas/**/*.pyc
+entregas/**/*.pyo
+
+# Archivos temporales de alumnos
+entregas/**/tmp/
+entregas/**/*.tmp
+entregas/**/temp/
+
+# Capturas grandes (permitir solo en docs/capturas/)
+entregas/**/*.png
+entregas/**/*.jpg
+entregas/**/*.jpeg
+!entregas/**/docs/capturas/*.png
+!entregas/**/docs/capturas/*.jpg
+!entregas/**/docs/capturas/*.jpeg
+
 # OS
 .DS_Store
 Thumbs.db
@@ -118,3 +168,4 @@ evaluaciones/
 # ❌ EVITAR:     Mensajes largos con múltiples líneas
 #
 # Razón: Mensajes cortos = tooltips pequeños en GitHub
+datos/csv_tienda_informatica/

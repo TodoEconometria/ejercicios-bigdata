@@ -1,0 +1,39 @@
+# Entregas - Ejercicio 3.1: Oracle con BD HR
+
+Esta carpeta contiene las entregas de los alumnos para el ejercicio 3.1.
+
+---
+
+## Instrucciones de Entrega
+
+👉 **[Guía General de Entregas](https://todoeconometria.github.io/ejercicios-bigdata/entregas/guia-entregas/)**
+
+👉 **[Instrucciones específicas del ejercicio](../../ejercicios/01_bases_de_datos/3.1_oracle_hr/README.md)**
+
+---
+
+## Formato de Carpeta
+
+Crea tu carpeta personal con formato:
+
+```
+entregas/3.1_oracle_hr/apellido_nombre/
+```
+
+**Ejemplo:**
+```
+entregas/3.1_oracle_hr/garcia_maria/
+├── consultas.sql
+├── analisis.md
+└── ...
+```
+
+---
+
+## ¿Qué subir?
+
+Consulta las [instrucciones específicas del ejercicio](../../ejercicios/01_bases_de_datos/3.1_oracle_hr/README.md) para saber qué archivos debes entregar.
+
+---
+
+**Dudas?** Consulta la [guía general](https://todoeconometria.github.io/ejercicios-bigdata/entregas/guia-entregas/) o pregunta al profesor.

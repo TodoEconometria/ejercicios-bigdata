@@ -1,0 +1,212 @@
+site_name: Big Data con Python - De Cero a Produccion
+site_description: Repositorio educativo completo para dominar Big Data con Python, desde conceptos basicos hasta produccion
+site_author: Juan Gutierrez - TodoEconometria
+site_url: https://todoeconometria.github.io/ejercicios-bigdata/
+
+repo_name: TodoEconometria/ejercicios-bigdata
+repo_url: https://github.com/TodoEconometria/ejercicios-bigdata
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: es
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo claro
+
+  features:
+    # Navigation
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+
+    # Search
+    - search.suggest
+    - search.highlight
+    - search.share
+
+    # Table of contents
+    - toc.follow
+    - toc.integrate
+
+    # Content
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+
+  icon:
+    repo: fontawesome/brands/github
+    logo: material/database
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/flame-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
+
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+plugins:
+  - search:
+      lang: es
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+        remove_comments: true
+      cache_safe: true
+
+markdown_extensions:
+  # Python Markdown
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+  # Python Markdown Extensions
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/TodoEconometria
+      name: GitHub
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/juangutierrezconsultor/
+      name: LinkedIn
+    - icon: fontawesome/solid/globe
+      link: https://www.todoeconometria.com
+      name: Web TodoEconometria
+
+  analytics:
+    feedback:
+      title: Es util esta pagina?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: Esta pagina fue util
+          data: 1
+          note: >-
+            Gracias por tu feedback!
+        - icon: material/emoticon-sad-outline
+          name: Esta pagina podria mejorar
+          data: 0
+          note: >-
+            Gracias por tu feedback! Ayudanos a mejorar creando un
+            <a href="https://github.com/TodoEconometria/ejercicios-bigdata/issues/new" target="_blank" rel="noopener">issue</a>.
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+
+  - Guia de Inicio:
+    - guia-inicio/index.md
+    - Instalacion de Herramientas: guia-inicio/instalacion.md
+    - Tu Primer Ejercicio: guia-inicio/primer-ejercicio.md
+    - Roadmap del Curso: guia-inicio/roadmap.md
+
+  - Git y GitHub:
+    - git-github/index.md
+    - Fork y Clone: git-github/fork-clone.md
+    - Sincronizar Fork: git-github/sincronizar-fork.md
+    - Crear Pull Requests: git-github/pull-requests.md
+    - Comandos Utiles: git-github/comandos-utiles.md
+
+  - Ejercicios:
+    - ejercicios/index.md
+    - Bases de Datos:
+      - '1.1 - Introduccion SQLite': ejercicios/01-introduccion-sqlite.md
+      - '2.1 - PostgreSQL HR': ejercicios/02-postgresql-hr.md
+      - '2.2 - PostgreSQL Jardineria': ejercicios/03-postgresql-jardineria.md
+      - '2.3 - Migracion SQLite → PostgreSQL': ejercicios/04-migracion-sqlite-postgresql.md
+      - '3.1 - Oracle HR': ejercicios/05-oracle-hr.md
+      - '5.1 - Analisis Excel/Python': ejercicios/06-analisis-excel-python.md
+    - Big Data y ETL:
+      - '02 - Pipeline ETL QoG': ejercicios/02-pipeline-etl-qog.md
+
+  - Dashboards:
+    - dashboards/index.md
+
+  - Entregas:
+    - Guia General de Entregas: entregas/guia-entregas.md
+
+  - FAQ: faq.md
+
+copyright: >
+  Copyright &copy; 2024 TodoEconometria -
+  <a href="#__consent">Cambiar configuracion de cookies</a>
