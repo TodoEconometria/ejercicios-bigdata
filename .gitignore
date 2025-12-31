@@ -146,7 +146,7 @@ instance/
 .profesor/
 
 # Scripts del profesor (SOLO LOCALES, NO PUBLICAR)
-scripts/
+
 PROFE.bat
 
 # Otros archivos privados
