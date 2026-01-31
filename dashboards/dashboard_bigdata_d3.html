@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Big Data Sales Command Center</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #1f2833;
+            --text-main: #c5c6c7;
+            --accent: #66fcf1;
+            --accent-dim: #45a29e;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        h1, h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+            text-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 400px 400px;
+            gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        .full-width { grid-column: 1 / -1; }
+
+        /* Tooltip personalizado */
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--accent);
+            padding: 10px;
+            border-radius: 5px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 0.9em;
+            z-index: 100;
+            box-shadow: 0 0 15px var(--accent-dim);
+        }
+
+        /* Estilos específicos de gráficos */
+        .axis text { fill: var(--text-main); }
+        .axis line, .axis path { stroke: #444; }
+        
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+        .legend-color { width: 12px; height: 12px; margin-right: 5px; border-radius: 2px; }
+
+    </style>
+</head>
+<body>
+
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h1>Big Data Sales Analytics</h1>
+        <p style="color: var(--accent-dim);">Visualización de Flujos de Datos y Transacciones en Tiempo Real</p>
+    </div>
+
+    <div class="dashboard-grid">
+        
+        <!-- GRÁFICO 1: STREAMGRAPH (RÍO DE DATOS) -->
+        <div class="card full-width" id="stream-container">
+            <h2>Flujo de Ventas por Sucursal (30 Días)</h2>
+            <div id="legend" style="margin-bottom: 10px;"></div>
+            <div id="streamgraph"></div>
+        </div>
+
+        <!-- GRÁFICO 2: FORCE LAYOUT (BURBUJAS) -->
+        <div class="card">
+            <h2>Transacciones Recientes (Cluster Físico)</h2>
+            <p style="font-size: 0.8em; color: #888;">El tamaño representa el monto. Arrastra las burbujas.</p>
+            <div id="forcegraph"></div>
+        </div>
+
+        <!-- GRÁFICO 3: DONUT CHART -->
+        <div class="card">
+            <h2>Distribución Total</h2>
+            <div id="donutgraph" style="display: flex; justify-content: center;"></div>
+        </div>
+
+    </div>
+
+    <div id="tooltip" class="tooltip"></div>
+
+    <script>
+        // ==========================================
+        // DATOS INYECTADOS DESDE PYTHON
+        // ==========================================
+        const streamData = [{"fecha": "2025-12-23", "BCN": 1315, "MAD": 2544, "VLC": 1109, "SEV": 1687, "BIL": 953}, {"fecha": "2025-12-24", "BCN": 938, "MAD": 909, "VLC": 1439, "SEV": 2022, "BIL": 2390}, {"fecha": "2025-12-25", "BCN": 1905, "MAD": 2679, "VLC": 1389, "SEV": 997, "BIL": 2757}, {"fecha": "2025-12-26", "BCN": 1676, "MAD": 2215, "VLC": 1798, "SEV": 2549, "BIL": 2885}, {"fecha": "2025-12-27", "BCN": 2306, "MAD": 1521, "VLC": 1964, "SEV": 1635, "BIL": 1618}, {"fecha": "2025-12-28", "BCN": 1257, "MAD": 3087, "VLC": 3027, "SEV": 1941, "BIL": 1139}, {"fecha": "2025-12-29", "BCN": 1818, "MAD": 1328, "VLC": 1554, "SEV": 1233, "BIL": 2572}, {"fecha": "2025-12-30", "BCN": 2442, "MAD": 852, "VLC": 725, "SEV": 924, "BIL": 725}, {"fecha": "2025-12-31", "BCN": 2284, "MAD": 1926, "VLC": 2488, "SEV": 2182, "BIL": 2796}, {"fecha": "2026-01-01", "BCN": 2089, "MAD": 2979, "VLC": 2263, "SEV": 2068, "BIL": 3284}, {"fecha": "2026-01-02", "BCN": 2805, "MAD": 2489, "VLC": 2051, "SEV": 3301, "BIL": 2430}, {"fecha": "2026-01-03", "BCN": 2790, "MAD": 2365, "VLC": 2721, "SEV": 2174, "BIL": 2943}, {"fecha": "2026-01-04", "BCN": 2136, "MAD": 778, "VLC": 1162, "SEV": 1715, "BIL": 1092}, {"fecha": "2026-01-05", "BCN": 1492, "MAD": 1978, "VLC": 2183, "SEV": 2159, "BIL": 1461}, {"fecha": "2026-01-06", "BCN": 1614, "MAD": 2591, "VLC": 2567, "SEV": 1203, "BIL": 2215}, {"fecha": "2026-01-07", "BCN": 2746, "MAD": 2570, "VLC": 1916, "SEV": 2722, "BIL": 2588}, {"fecha": "2026-01-08", "BCN": 1844, "MAD": 2339, "VLC": 2957, "SEV": 3377, "BIL": 1558}, {"fecha": "2026-01-09", "BCN": 2470, "MAD": 2537, "VLC": 1407, "SEV": 1813, "BIL": 1510}, {"fecha": "2026-01-10", "BCN": 1511, "MAD": 2701, "VLC": 2124, "SEV": 1376, "BIL": 1453}, {"fecha": "2026-01-11", "BCN": 1372, "MAD": 2452, "VLC": 944, "SEV": 524, "BIL": 1701}, {"fecha": "2026-01-12", "BCN": 2725, "MAD": 1476, "VLC": 2370, "SEV": 1962, "BIL": 791}, {"fecha": "2026-01-13", "BCN": 1718, "MAD": 1336, "VLC": 2375, "SEV": 2822, "BIL": 2475}, {"fecha": "2026-01-14", "BCN": 2469, "MAD": 2932, "VLC": 3055, "SEV": 1680, "BIL": 1644}, {"fecha": "2026-01-15", "BCN": 2727, "MAD": 1583, "VLC": 1670, "SEV": 1416, "BIL": 2510}, {"fecha": "2026-01-16", "BCN": 2311, "MAD": 1797, "VLC": 1127, "SEV": 2058, "BIL": 1589}, {"fecha": "2026-01-17", "BCN": 1439, "MAD": 1345, "VLC": 1102, "SEV": 1846, "BIL": 1691}, {"fecha": "2026-01-18", "BCN": 2479, "MAD": 711, "VLC": 2092, "SEV": 2344, "BIL": 2147}, {"fecha": "2026-01-19", "BCN": 1311, "MAD": 1164, "VLC": 2545, "SEV": 1126, "BIL": 1651}, {"fecha": "2026-01-20", "BCN": 1706, "MAD": 3297, "VLC": 2113, "SEV": 1885, "BIL": 2700}, {"fecha": "2026-01-21", "BCN": 2125, "MAD": 1638, "VLC": 2661, "SEV": 1494, "BIL": 3403}];
+        const transactions = [{"id": "TRX-1000", "sucursal": "BIL", "monto": 739.97, "grupo": 4}, {"id": "TRX-1001", "sucursal": "BCN", "monto": 472.46, "grupo": 0}, {"id": "TRX-1002", "sucursal": "SEV", "monto": 850.52, "grupo": 3}, {"id": "TRX-1003", "sucursal": "BIL", "monto": 227.46, "grupo": 4}, {"id": "TRX-1004", "sucursal": "SEV", "monto": 385.14, "grupo": 3}, {"id": "TRX-1005", "sucursal": "BCN", "monto": 949.03, "grupo": 0}, {"id": "TRX-1006", "sucursal": "BIL", "monto": 609.06, "grupo": 4}, {"id": "TRX-1007", "sucursal": "BCN", "monto": 856.54, "grupo": 0}, {"id": "TRX-1008", "sucursal": "BCN", "monto": 448.84, "grupo": 0}, {"id": "TRX-1009", "sucursal": "BIL", "monto": 526.0, "grupo": 4}, {"id": "TRX-1010", "sucursal": "SEV", "monto": 2286.44, "grupo": 3}, {"id": "TRX-1011", "sucursal": "MAD", "monto": 219.22, "grupo": 1}, {"id": "TRX-1012", "sucursal": "SEV", "monto": 357.33, "grupo": 3}, {"id": "TRX-1013", "sucursal": "BIL", "monto": 53.81, "grupo": 4}, {"id": "TRX-1014", "sucursal": "BCN", "monto": 278.65, "grupo": 0}, {"id": "TRX-1015", "sucursal": "VLC", "monto": 394.13, "grupo": 2}, {"id": "TRX-1016", "sucursal": "BCN", "monto": 885.79, "grupo": 0}, {"id": "TRX-1017", "sucursal": "SEV", "monto": 761.97, "grupo": 3}, {"id": "TRX-1018", "sucursal": "BIL", "monto": 185.59, "grupo": 4}, {"id": "TRX-1019", "sucursal": "VLC", "monto": 370.2, "grupo": 2}, {"id": "TRX-1020", "sucursal": "BIL", "monto": 457.04, "grupo": 4}, {"id": "TRX-1021", "sucursal": "MAD", "monto": 965.93, "grupo": 1}, {"id": "TRX-1022", "sucursal": "SEV", "monto": 795.19, "grupo": 3}, {"id": "TRX-1023", "sucursal": "BCN", "monto": 87.94, "grupo": 0}, {"id": "TRX-1024", "sucursal": "VLC", "monto": 927.51, "grupo": 2}, {"id": "TRX-1025", "sucursal": "BIL", "monto": 50.67, "grupo": 4}, {"id": "TRX-1026", "sucursal": "BIL", "monto": 383.91, "grupo": 4}, {"id": "TRX-1027", "sucursal": "BCN", "monto": 261.38, "grupo": 0}, {"id": "TRX-1028", "sucursal": "VLC", "monto": 284.5, "grupo": 2}, {"id": "TRX-1029", "sucursal": "BCN", "monto": 103.08, "grupo": 0}, {"id": "TRX-1030", "sucursal": "BCN", "monto": 831.95, "grupo": 0}, {"id": "TRX-1031", "sucursal": "SEV", "monto": 613.79, "grupo": 3}, {"id": "TRX-1032", "sucursal": "BIL", "monto": 815.54, "grupo": 4}, {"id": "TRX-1033", "sucursal": "MAD", "monto": 535.52, "grupo": 1}, {"id": "TRX-1034", "sucursal": "MAD", "monto": 213.75, "grupo": 1}, {"id": "TRX-1035", "sucursal": "MAD", "monto": 89.44, "grupo": 1}, {"id": "TRX-1036", "sucursal": "MAD", "monto": 915.17, "grupo": 1}, {"id": "TRX-1037", "sucursal": "MAD", "monto": 642.87, "grupo": 1}, {"id": "TRX-1038", "sucursal": "SEV", "monto": 510.2, "grupo": 3}, {"id": "TRX-1039", "sucursal": "SEV", "monto": 931.5, "grupo": 3}, {"id": "TRX-1040", "sucursal": "MAD", "monto": 915.46, "grupo": 1}, {"id": "TRX-1041", "sucursal": "SEV", "monto": 304.37, "grupo": 3}, {"id": "TRX-1042", "sucursal": "VLC", "monto": 715.46, "grupo": 2}, {"id": "TRX-1043", "sucursal": "MAD", "monto": 2181.48, "grupo": 1}, {"id": "TRX-1044", "sucursal": "MAD", "monto": 275.32, "grupo": 1}, {"id": "TRX-1045", "sucursal": "MAD", "monto": 954.85, "grupo": 1}, {"id": "TRX-1046", "sucursal": "MAD", "monto": 914.04, "grupo": 1}, {"id": "TRX-1047", "sucursal": "VLC", "monto": 79.88, "grupo": 2}, {"id": "TRX-1048", "sucursal": "VLC", "monto": 416.95, "grupo": 2}, {"id": "TRX-1049", "sucursal": "BCN", "monto": 348.39, "grupo": 0}, {"id": "TRX-1050", "sucursal": "MAD", "monto": 946.2, "grupo": 1}, {"id": "TRX-1051", "sucursal": "VLC", "monto": 821.93, "grupo": 2}, {"id": "TRX-1052", "sucursal": "VLC", "monto": 469.12, "grupo": 2}, {"id": "TRX-1053", "sucursal": "SEV", "monto": 825.91, "grupo": 3}, {"id": "TRX-1054", "sucursal": "VLC", "monto": 270.84, "grupo": 2}, {"id": "TRX-1055", "sucursal": "VLC", "monto": 734.14, "grupo": 2}, {"id": "TRX-1056", "sucursal": "MAD", "monto": 2371.19, "grupo": 1}, {"id": "TRX-1057", "sucursal": "SEV", "monto": 676.59, "grupo": 3}, {"id": "TRX-1058", "sucursal": "BIL", "monto": 444.51, "grupo": 4}, {"id": "TRX-1059", "sucursal": "VLC", "monto": 855.99, "grupo": 2}, {"id": "TRX-1060", "sucursal": "BCN", "monto": 52.82, "grupo": 0}, {"id": "TRX-1061", "sucursal": "BIL", "monto": 111.08, "grupo": 4}, {"id": "TRX-1062", "sucursal": "BIL", "monto": 485.36, "grupo": 4}, {"id": "TRX-1063", "sucursal": "BCN", "monto": 640.77, "grupo": 0}, {"id": "TRX-1064", "sucursal": "MAD", "monto": 824.12, "grupo": 1}, {"id": "TRX-1065", "sucursal": "VLC", "monto": 160.58, "grupo": 2}, {"id": "TRX-1066", "sucursal": "MAD", "monto": 772.57, "grupo": 1}, {"id": "TRX-1067", "sucursal": "VLC", "monto": 565.47, "grupo": 2}, {"id": "TRX-1068", "sucursal": "SEV", "monto": 886.6, "grupo": 3}, {"id": "TRX-1069", "sucursal": "MAD", "monto": 357.93, "grupo": 1}, {"id": "TRX-1070", "sucursal": "VLC", "monto": 77.72, "grupo": 2}, {"id": "TRX-1071", "sucursal": "BCN", "monto": 694.06, "grupo": 0}, {"id": "TRX-1072", "sucursal": "BIL", "monto": 450.28, "grupo": 4}, {"id": "TRX-1073", "sucursal": "SEV", "monto": 979.05, "grupo": 3}, {"id": "TRX-1074", "sucursal": "SEV", "monto": 260.05, "grupo": 3}, {"id": "TRX-1075", "sucursal": "BCN", "monto": 70.72, "grupo": 0}, {"id": "TRX-1076", "sucursal": "BCN", "monto": 393.64, "grupo": 0}, {"id": "TRX-1077", "sucursal": "BIL", "monto": 787.48, "grupo": 4}, {"id": "TRX-1078", "sucursal": "SEV", "monto": 495.22, "grupo": 3}, {"id": "TRX-1079", "sucursal": "VLC", "monto": 882.39, "grupo": 2}, {"id": "TRX-1080", "sucursal": "BCN", "monto": 641.12, "grupo": 0}, {"id": "TRX-1081", "sucursal": "SEV", "monto": 150.59, "grupo": 3}, {"id": "TRX-1082", "sucursal": "BIL", "monto": 137.15, "grupo": 4}, {"id": "TRX-1083", "sucursal": "VLC", "monto": 825.9, "grupo": 2}, {"id": "TRX-1084", "sucursal": "VLC", "monto": 94.38, "grupo": 2}, {"id": "TRX-1085", "sucursal": "BCN", "monto": 922.89, "grupo": 0}, {"id": "TRX-1086", "sucursal": "SEV", "monto": 171.98, "grupo": 3}, {"id": "TRX-1087", "sucursal": "SEV", "monto": 273.28, "grupo": 3}, {"id": "TRX-1088", "sucursal": "SEV", "monto": 896.52, "grupo": 3}, {"id": "TRX-1089", "sucursal": "BIL", "monto": 1826.89, "grupo": 4}, {"id": "TRX-1090", "sucursal": "BIL", "monto": 374.41, "grupo": 4}, {"id": "TRX-1091", "sucursal": "MAD", "monto": 847.38, "grupo": 1}, {"id": "TRX-1092", "sucursal": "BIL", "monto": 587.03, "grupo": 4}, {"id": "TRX-1093", "sucursal": "BIL", "monto": 809.23, "grupo": 4}, {"id": "TRX-1094", "sucursal": "BIL", "monto": 868.99, "grupo": 4}, {"id": "TRX-1095", "sucursal": "BCN", "monto": 227.4, "grupo": 0}, {"id": "TRX-1096", "sucursal": "VLC", "monto": 73.94, "grupo": 2}, {"id": "TRX-1097", "sucursal": "MAD", "monto": 863.77, "grupo": 1}, {"id": "TRX-1098", "sucursal": "MAD", "monto": 727.62, "grupo": 1}, {"id": "TRX-1099", "sucursal": "BCN", "monto": 944.25, "grupo": 0}];
+        const donutData = [{"name": "BCN", "value": 59820}, {"name": "MAD", "value": 60119}, {"name": "VLC", "value": 58898}, {"name": "SEV", "value": 56235}, {"name": "BIL", "value": 60671}];
+        const keys = ["BCN", "MAD", "VLC", "SEV", "BIL"];
+
+        // Colores Cyberpunk
+        const colors = ["#ff0055", "#00ff99", "#00ccff", "#ffcc00", "#9900ff"];
+        const colorScale = d3.scaleOrdinal().domain(keys).range(colors);
+
+        // Tooltip global
+        const tooltip = d3.select("#tooltip");
+
+        // ==========================================
+        // 1. STREAMGRAPH (El Río)
+        // ==========================================
+        function drawStreamGraph() {
+            const container = document.getElementById('stream-container');
+            const width = container.clientWidth - 40;
+            const height = 300;
+            const margin = {top: 20, right: 30, bottom: 30, left: 30};
+
+            const svg = d3.select("#streamgraph")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+            // Stackear los datos
+            const stack = d3.stack()
+                .keys(keys)
+                .offset(d3.stackOffsetWiggle); // Efecto "Wiggle" para que parezca un río orgánico
+
+            const series = stack(streamData);
+
+            const x = d3.scaleBand()
+                .domain(streamData.map(d => d.fecha))
+                .range([margin.left, width - margin.right]);
+
+            const y = d3.scaleLinear()
+                .domain([
+                    d3.min(series, layer => d3.min(layer, d => d[0])),
+                    d3.max(series, layer => d3.max(layer, d => d[1]))
+                ])
+                .range([height - margin.bottom, margin.top]);
+
+            // Area generator
+            const area = d3.area()
+                .x(d => x(d.data.fecha) + x.bandwidth() / 2)
+                .y0(d => y(d[0]))
+                .y1(d => y(d[1]))
+                .curve(d3.curveBasis); // Curvas suaves
+
+            // Dibujar capas
+            svg.selectAll("path")
+                .data(series)
+                .join("path")
+                .attr("d", area)
+                .style("fill", d => colorScale(d.key))
+                .style("opacity", 0.8)
+                .on("mouseover", function(event, d) {
+                    d3.select(this).style("opacity", 1).style("stroke", "white");
+                    tooltip.style("opacity", 1)
+                        .html(`<strong>Sucursal: ${d.key}</strong>`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 20) + "px");
+                })
+                .on("mousemove", function(event) {
+                    tooltip.style("left", (event.pageX + 10) + "px")
+                           .style("top", (event.pageY - 20) + "px");
+                })
+                .on("mouseout", function() {
+                    d3.select(this).style("opacity", 0.8).style("stroke", "none");
+                    tooltip.style("opacity", 0);
+                });
+
+            // Leyenda
+            const legend = d3.select("#legend");
+            keys.forEach(key => {
+                const item = legend.append("div").attr("class", "legend-item");
+                item.append("div").attr("class", "legend-color").style("background", colorScale(key));
+                item.append("span").text(key);
+            });
+        }
+
+        // ==========================================
+        // 2. FORCE DIRECTED GRAPH (Burbujas Físicas)
+        // ==========================================
+        function drawForceGraph() {
+            const width = 500;
+            const height = 320;
+
+            const svg = d3.select("#forcegraph")
+                .append("svg")
+                .attr("width", "100%")
+                .attr("height", height)
+                .attr("viewBox", `0 0 ${width} ${height}`);
+
+            // Escala de tamaño basada en monto
+            const sizeScale = d3.scaleSqrt()
+                .domain([0, d3.max(transactions, d => d.monto)])
+                .range([2, 20]);
+
+            // Simulación física
+            const simulation = d3.forceSimulation(transactions)
+                .force("charge", d3.forceManyBody().strength(5)) // Atracción leve
+                .force("center", d3.forceCenter(width / 2, height / 2))
+                .force("collide", d3.forceCollide().radius(d => sizeScale(d.monto) + 1).iterations(2))
+                .on("tick", ticked);
+
+            const node = svg.append("g")
+                .selectAll("circle")
+                .data(transactions)
+                .join("circle")
+                .attr("r", d => sizeScale(d.monto))
+                .attr("fill", d => colorScale(d.sucursal))
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 0.5)
+                .attr("opacity", 0.8)
+                .call(drag(simulation)); // Habilitar arrastre
+
+            node.on("mouseover", (event, d) => {
+                tooltip.style("opacity", 1)
+                    .html(`ID: ${d.id}<br>Monto: ${d.monto}€<br>Sucursal: ${d.sucursal}`)
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 20) + "px");
+            }).on("mouseout", () => tooltip.style("opacity", 0));
+
+            function ticked() {
+                node
+                    .attr("cx", d => Math.max(10, Math.min(width - 10, d.x)))
+                    .attr("cy", d => Math.max(10, Math.min(height - 10, d.y)));
+            }
+
+            // Funciones de arrastre
+            function drag(simulation) {
+                function dragstarted(event) {
+                    if (!event.active) simulation.alphaTarget(0.3).restart();
+                    event.subject.fx = event.subject.x;
+                    event.subject.fy = event.subject.y;
+                }
+                function dragged(event) {
+                    event.subject.fx = event.x;
+                    event.subject.fy = event.y;
+                }
+                function dragended(event) {
+                    if (!event.active) simulation.alphaTarget(0);
+                    event.subject.fx = null;
+                    event.subject.fy = null;
+                }
+                return d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended);
+            }
+        }
+
+        // ==========================================
+        // 3. DONUT CHART (Animado)
+        // ==========================================
+        function drawDonut() {
+            const width = 300;
+            const height = 300;
+            const radius = Math.min(width, height) / 2;
+
+            const svg = d3.select("#donutgraph")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+                .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+            const pie = d3.pie()
+                .value(d => d.value)
+                .sort(null);
+
+            const arc = d3.arc()
+                .innerRadius(radius * 0.5) // Hace que sea un donut
+                .outerRadius(radius * 0.8);
+
+            const arcHover = d3.arc()
+                .innerRadius(radius * 0.5)
+                .outerRadius(radius * 0.9);
+
+            const path = svg.selectAll("path")
+                .data(pie(donutData))
+                .join("path")
+                .attr("fill", d => colorScale(d.data.name))
+                .attr("d", arc)
+                .attr("stroke", "var(--card-bg)")
+                .style("stroke-width", "2px")
+                .style("opacity", 0.8)
+                .transition().duration(1000) // Animación de entrada
+                .attrTween("d", function(d) {
+                    const i = d3.interpolate(d.startAngle + 0.1, d.endAngle);
+                    return function(t) {
+                        d.endAngle = i(t);
+                        return arc(d);
+                    }
+                });
+
+            // Interacción
+            svg.selectAll("path")
+                .on("mouseover", function(event, d) {
+                    d3.select(this)
+                        .transition().duration(200)
+                        .attr("d", arcHover)
+                        .style("opacity", 1);
+                    
+                    // Texto central
+                    svg.select(".center-text").text(d.data.name);
+                    svg.select(".center-val").text(d3.format(",")(d.data.value) + "€");
+                })
+                .on("mouseout", function(d) {
+                    d3.select(this)
+                        .transition().duration(200)
+                        .attr("d", arc)
+                        .style("opacity", 0.8);
+                    
+                    svg.select(".center-text").text("TOTAL");
+                    svg.select(".center-val").text("");
+                });
+
+            // Texto central
+            svg.append("text")
+                .attr("class", "center-text")
+                .attr("text-anchor", "middle")
+                .attr("dy", "-0.5em")
+                .style("fill", "white")
+                .style("font-size", "20px")
+                .style("font-weight", "bold")
+                .text("TOTAL");
+
+            svg.append("text")
+                .attr("class", "center-val")
+                .attr("text-anchor", "middle")
+                .attr("dy", "1em")
+                .style("fill", "var(--accent)")
+                .style("font-size", "16px")
+                .text("");
+        }
+
+        // Inicializar gráficos
+        drawStreamGraph();
+        drawForceGraph();
+        drawDonut();
+
+    </script>
+</body>
+</html>

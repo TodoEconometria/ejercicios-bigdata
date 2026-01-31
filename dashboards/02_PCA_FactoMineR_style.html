@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de PCA en Python: Estilo FactoMineR</title>
+    <style>
+
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary-color: #64748b;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --bg-color: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-code: #1e293b;
+    --text-color: #1e293b;
+    --text-secondary: #475569;
+    --border-color: #e2e8f0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.7;
+    color: var(--text-color);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--bg-color);
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    padding: 60px 80px;
+}
+
+/* Encabezados */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 4px solid var(--primary-color);
+}
+
+h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+h2::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 28px;
+    background: linear-gradient(180deg, var(--primary-color), var(--primary-dark));
+    border-radius: 3px;
+}
+
+h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Párrafos y texto */
+p {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* Enlaces */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+a:hover {
+    border-bottom-color: var(--primary-color);
+}
+
+/* Blockquotes - Cajas de información */
+blockquote {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-left: 5px solid var(--primary-color);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 12px 12px 0;
+    font-style: normal;
+}
+
+blockquote p {
+    margin: 0;
+    color: var(--text-color);
+}
+
+blockquote strong {
+    color: var(--primary-dark);
+}
+
+/* Listas */
+ul, ol {
+    margin: 1rem 0 1rem 1.5rem;
+    color: var(--text-secondary);
+}
+
+li {
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+li::marker {
+    color: var(--primary-color);
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+thead {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+}
+
+th {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+td {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--bg-secondary);
+}
+
+tbody tr:hover {
+    background-color: #e0f2fe;
+}
+
+/* Código inline */
+code {
+    background: var(--bg-secondary);
+    color: #e11d48;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+    border: 1px solid var(--border-color);
+}
+
+/* Bloques de código */
+pre {
+    background: var(--bg-code);
+    color: #e2e8f0;
+    padding: 1.5rem;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border: none;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Líneas horizontales */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+    margin: 3rem 0;
+}
+
+/* Imágenes */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+    margin: 1.5rem 0;
+    display: block;
+}
+
+/* Checkboxes en listas */
+li input[type="checkbox"] {
+    margin-right: 0.5rem;
+    transform: scale(1.2);
+    accent-color: var(--primary-color);
+}
+
+/* Sección de certificación */
+blockquote h3 {
+    color: var(--primary-dark);
+    margin-top: 0;
+}
+
+/* Fórmulas matemáticas (si usas MathJax) */
+.math {
+    font-family: 'Times New Roman', serif;
+    font-style: italic;
+}
+
+/* Footer */
+.footer-info {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border-color);
+    text-align: center;
+    color: var(--secondary-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 30px 25px;
+        border-radius: 12px;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.35rem;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    th, td {
+        padding: 0.75rem;
+    }
+}
+
+/* Animaciones sutiles */
+h2, h3, blockquote, table, pre {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .container {
+        box-shadow: none;
+        padding: 20px;
+    }
+
+    pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+}
+
+    </style>
+    <!-- MathJax para fórmulas matemáticas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+<h1 id="manual-de-pca-en-python-estilo-factominer">Manual de PCA en Python: Estilo FactoMineR</h1>
+<h2 id="replicando-el-estandar-de-oro-del-analisis-multivariante">Replicando el Estandar de Oro del Analisis Multivariante</h2>
+<hr />
+<blockquote>
+<h3 id="informacion-de-certificacion-y-referencia">Informacion de Certificacion y Referencia</h3>
+<p><strong>Autor original/Referencia:</strong> @TodoEconometria<br />
+<strong>Profesor:</strong> Juan Marcelo Gutierrez Miranda<br />
+<strong>Metodologia:</strong> Cursos Avanzados de Big Data, Ciencia de Datos, Desarrollo de aplicaciones con IA &amp; Econometria Aplicada.<br />
+<strong>Hash ID de Certificacion:</strong> <code>4e8d9b1a5f6e7c3d2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c</code><br />
+<strong>Repositorio:</strong> <a href="https://github.com/TodoEconometria/certificaciones">https://github.com/TodoEconometria/certificaciones</a></p>
+<p><strong>REFERENCIA ACADEMICA PRINCIPAL:</strong></p>
+<ul>
+<li>Husson, F., Le, S., &amp; Pages, J. (2017). <em>Exploratory Multivariate Analysis by Example Using R</em>. CRC Press.</li>
+<li><strong>Tutorial FactoMineR:</strong> <a href="http://factominer.free.fr/course/FactoTuto.html">http://factominer.free.fr/course/FactoTuto.html</a></li>
+<li>Le, S., Josse, J., &amp; Husson, F. (2008). FactoMineR: An R Package for Multivariate Analysis. <em>Journal of Statistical Software</em>, 25(1), 1-18.</li>
+<li>Pedregosa, F., et al. (2011). Scikit-learn: Machine Learning in Python. <em>JMLR</em> 12, pp. 2825-2830.</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="1-introduccion-por-que-factominer-es-el-estandar-de-oro">1. Introduccion: Por que FactoMineR es el Estandar de Oro</h2>
+<h3 id="11-el-problema-de-los-datos-multivariantes">1.1. El Problema de los Datos Multivariantes</h3>
+<p>Imagina que tienes datos de <strong>41 atletas</strong> que compitieron en <strong>decatlon</strong> (10 pruebas deportivas). Cada atleta tiene 10 mediciones: tiempos en carreras, distancias en saltos y lanzamientos. La pregunta es: <strong>Como podemos "ver" patrones en 10 dimensiones?</strong></p>
+<p>El cerebro humano solo puede visualizar 2 o 3 dimensiones. El <strong>Analisis de Componentes Principales (PCA)</strong> es la herramienta matematica que nos permite "comprimir" esas 10 dimensiones en 2, perdiendo la menor cantidad de informacion posible.</p>
+<h3 id="12-filosofia-factominer-vs-scikit-learn">1.2. Filosofia: FactoMineR vs. Scikit-Learn</h3>
+<p>Este manual replica la logica de <strong>FactoMineR</strong> (el estandar de oro en R) usando Python.</p>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Scikit-learn</th>
+<th>FactoMineR / Prince</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Enfoque</strong></td>
+<td>Machine Learning</td>
+<td><strong>Exploracion de Datos</strong></td>
+</tr>
+<tr>
+<td><strong>Objetivo</strong></td>
+<td>Reducir dimensiones para un modelo predictivo</td>
+<td><strong>Entender que variables mueven a que individuos</strong></td>
+</tr>
+<tr>
+<td><strong>Metricas clave</strong></td>
+<td><code>explained_variance_ratio_</code></td>
+<td><strong>Contribuciones, $\cos^2$, correlaciones</strong></td>
+</tr>
+<tr>
+<td><strong>Variables suplementarias</strong></td>
+<td>No soportadas</td>
+<td><strong>Soporte nativo</strong></td>
+</tr>
+<tr>
+<td><strong>Graficos</strong></td>
+<td>Basicos</td>
+<td><strong>Circulo de correlacion, biplot</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>La diferencia fundamental:</strong> Scikit-learn te dice "estos son tus datos comprimidos". FactoMineR te dice "<strong>por que</strong> tus datos se comprimieron asi, <strong>que variables</strong> son responsables, y <strong>que tan confiable</strong> es la representacion de cada punto".</p>
+</blockquote>
+<hr />
+<h2 id="2-antes-de-empezar-tratamiento-de-datos-perdidos">2. ANTES DE EMPEZAR: Tratamiento de Datos Perdidos</h2>
+<h3 id="21-el-error-mas-comun-meto-la-media-y-listo">2.1. El Error Mas Comun: "Meto la Media y Listo"</h3>
+<p>Uno de los errores mas frecuentes en analisis multivariante es <strong>imputar datos perdidos con la media sin pensar</strong>. Esta practica, aunque comun, puede <strong>destruir la estructura real de tus datos</strong> y llevarte a conclusiones erroneas.</p>
+<blockquote>
+<p><strong>REGLA DE ORO:</strong> Antes de imputar cualquier valor perdido, <strong>debes entender POR QUE falta ese dato</strong>. La estrategia de imputacion depende del <strong>mecanismo de perdida</strong>.</p>
+</blockquote>
+<h3 id="22-los-tres-tipos-de-datos-perdidos-rubin-1976">2.2. Los Tres Tipos de Datos Perdidos (Rubin, 1976)</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Nombre</th>
+<th>Significado</th>
+<th>Ejemplo</th>
+<th>Se puede usar la media?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MCAR</strong></td>
+<td>Missing Completely At Random</td>
+<td>El dato falta <strong>por puro azar</strong>, sin relacion con ninguna variable</td>
+<td>Un sensor fallo aleatoriamente</td>
+<td><strong>SI</strong>, pero con precaucion</td>
+</tr>
+<tr>
+<td><strong>MAR</strong></td>
+<td>Missing At Random</td>
+<td>El dato falta por una razon <strong>relacionada con OTRAS variables observadas</strong></td>
+<td>Los jovenes no responden preguntas de salario (pero sabemos su edad)</td>
+<td><strong>DEPENDE</strong> del metodo</td>
+</tr>
+<tr>
+<td><strong>MNAR</strong></td>
+<td>Missing Not At Random</td>
+<td>El dato falta por una razon <strong>relacionada con EL MISMO valor perdido</strong></td>
+<td>Los ricos no declaran su patrimonio PORQUE es alto</td>
+<td><strong>NO</strong>, sesga los resultados</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-por-que-la-media-puede-destruir-tu-analisis">2.3. Por que la Media Puede Destruir tu Analisis</h3>
+<p>Imagina este escenario en el decatlon:</p>
+<div class="highlight"><pre><span></span><code>Atleta      | 100m  | Salto Largo | Lanzamiento
+------------|-------|-------------|------------
+Velocista A | 10.5s | 7.8m        | ???
+Velocista B | 10.7s | 7.6m        | ???
+Lanzador C  | 11.8s | 6.2m        | 18.5m
+Lanzador D  | 12.0s | 6.0m        | 19.2m
+</code></pre></div>
+
+<p><strong>Problema:</strong> Los velocistas (A y B) no completaron el lanzamiento (por lesion).</p>
+<p><strong>Si imputas con la media del lanzamiento:</strong><br />
+- Media de lanzamiento = (18.5 + 19.2) / 2 = <strong>18.85m</strong><br />
+- Asignas 18.85m a los velocistas A y B</p>
+<p><strong>CONSECUENCIA CATASTROFICA:</strong><br />
+- En el PCA, los velocistas aparecen como <strong>buenos lanzadores</strong><br />
+- El circulo de correlacion mostrara que velocidad y lanzamiento estan <strong>correlacionados positivamente</strong><br />
+- <strong>ESTO ES FALSO</strong> - en realidad, los velocistas suelen ser peores lanzadores</p>
+<blockquote>
+<p><strong>El problema:</strong> El dato NO falta al azar (MCAR). Falta porque los velocistas <strong>se lesionaron en la prueba de lanzamiento</strong> (probablemente por falta de tecnica). Es un caso de <strong>MAR o MNAR</strong>.</p>
+</blockquote>
+<h3 id="24-como-diagnosticar-el-tipo-de-dato-perdido">2.4. Como Diagnosticar el Tipo de Dato Perdido</h3>
+<p>Antes de imputar, realiza estos <strong>tests de diagnostico</strong>:</p>
+<h4 id="test-1-patron-visual-de-perdida">Test 1: Patron Visual de Perdida</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">missingno</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">msno</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Visualizar patron de datos perdidos</span>
+<span class="n">msno</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Visualizar correlacion entre datos perdidos</span>
+<span class="n">msno</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><strong>Interpretacion:</strong><br />
+- Si los huecos estan <strong>dispersos aleatoriamente</strong>: probablemente MCAR<br />
+- Si los huecos <strong>se agrupan en filas/columnas especificas</strong>: probablemente MAR o MNAR</p>
+<h4 id="test-2-test-de-little-mcar-test">Test 2: Test de Little (MCAR Test)</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Instalar: pip install pyampute</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyampute.exploration</span><span class="w"> </span><span class="kn">import</span> <span class="n">mcar_test</span>
+
+<span class="c1"># Test estadistico para MCAR</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mcar_test</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-valor: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># Si p &gt; 0.05: No se rechaza MCAR (los datos PUEDEN ser aleatorios)</span>
+<span class="c1"># Si p &lt; 0.05: Se rechaza MCAR (los datos NO son aleatorios)</span>
+</code></pre></div>
+
+<h4 id="test-3-comparar-grupos-datos-completos-vs-incompletos">Test 3: Comparar Grupos (Datos Completos vs Incompletos)</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Crear indicador de dato perdido</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;tiene_na&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;lanzamiento&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+
+<span class="c1"># Comparar medias de otras variables</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;tiene_na&#39;</span><span class="p">)[</span><span class="s1">&#39;100m&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;tiene_na&#39;</span><span class="p">)[</span><span class="s1">&#39;salto_largo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="c1"># Si las medias son MUY diferentes, el dato NO es MCAR</span>
+</code></pre></div>
+
+<h3 id="25-estrategias-de-imputacion-segun-el-tipo">2.5. Estrategias de Imputacion Segun el Tipo</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo de Perdida</th>
+<th>Estrategia Recomendada</th>
+<th>Estrategia a EVITAR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MCAR</strong> (aleatorio puro)</td>
+<td>Media, mediana, KNN, MICE</td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>MAR</strong> (depende de otras variables)</td>
+<td>KNN, MICE, Regresion multiple</td>
+<td>Media simple (sesga)</td>
+</tr>
+<tr>
+<td><strong>MNAR</strong> (depende del valor perdido)</td>
+<td>Modelos especificos, Analisis de sensibilidad</td>
+<td>Media, KNN, MICE (todos sesgan)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="26-alternativas-a-la-media-codigo-python">2.6. Alternativas a la Media (Codigo Python)</h3>
+<h4 id="opcion-1-eliminar-filas-con-na-solo-si-son-pocas-y-mcar">Opcion 1: Eliminar Filas con NA (solo si son pocas y MCAR)</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Solo si tienes POCOS datos perdidos (&lt;5%) y son MCAR</span>
+<span class="n">df_limpio</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Filas eliminadas: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">df_limpio</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h4 id="opcion-2-imputacion-por-knn-respeta-la-estructura-local">Opcion 2: Imputacion por KNN (respeta la estructura local)</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.impute</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNNImputer</span>
+
+<span class="c1"># KNN busca los K vecinos mas similares y promedia sus valores</span>
+<span class="n">imputer</span> <span class="o">=</span> <span class="n">KNNImputer</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">df_imputado</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">columnas_numericas</span><span class="p">]),</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">columnas_numericas</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Ventaja:</strong> Un velocista con NA en lanzamiento recibira el valor de <strong>otros velocistas similares</strong>, no el promedio global.</p>
+<h4 id="opcion-3-imputacion-multiple-mice-el-estandar-de-oro">Opcion 3: Imputacion Multiple (MICE) - El Estandar de Oro</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.experimental</span><span class="w"> </span><span class="kn">import</span> <span class="n">enable_iterative_imputer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.impute</span><span class="w"> </span><span class="kn">import</span> <span class="n">IterativeImputer</span>
+
+<span class="c1"># MICE: Multiple Imputation by Chained Equations</span>
+<span class="n">imputer</span> <span class="o">=</span> <span class="n">IterativeImputer</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">df_imputado</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">columnas_numericas</span><span class="p">]),</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">columnas_numericas</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Ventaja:</strong> Usa TODAS las variables para predecir el valor perdido mediante regresiones iterativas.</p>
+<h4 id="opcion-4-imputacion-por-grupo-cuando-hay-categorias">Opcion 4: Imputacion por Grupo (cuando hay categorias)</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Si sabes que el dato depende de una categoria</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;lanzamiento&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;tipo_atleta&#39;</span><span class="p">)[</span><span class="s1">&#39;lanzamiento&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Ejemplo:</strong> Imputar el lanzamiento de un velocista con la <strong>media de otros velocistas</strong>, no con la media global.</p>
+<h3 id="27-checklist-antes-de-hacer-pca">2.7. Checklist ANTES de Hacer PCA</h3>
+<p>Antes de ejecutar tu analisis PCA, verifica:</p>
+<ul>
+<li><input type="checkbox" disabled> <strong>Cuantos NA tengo?</strong> <code>df.isna().sum()</code> - Si &gt; 20% en una variable, considera eliminarla</li>
+<li><input type="checkbox" disabled> <strong>Donde estan los NA?</strong> <code>msno.matrix(df)</code> - Busca patrones</li>
+<li><input type="checkbox" disabled> <strong>Son aleatorios?</strong> Test de Little o comparacion de grupos</li>
+<li><input type="checkbox" disabled> <strong>Que metodo uso?</strong></li>
+<li>MCAR + pocos NA: Media o eliminar filas</li>
+<li>MAR: KNN o MICE</li>
+<li>MNAR: Consulta con experto del dominio o analisis de sensibilidad</li>
+</ul>
+<h3 id="28-ejemplo-practico-que-hacer-en-el-decatlon">2.8. Ejemplo Practico: Que Hacer en el Decatlon</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.impute</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNNImputer</span>
+
+<span class="c1"># Cargar datos</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;decathlon.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># 1. Diagnostico</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Datos perdidos por columna:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+<span class="c1"># 2. Si hay NA, verificar patron</span>
+<span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+    <span class="c1"># Comparar atletas con/sin NA</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tiene_na&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Comparacion de medias (con NA vs sin NA):&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;tiene_na&#39;</span><span class="p">)[[</span><span class="s1">&#39;100m&#39;</span><span class="p">,</span> <span class="s1">&#39;Long.jump&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+    <span class="c1"># Si las medias son similares, probablemente MCAR -&gt; podemos imputar</span>
+    <span class="c1"># Si las medias son muy diferentes, cuidado -&gt; usar KNN o MICE</span>
+
+    <span class="c1"># 3. Imputar con KNN (respeta estructura)</span>
+    <span class="n">imputer</span> <span class="o">=</span> <span class="n">KNNImputer</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">columnas_activas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;100m&#39;</span><span class="p">,</span> <span class="s1">&#39;Long.jump&#39;</span><span class="p">,</span> <span class="s1">&#39;Shot.put&#39;</span><span class="p">,</span> <span class="s1">&#39;High.jump&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;400m&#39;</span><span class="p">,</span> <span class="s1">&#39;110m.hurdle&#39;</span><span class="p">,</span> <span class="s1">&#39;Discus&#39;</span><span class="p">,</span> <span class="s1">&#39;Pole.vault&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;Javeline&#39;</span><span class="p">,</span> <span class="s1">&#39;1500m&#39;</span><span class="p">]</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="n">columnas_activas</span><span class="p">]</span> <span class="o">=</span> <span class="n">imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">columnas_activas</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Imputacion completada con KNN&quot;</span><span class="p">)</span>
+
+<span class="c1"># 4. Ahora SI podemos hacer PCA</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prince</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">rescale_with_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">columnas_activas</span><span class="p">])</span>
+</code></pre></div>
+
+<h3 id="29-resumen-la-regla-de-los-3-pasos">2.9. Resumen: La Regla de los 3 Pasos</h3>
+<div class="highlight"><pre><span></span><code>PASO 1: DIAGNOSTICAR
+   &quot;Por que falta este dato?&quot;
+   -&gt; MCAR, MAR, o MNAR?
+
+PASO 2: DECIDIR
+   &quot;Puedo imputar sin sesgar?&quot;
+   -&gt; Si MNAR: NO imputes con media
+   -&gt; Si MAR: Usa KNN o MICE
+   -&gt; Si MCAR: Media es aceptable
+
+PASO 3: DOCUMENTAR
+   &quot;Que hice y por que?&quot;
+   -&gt; Reporta el % de NA
+   -&gt; Reporta el metodo usado
+   -&gt; Reporta si los resultados cambian
+</code></pre></div>
+
+<blockquote>
+<p><strong>MORALEJA:</strong> Meter la media "porque si" es como llenar un hueco en un puzzle con una pieza de otro puzzle. Puede que encaje, pero <strong>la imagen final estara distorsionada</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="210-fundamental-por-que-el-0-es-valido-y-no-siempre-hay-que-imputar">2.10. FUNDAMENTAL: Por Que el 0 es Valido y NO Siempre Hay que Imputar</h2>
+<h3 id="2101-el-problema-de-fondo-confundir-base-completa-con-base-correcta">2.10.1. El Problema de Fondo: Confundir "Base Completa" con "Base Correcta"</h3>
+<p>Uno de los errores conceptuales mas graves que cometen los estudiantes (y muchos profesionales) es pensar que:</p>
+<blockquote>
+<p><strong>FALSO:</strong> "Una base de datos debe estar completa para ser analizada"</p>
+</blockquote>
+<p>Esta creencia viene de la programacion (donde <code>NULL</code> causa errores) y del machine learning (donde muchos algoritmos no aceptan <code>NaN</code>). Pero en <strong>analisis de datos reales</strong>, especialmente en encuestas y Big Data, <strong>los datos faltantes son INFORMACION</strong>, no un problema a "arreglar".</p>
+<h4 id="la-verdad-incomoda">La Verdad Incomoda:</h4>
+<table>
+<thead>
+<tr>
+<th>Creencia Erronea</th>
+<th>Realidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Debo llenar todos los NA"</td>
+<td><strong>NO</strong>. Debes entender POR QUE faltan</td>
+</tr>
+<tr>
+<td>"Una base completa es mejor"</td>
+<td><strong>NO</strong>. Una base con imputaciones incorrectas es PEOR que una base con NA</td>
+</tr>
+<tr>
+<td>"El 0 significa que no hay dato"</td>
+<td><strong>DEPENDE</strong>. En encuestas, 0 puede ser una respuesta valida</td>
+</tr>
+<tr>
+<td>"NaN y 0 son lo mismo"</td>
+<td><strong>FALSO</strong>. Son conceptualmente diferentes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="2102-la-diferencia-fundamental-0-vs-nan-vs-no-respuesta">2.10.2. La Diferencia Fundamental: 0 vs NaN vs "No Respuesta"</h3>
+<p>Imagina una encuesta sobre ingresos y gastos:</p>
+<table>
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Respuesta Persona A</th>
+<th>Respuesta Persona B</th>
+<th>Respuesta Persona C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Cuantos cigarrillos fuma al dia?"</td>
+<td><strong>0</strong> (no fuma)</td>
+<td><strong>NaN</strong> (se nego a responder)</td>
+<td><strong>20</strong> (fuma 20)</td>
+</tr>
+<tr>
+<td>"Cuanto gasto en tabaco este mes?"</td>
+<td><strong>0</strong> (coherente: no fuma)</td>
+<td><strong>NaN</strong> (no respondio)</td>
+<td><strong>150</strong> (coherente: fuma)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="analisis-de-cada-caso">Analisis de Cada Caso:</h4>
+<p><strong>Persona A - El 0 es VALIDO:</strong><br />
+- <code>cigarrillos = 0</code> significa <strong>"NO FUMA"</strong>, es una respuesta real<br />
+- <code>gasto_tabaco = 0</code> es <strong>coherente</strong> con no fumar<br />
+- <strong>IMPUTAR</strong> estos 0 con la media seria <strong>CATASTROFICO</strong>: convertirias a un no fumador en fumador promedio</p>
+<p><strong>Persona B - El NaN es INFORMATIVO:</strong><br />
+- <code>cigarrillos = NaN</code> significa <strong>"NO QUISO RESPONDER"</strong><br />
+- Puede ser porque:<br />
+  - Fuma ilegalmente (menor de edad)<br />
+  - Le da verguenza admitir que fuma mucho<br />
+  - Simplemente no quiere compartir esa informacion<br />
+- <strong>IMPUTAR</strong> con la media asume que es un fumador promedio, lo cual puede ser <strong>FALSO</strong></p>
+<p><strong>Persona C - Dato Completo:</strong><br />
+- Respondio todo, no hay ambiguedad</p>
+<hr />
+<h3 id="2103-conceptos-de-muestreo-por-que-los-datos-faltantes-son-parte-del-diseno">2.10.3. Conceptos de Muestreo: Por Que los Datos Faltantes son Parte del Diseno</h3>
+<h4 id="el-contexto-de-las-encuestas">El Contexto de las Encuestas</h4>
+<p>Cuando trabajamos con encuestas (surveys) o bases de datos de Big Data, <strong>los datos faltantes son una consecuencia natural del proceso de recoleccion</strong>. Segun la teoria de muestreo (ver <a href="https://todoeconometria.com/estrategias-de-muestreo/">TodoEconometria - Estrategias de Muestreo</a>):</p>
+<blockquote>
+<p><strong>Muestreo Aleatorio Simple:</strong> La seleccion de la muestra representativa es altamente complicada. Por ejemplo, si queremos estudiar personas con diabetes tipo 2, <strong>no todos responderan todas las preguntas</strong>, y eso es <strong>esperado y valido</strong>.</p>
+</blockquote>
+<h4 id="los-tres-escenarios-reales">Los Tres Escenarios Reales:</h4>
+<p><strong>Escenario 1: Preguntas de Control (Filtros)</strong></p>
+<p>En encuestas bien disenadas, hay preguntas que <strong>intencionalmente</strong> generan <code>NaN</code> en otras variables:</p>
+<div class="highlight"><pre><span></span><code>P1: &quot;Tiene automovil?&quot;
+    <input type="checkbox" disabled> Si  -&gt; Pasar a P2
+    <input type="checkbox" disabled> No  -&gt; Saltar a P5
+
+P2: &quot;Que marca es su automovil?&quot; (Solo si respondio Si en P1)
+    _____________
+</code></pre></div>
+
+<p><strong>Resultado en la base de datos:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Persona</th>
+<th>Tiene_Auto</th>
+<th>Marca_Auto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Juan</td>
+<td>Si</td>
+<td>Toyota</td>
+</tr>
+<tr>
+<td>Maria</td>
+<td><strong>No</strong></td>
+<td><strong>NaN</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pregunta:</strong> Debemos imputar la marca de auto de Maria?</p>
+<p><strong>Respuesta:</strong> <strong>NO</strong>. El <code>NaN</code> es <strong>correcto</strong>. Maria no tiene auto, por lo tanto <strong>no puede tener marca</strong>. Imputar "Toyota" (la media/moda) seria absurdo.</p>
+<hr />
+<p><strong>Escenario 2: No Respuesta por Sensibilidad</strong></p>
+<p>Algunas preguntas son sensibles:</p>
+<div class="highlight"><pre><span></span><code>P10: &quot;Cual es su ingreso mensual?&quot;
+     <input type="checkbox" disabled> Menos de $1000
+     <input type="checkbox" disabled> $1000 - $3000
+     <input type="checkbox" disabled> $3000 - $5000
+     <input type="checkbox" disabled> Mas de $5000
+     <input type="checkbox" disabled> Prefiero no responder
+</code></pre></div>
+
+<p><strong>Resultado:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Persona</th>
+<th>Ingreso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pedro</td>
+<td>$1000-$3000</td>
+</tr>
+<tr>
+<td>Ana</td>
+<td><strong>NaN</strong> (prefiere no responder)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pregunta:</strong> Debemos imputar el ingreso de Ana con la mediana?</p>
+<p><strong>Respuesta:</strong> <strong>DEPENDE del tipo de perdida:</strong><br />
+- Si Ana es <strong>rica</strong> y no quiere declararlo: <strong>MNAR</strong> (el dato falta porque es alto)<br />
+- Si Ana respondio al azar "no responder": <strong>MCAR</strong> (aleatorio)</p>
+<p><strong>Imputar con la mediana en caso MNAR</strong> introducira <strong>sesgo hacia abajo</strong> (asumimos que los ricos que no responden tienen ingresos promedio).</p>
+<hr />
+<p><strong>Escenario 3: Datos de Big Data con Sensores</strong></p>
+<p>En bases de datos de IoT, sensores, o logs:</p>
+<div class="highlight"><pre><span></span><code>Sensor de Temperatura:
+Hora  | Temperatura
+------|------------
+10:00 | 25.3°C
+10:05 | 25.5°C
+10:10 | NaN  (sensor fallo)
+10:15 | 26.1°C
+</code></pre></div>
+
+<p><strong>Pregunta:</strong> Debemos imputar 10:10 con la media de 10:05 y 10:15?</p>
+<p><strong>Respuesta:</strong> <strong>DEPENDE:</strong><br />
+- Si el sensor falla <strong>aleatoriamente</strong>: MCAR -&gt; Imputacion lineal es razonable<br />
+- Si el sensor falla <strong>cuando hace mucho calor</strong> (se sobrecalienta): MNAR -&gt; Imputar con la media <strong>subestimara</strong> la temperatura real</p>
+<hr />
+<h3 id="2104-el-error-conceptual-necesito-datos-completos-para-analizar">2.10.4. El Error Conceptual: "Necesito Datos Completos para Analizar"</h3>
+<h4 id="mito-1-los-algoritmos-no-aceptan-nan">Mito 1: "Los algoritmos no aceptan NaN"</h4>
+<p><strong>Realidad:</strong><br />
+- Muchos algoritmos <strong>SI</strong> aceptan NaN: arboles de decision, Random Forest, XGBoost<br />
+- Los que no aceptan NaN (regresion lineal, PCA clasico) tienen <strong>versiones robustas</strong>:<br />
+  - PCA con <code>prince</code> acepta NA<br />
+  - Regresion con <code>statsmodels</code> tiene <code>missing='drop'</code></p>
+<h4 id="mito-2-mas-datos-mejor-modelo">Mito 2: "Mas datos = Mejor modelo"</h4>
+<p><strong>Realidad:</strong><br />
+- <strong>Datos incorrectos</strong> (imputados mal) son <strong>peores</strong> que <strong>menos datos correctos</strong><br />
+- Ejemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Opcion A: Imputar con media (MALO si es MNAR)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;ingreso&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ingreso&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>  <span class="c1"># 1000 filas, pero con sesgo</span>
+
+<span class="c1"># Opcion B: Eliminar filas con NA (BUENO si son pocas)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ingreso&#39;</span><span class="p">])</span>  <span class="c1"># 800 filas, pero sin sesgo</span>
+</code></pre></div>
+
+<p><strong>Cual es mejor?</strong> Depende del % de NA:<br />
+- Si NA &lt; 5%: <strong>Eliminar</strong> es seguro<br />
+- Si NA &gt; 20%: <strong>Investigar</strong> por que faltan antes de decidir</p>
+<hr />
+<h3 id="2105-caso-practico-encuesta-de-habitos-de-consumo">2.10.5. Caso Practico: Encuesta de Habitos de Consumo</h3>
+<p>Imagina esta base de datos:</p>
+<table>
+<thead>
+<tr>
+<th>Persona</th>
+<th>Fuma</th>
+<th>Cigarrillos_Dia</th>
+<th>Gasto_Tabaco</th>
+<th>Bebe_Alcohol</th>
+<th>Copas_Semana</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>No</td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td>Si</td>
+<td>3</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Si</td>
+<td>10</td>
+<td>50</td>
+<td>No</td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>C</td>
+<td>Si</td>
+<td><strong>NaN</strong></td>
+<td><strong>NaN</strong></td>
+<td>Si</td>
+<td><strong>NaN</strong></td>
+</tr>
+<tr>
+<td>D</td>
+<td>No</td>
+<td><strong>0</strong></td>
+<td><strong>0</strong></td>
+<td>No</td>
+<td><strong>0</strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="analisis-correcto">Analisis Correcto:</h4>
+<p><strong>Persona A:</strong><br />
+- <code>Cigarrillos_Dia = 0</code> es <strong>VALIDO</strong> (no fuma)<br />
+- <code>Gasto_Tabaco = 0</code> es <strong>VALIDO</strong> (coherente)<br />
+- <strong>NO IMPUTAR</strong></p>
+<p><strong>Persona B:</strong><br />
+- <code>Copas_Semana = 0</code> es <strong>VALIDO</strong> (no bebe)<br />
+- <strong>NO IMPUTAR</strong></p>
+<p><strong>Persona C:</strong><br />
+- <code>Cigarrillos_Dia = NaN</code> es <strong>PROBLEMATICO</strong><br />
+- Opciones:<br />
+  1. <strong>Eliminar fila</strong> (si es la unica con NA)<br />
+  2. <strong>Imputar con KNN</strong> (buscar fumadores similares)<br />
+  3. <strong>Dejar como NA</strong> y usar algoritmos que lo soporten</p>
+<h4 id="analisis-incorrecto-comun-en-principiantes">Analisis INCORRECTO (Comun en Principiantes):</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># ERROR: Imputar TODO con la media</span>
+<span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</code></pre></div>
+
+<p><strong>Consecuencia:</strong><br />
+- Persona A (no fumador) ahora tiene <code>Cigarrillos_Dia = 5</code> (media de B y C)<br />
+- Persona D (no fumador, no bebedor) ahora fuma y bebe<br />
+- <strong>La base de datos esta DESTRUIDA</strong></p>
+<hr />
+<h3 id="2106-reglas-de-oro-para-estudiantes">2.10.6. Reglas de Oro para Estudiantes</h3>
+<h4 id="regla-1-antes-de-tocar-un-na-preguntate">Regla 1: Antes de Tocar un NA, Preguntate:</h4>
+<div class="highlight"><pre><span></span><code>1. Por que falta este dato?
+   - Pregunta de filtro? -&gt; NA es CORRECTO, NO imputar
+   - No respuesta? -&gt; Investigar tipo (MCAR/MAR/MNAR)
+   - Error tecnico? -&gt; Puede ser MCAR
+
+2. Es un 0 o un NaN?
+   - 0 = Respuesta valida (&quot;no tengo&quot;, &quot;no hago&quot;)
+   - NaN = Ausencia de respuesta
+
+3. Que pasa si imputo mal?
+   - Sesgo en resultados
+   - Conclusiones erroneas
+   - Modelo invalido
+</code></pre></div>
+
+<h4 id="regla-2-workflow-de-decision">Regla 2: Workflow de Decision</h4>
+<div class="highlight"><pre><span></span><code>PASO 1: Contar NA
+   df.isna().sum()
+   -&gt; Si &lt; 5%: Considera eliminar filas
+   -&gt; Si &gt; 20%: Investiga patron
+
+PASO 2: Visualizar patron
+   import missingno as msno
+   msno.matrix(df)
+   -&gt; Aleatorio? -&gt; MCAR
+   -&gt; Agrupado? -&gt; MAR/MNAR
+
+PASO 3: Test estadistico
+   from pyampute.exploration import mcar_test
+   mcar_test(df)
+   -&gt; p &gt; 0.05: MCAR (puedes imputar)
+   -&gt; p &lt; 0.05: MAR/MNAR (cuidado)
+
+PASO 4: Decidir estrategia
+   - MCAR + pocos NA: Media o eliminar
+   - MAR: KNN o MICE
+   - MNAR: NO imputar o modelo especifico
+   - Pregunta de filtro: DEJAR como NA
+</code></pre></div>
+
+<h4 id="regla-3-documentar-siempre">Regla 3: Documentar SIEMPRE</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># BUENA PRACTICA</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;REPORTE DE DATOS FALTANTES&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total de observaciones: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variables con NA: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Detalle por variable:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Porcentaje de NA:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Estrategia aplicada:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Variables con 0 valido: [&#39;Cigarrillos_Dia&#39;, &#39;Copas_Semana&#39;]&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Variables imputadas con KNN: [&#39;Ingreso&#39;]&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Filas eliminadas: 3 (0.5</span><span class="si">% d</span><span class="s2">el total)&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h3 id="2107-ejemplo-completo-codigo-correcto-vs-incorrecto">2.10.7. Ejemplo Completo: Codigo Correcto vs Incorrecto</h3>
+<h4 id="codigo-incorrecto-principiante">Codigo INCORRECTO (Principiante):</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Cargar datos</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;encuesta.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># ERROR: Imputar TODO con la media</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="c1"># ERROR: No verificar que paso</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Listo, base completa!&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Problemas:</strong><br />
+1. No distingue entre 0 valido y NaN<br />
+2. No verifica tipo de perdida<br />
+3. No documenta que hizo<br />
+4. Puede haber destruido la estructura real</p>
+<h4 id="codigo-correcto-profesional">Codigo CORRECTO (Profesional):</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.impute</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNNImputer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">missingno</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">msno</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># 1. Cargar y explorar</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;encuesta.csv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DIAGNOSTICO INICIAL&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Datos faltantes:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+<span class="c1"># 2. Visualizar patron</span>
+<span class="n">msno</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Patron de Datos Faltantes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 3. Separar variables con 0 valido de variables con NA</span>
+<span class="c1"># Variables donde 0 es valido (no imputar)</span>
+<span class="n">vars_con_cero_valido</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cigarrillos_Dia&#39;</span><span class="p">,</span> <span class="s1">&#39;Gasto_Tabaco&#39;</span><span class="p">,</span> <span class="s1">&#39;Copas_Semana&#39;</span><span class="p">]</span>
+
+<span class="c1"># Variables donde NA debe tratarse</span>
+<span class="n">vars_a_imputar</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ingreso&#39;</span><span class="p">,</span> <span class="s1">&#39;Edad&#39;</span><span class="p">,</span> <span class="s1">&#39;Horas_Trabajo&#39;</span><span class="p">]</span>
+
+<span class="c1"># 4. Verificar coherencia (0 en variables dependientes)</span>
+<span class="c1"># Ejemplo: Si no fuma, gasto en tabaco debe ser 0</span>
+<span class="n">mask_no_fuma</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Fuma&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;No&#39;</span>
+<span class="k">assert</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask_no_fuma</span><span class="p">,</span> <span class="s1">&#39;Cigarrillos_Dia&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> \
+    <span class="s2">&quot;ERROR: Hay no fumadores con cigarrillos &gt; 0&quot;</span>
+
+<span class="c1"># 5. Imputar solo variables numericas que lo necesiten</span>
+<span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">vars_a_imputar</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Aplicando KNN Imputer a:&quot;</span><span class="p">,</span> <span class="n">vars_a_imputar</span><span class="p">)</span>
+    <span class="n">imputer</span> <span class="o">=</span> <span class="n">KNNImputer</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">vars_a_imputar</span><span class="p">]</span> <span class="o">=</span> <span class="n">imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">vars_a_imputar</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Imputacion completada&quot;</span><span class="p">)</span>
+
+<span class="c1"># 6. Documentar</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;REPORTE FINAL&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Filas totales: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variables con 0 valido (NO imputadas): </span><span class="si">{</span><span class="n">vars_con_cero_valido</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variables imputadas con KNN: </span><span class="si">{</span><span class="n">vars_a_imputar</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NA restantes: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<hr />
+<h3 id="2108-resumen-la-filosofia-del-analista-de-datos">2.10.8. Resumen: La Filosofia del Analista de Datos</h3>
+<blockquote>
+<p><strong>"No es tu trabajo llenar huecos. Es tu trabajo ENTENDER por que hay huecos."</strong></p>
+</blockquote>
+<h4 id="principios-fundamentales">Principios Fundamentales:</h4>
+<ol>
+<li><strong>Los datos faltantes son informacion</strong>, no un error</li>
+<li><strong>El 0 es una respuesta valida</strong>, no un dato faltante</li>
+<li><strong>NaN significa "no se"</strong>, y a veces <strong>"no se" es la respuesta correcta</strong></li>
+<li><strong>Imputar mal es peor que no imputar</strong></li>
+<li><strong>Documenta TODO</strong> lo que hagas con los NA</li>
+</ol>
+<h4 id="checklist-final-antes-de-hacer-pca-o-cualquier-analisis">Checklist Final Antes de Hacer PCA (o Cualquier Analisis):</h4>
+<ul>
+<li><input type="checkbox" disabled> He identificado todas las variables con 0 valido?</li>
+<li><input type="checkbox" disabled> He verificado que los 0 sean coherentes con otras variables?</li>
+<li><input type="checkbox" disabled> He diagnosticado el tipo de perdida (MCAR/MAR/MNAR)?</li>
+<li><input type="checkbox" disabled> He decidido una estrategia justificada para cada variable?</li>
+<li><input type="checkbox" disabled> He documentado cuantos NA habia y que hice con ellos?</li>
+<li><input type="checkbox" disabled> He verificado que los resultados tengan sentido despues de imputar?</li>
+</ul>
+<hr />
+<h2 id="3-el-dataset-decathlon-contexto-y-preguntas-de-investigacion">3. El Dataset: Decathlon - Contexto y Preguntas de Investigacion</h2>
+<h3 id="31-el-escenario-real-que-problema-queremos-resolver">3.1. El Escenario Real: Que Problema Queremos Resolver?</h3>
+<p>Imagina que eres el <strong>director tecnico de una federacion de atletismo</strong>. Tienes datos de 41 atletas que compitieron en decatlon (10 pruebas) en dos competiciones diferentes: los <strong>Juegos Olimpicos</strong> y el <strong>Meeting de Decastar</strong>.</p>
+<p>Te enfrentas a varias <strong>preguntas de negocio/investigacion</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Por que importa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Existen "perfiles" de atletas? (velocistas vs lanzadores vs completos)</td>
+<td>Para disenar programas de entrenamiento especializados</td>
+</tr>
+<tr>
+<td>Que pruebas estan relacionadas entre si?</td>
+<td>Para optimizar el entrenamiento cruzado</td>
+</tr>
+<tr>
+<td>Los atletas olimpicos tienen un perfil diferente a los de Decastar?</td>
+<td>Para entender que caracteriza a los de elite</td>
+</tr>
+<tr>
+<td>Que pruebas son "redundantes" (miden lo mismo)?</td>
+<td>Para simplificar las evaluaciones</td>
+</tr>
+<tr>
+<td>Que atletas tienen perfiles atipicos?</td>
+<td>Para identificar talentos unicos o detectar anomalias</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>CLAVE:</strong> No aplicamos PCA "porque si" o "porque esta de moda". Lo aplicamos porque tenemos <strong>preguntas especificas</strong> que esta tecnica puede responder de forma <strong>eficiente y valida</strong>.</p>
+</blockquote>
+<h3 id="32-por-que-pca-es-la-herramienta-adecuada-y-no-otra">3.2. Por que PCA es la Herramienta Adecuada (y no otra)</h3>
+<h4 id="el-problema-matematico">El Problema Matematico</h4>
+<p>Tenemos <strong>10 variables numericas</strong> (las pruebas). Visualizar 10 dimensiones es imposible. Pero:</p>
+<ul>
+<li>No queremos perder informacion importante</li>
+<li>Queremos ver <strong>patrones</strong> (grupos de atletas, relaciones entre pruebas)</li>
+<li>Queremos <strong>reducir la complejidad</strong> sin destruir la estructura</li>
+</ul>
+<h4 id="por-que-no-otras-tecnicas">Por que NO otras tecnicas?</h4>
+<table>
+<thead>
+<tr>
+<th>Tecnica</th>
+<th>Por que NO es adecuada aqui</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Regresion</strong></td>
+<td>No tenemos una variable "objetivo" que predecir. Queremos explorar, no predecir.</td>
+</tr>
+<tr>
+<td><strong>Clustering (K-Means)</strong></td>
+<td>Agrupa individuos, pero no explica QUE variables los diferencian ni como se relacionan las variables entre si.</td>
+</tr>
+<tr>
+<td><strong>Correlacion simple</strong></td>
+<td>Solo compara variables de 2 en 2. Con 10 variables, tendriamos 45 correlaciones. Imposible de interpretar.</td>
+</tr>
+<tr>
+<td><strong>t-SNE / UMAP</strong></td>
+<td>Buenos para visualizar, pero no dan interpretacion de las dimensiones (son "cajas negras").</td>
+</tr>
+</tbody>
+</table>
+<h4 id="por-que-si-usar-pca">Por que SI usar PCA?</h4>
+<table>
+<thead>
+<tr>
+<th>Ventaja de PCA</th>
+<th>Aplicacion en Decathlon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Reduce dimensiones</strong> preservando varianza</td>
+<td>De 10 pruebas a 2-3 dimensiones interpretables</td>
+</tr>
+<tr>
+<td><strong>Identifica que variables "van juntas"</strong></td>
+<td>Descubrir que 100m, salto largo y 400m estan correlacionadas</td>
+</tr>
+<tr>
+<td><strong>Detecta individuos atipicos</strong></td>
+<td>Identificar atletas con perfiles unicos</td>
+</tr>
+<tr>
+<td><strong>Permite variables suplementarias</strong></td>
+<td>Ver si "Competicion" explica diferencias sin contaminar el analisis</td>
+</tr>
+<tr>
+<td><strong>Es interpretable</strong></td>
+<td>Cada eje tiene un significado (ej: "velocidad vs resistencia")</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-el-contexto-deportivo-del-decathlon">3.3. El Contexto Deportivo del Decathlon</h3>
+<p>El decatlon es conocido como <strong>"la prueba reina del atletismo"</strong> porque evalua al atleta mas completo. Consta de 10 pruebas en 2 dias:</p>
+<h4 id="dia-1">Dia 1</h4>
+<table>
+<thead>
+<tr>
+<th>Prueba</th>
+<th>Tipo</th>
+<th>Habilidad Principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100m</td>
+<td>Carrera</td>
+<td>Velocidad explosiva</td>
+</tr>
+<tr>
+<td>Salto largo</td>
+<td>Salto</td>
+<td>Potencia de piernas</td>
+</tr>
+<tr>
+<td>Lanzamiento de peso</td>
+<td>Lanzamiento</td>
+<td>Fuerza bruta</td>
+</tr>
+<tr>
+<td>Salto alto</td>
+<td>Salto</td>
+<td>Tecnica + potencia</td>
+</tr>
+<tr>
+<td>400m</td>
+<td>Carrera</td>
+<td>Velocidad-resistencia</td>
+</tr>
+</tbody>
+</table>
+<h4 id="dia-2">Dia 2</h4>
+<table>
+<thead>
+<tr>
+<th>Prueba</th>
+<th>Tipo</th>
+<th>Habilidad Principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>110m vallas</td>
+<td>Carrera</td>
+<td>Velocidad + tecnica</td>
+</tr>
+<tr>
+<td>Lanzamiento de disco</td>
+<td>Lanzamiento</td>
+<td>Fuerza + tecnica</td>
+</tr>
+<tr>
+<td>Salto con pertiga</td>
+<td>Salto</td>
+<td>Tecnica avanzada</td>
+</tr>
+<tr>
+<td>Lanzamiento de jabalina</td>
+<td>Lanzamiento</td>
+<td>Fuerza + coordinacion</td>
+</tr>
+<tr>
+<td>1500m</td>
+<td>Carrera</td>
+<td>Resistencia pura</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Hipotesis previa (antes del PCA):</strong> Esperamos encontrar que las pruebas se agrupen por "tipo de habilidad": velocidad (100m, 400m, vallas), fuerza (peso, disco, jabalina), y tecnica (pertiga, salto alto). El PCA nos dira si esta hipotesis es correcta.</p>
+</blockquote>
+<h3 id="34-las-dos-competiciones-por-que-es-importante">3.4. Las Dos Competiciones: Por que es Importante?</h3>
+<table>
+<thead>
+<tr>
+<th>Competicion</th>
+<th>Nivel</th>
+<th>Caracteristicas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Juegos Olimpicos</strong></td>
+<td>Elite mundial</td>
+<td>Solo los mejores del mundo. Alta presion. Maxima preparacion.</td>
+</tr>
+<tr>
+<td><strong>Meeting de Decastar</strong></td>
+<td>Alto nivel europeo</td>
+<td>Competidores de elite, pero no necesariamente los mejores del mundo.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pregunta clave:</strong> Los atletas olimpicos tienen un <strong>perfil de rendimiento diferente</strong>? O simplemente son "mejores en todo"?</p>
+<ul>
+<li>Si son "mejores en todo", estaran en la misma direccion que los de Decastar pero mas lejos del origen.</li>
+<li>Si tienen un <strong>perfil diferente</strong>, estaran en una zona distinta del mapa.</li>
+</ul>
+<p>Esta pregunta se responde usando <code>Competition</code> como <strong>variable suplementaria</strong>: no participa en el calculo del PCA, pero la proyectamos para ver si los grupos se separan.</p>
+<h3 id="35-estructura-de-los-datos">3.5. Estructura de los Datos</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo de Variable</th>
+<th>Variables</th>
+<th>Rol en el Analisis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Activas</strong></td>
+<td>100m, Long.jump, Shot.put, High.jump, 400m, 110m.hurdle, Discus, Pole.vault, Javeline, 1500m</td>
+<td><strong>Construyen los ejes PCA</strong></td>
+</tr>
+<tr>
+<td><strong>Suplementarias Cuantitativas</strong></td>
+<td>Rank, Points</td>
+<td>Se proyectan pero <strong>NO</strong> construyen ejes</td>
+</tr>
+<tr>
+<td><strong>Suplementarias Cualitativas</strong></td>
+<td>Competition (Decastar/OlympicG)</td>
+<td>Para <strong>colorear y segmentar</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="36-concepto-clave-variables-activas-vs-suplementarias">3.6. Concepto Clave: Variables Activas vs. Suplementarias</h3>
+<p>Este es uno de los conceptos mas poderosos de FactoMineR:</p>
+<blockquote>
+<p><strong>Variables Activas:</strong> Participan en el calculo matematico de los componentes principales. Son las que "construyen" los ejes. En nuestro caso, las 10 pruebas deportivas.</p>
+<p><strong>Variables Suplementarias:</strong> <strong>NO</strong> participan en el calculo, pero se proyectan sobre el espacio factorial para ver como se relacionan con las dimensiones encontradas.</p>
+</blockquote>
+<p><strong>Por que es util?</strong> Imagina que quieres saber si el tipo de competicion (Juegos Olimpicos vs Decastar) influye en el perfil de rendimiento de los atletas. Si incluyes "Competition" como variable activa, <strong>contaminas</strong> el analisis (introduces una variable categorica en un calculo numerico). Pero si la usas como <strong>suplementaria</strong>, puedes ver si los grupos se separan <strong>sin haber forzado esa separacion</strong>.</p>
+<h3 id="37-otros-datasets-clasicos-de-pca-y-sus-contextos">3.7. Otros Datasets Clasicos de PCA y sus Contextos</h3>
+<p>Para que entiendas que PCA se aplica en <strong>muchos dominios</strong>, aqui tienes otros datasets clasicos:</p>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Contexto</th>
+<th>Pregunta de Investigacion</th>
+<th>Variables</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Iris</strong> (Fisher, 1936)</td>
+<td>Botanica</td>
+<td>Pueden las medidas de petalos/sepalos distinguir especies de flores?</td>
+<td>4 medidas de flores, 3 especies</td>
+</tr>
+<tr>
+<td><strong>Wine</strong> (UCI)</td>
+<td>Enologia</td>
+<td>Que propiedades quimicas caracterizan vinos de diferentes regiones?</td>
+<td>13 propiedades quimicas, 3 origenes</td>
+</tr>
+<tr>
+<td><strong>Breast Cancer</strong> (UCI)</td>
+<td>Medicina</td>
+<td>Que medidas de celulas distinguen tumores benignos de malignos?</td>
+<td>30 medidas de nucleos celulares</td>
+</tr>
+<tr>
+<td><strong>MNIST</strong> (LeCun)</td>
+<td>Vision artificial</td>
+<td>Pueden reducirse imagenes de 784 pixeles a pocas dimensiones?</td>
+<td>784 pixeles, 10 digitos</td>
+</tr>
+<tr>
+<td><strong>Encuestas sociales</strong></td>
+<td>Sociologia</td>
+<td>Que dimensiones latentes explican las opiniones politicas?</td>
+<td>Muchas preguntas de encuesta</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Patron comun:</strong> En todos los casos, tenemos <strong>muchas variables numericas</strong> y queremos <strong>descubrir estructura latente</strong> (dimensiones ocultas que explican la variacion).</p>
+</blockquote>
+<h3 id="38-checklist-antes-de-aplicar-pca-preguntate">3.8. Checklist: Antes de Aplicar PCA, Preguntate...</h3>
+<ul>
+<li><input type="checkbox" disabled> <strong>Tengo una pregunta clara?</strong> "Quiero explorar patrones" es valido. "Quiero predecir Y" no es para PCA.</li>
+<li><input type="checkbox" disabled> <strong>Mis variables son numericas?</strong> PCA requiere variables cuantitativas (o convertibles a numericas).</li>
+<li><input type="checkbox" disabled> <strong>Tengo suficientes observaciones?</strong> Regla practica: al menos 5-10 observaciones por variable.</li>
+<li><input type="checkbox" disabled> <strong>Las variables estan en escalas comparables?</strong> Si no, debo estandarizar (lo hace Prince por defecto).</li>
+<li><input type="checkbox" disabled> <strong>He tratado los datos perdidos?</strong> (Ver seccion 2)</li>
+<li><input type="checkbox" disabled> <strong>Tengo variables suplementarias para validar?</strong> Muy util para interpretar los resultados.</li>
+</ul>
+<hr />
+<h2 id="4-resultados-del-analisis-panel-de-graficos">4. Resultados del Analisis: Panel de Graficos</h2>
+<p>A continuacion se presenta el panel completo de graficos generados por el script <code>02_PCA_FactoMineR_style.py</code>:</p>
+<p><img alt="Panel de Graficos PCA" src="02_PCA_FactoMineR_graficos.png" /></p>
+<hr />
+<h2 id="5-interpretacion-detallada-de-cada-grafico">5. Interpretacion Detallada de Cada Grafico</h2>
+<h3 id="41-scree-plot-grafico-de-sedimentacion">4.1. SCREE PLOT (Grafico de Sedimentacion)</h3>
+<p><strong>Ubicacion:</strong> Panel superior izquierdo</p>
+<p><strong>Que muestra:</strong> La varianza explicada por cada componente principal.</p>
+<p><img alt="Interpretacion Scree Plot" src="02_PCA_FactoMineR_graficos.png" /></p>
+<h4 id="lectura-de-los-resultados">Lectura de los Resultados:</h4>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Varianza Explicada</th>
+<th>Varianza Acumulada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dim.1</td>
+<td>16.7%</td>
+<td>16.7%</td>
+</tr>
+<tr>
+<td>Dim.2</td>
+<td>14.5%</td>
+<td>31.2%</td>
+</tr>
+<tr>
+<td>Dim.3</td>
+<td>12.8%</td>
+<td>44.0%</td>
+</tr>
+<tr>
+<td>Dim.4</td>
+<td>11.9%</td>
+<td>55.9%</td>
+</tr>
+<tr>
+<td>Dim.5</td>
+<td>9.6%</td>
+<td>65.5%</td>
+</tr>
+</tbody>
+</table>
+<h4 id="interpretacion">Interpretacion:</h4>
+<ol>
+<li>
+<p><strong>La linea punteada gris (Umbral = 10%)</strong> representa la contribucion esperada si todas las variables fueran independientes (100% / 10 variables = 10%). Las dimensiones <strong>por encima</strong> de esta linea aportan mas informacion que el promedio.</p>
+</li>
+<li>
+<p><strong>Las primeras 4 dimensiones</strong> tienen autovalores mayores a 1 (Regla de Kaiser), lo que sugiere retener 4 componentes.</p>
+</li>
+<li>
+<p><strong>La curva roja (acumulada)</strong> muestra que con 5 dimensiones capturamos el 65.5% de la variabilidad total. Esto es relativamente bajo, lo que indica que <strong>el decatlon es un deporte multidimensional</strong> donde no hay un unico "factor" que explique todo el rendimiento.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Insight Deportivo:</strong> A diferencia de deportes como natacion (donde la velocidad lo explica casi todo), el decatlon requiere <strong>multiples habilidades independientes</strong>: velocidad, fuerza, resistencia, tecnica. Por eso ninguna dimension domina claramente.</p>
+</blockquote>
+<hr />
+<h3 id="42-circulo-de-correlacion-el-grafico-mas-importante">4.2. CIRCULO DE CORRELACION (El Grafico Mas Importante)</h3>
+<p><strong>Ubicacion:</strong> Panel superior centro</p>
+<p>Este es <strong>el grafico mas importante de FactoMineR</strong>. Muestra como las variables se relacionan entre si y con los ejes.</p>
+<p><img alt="Circulo de Correlacion" src="02_PCA_circulo_correlacion.png" /></p>
+<h4 id="como-leer-el-circulo">Como Leer el Circulo:</h4>
+<table>
+<thead>
+<tr>
+<th>Situacion en el Grafico</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Flecha <strong>cerca del circulo</strong> (borde)</td>
+<td>Variable <strong>bien representada</strong> en el plano</td>
+</tr>
+<tr>
+<td>Flecha <strong>corta</strong> (cerca del centro)</td>
+<td>Variable <strong>mal representada</strong>, su varianza esta en otras dimensiones</td>
+</tr>
+<tr>
+<td>Flechas en la <strong>misma direccion</strong></td>
+<td>Variables <strong>positivamente correlacionadas</strong></td>
+</tr>
+<tr>
+<td>Flechas <strong>opuestas</strong> (180 grados)</td>
+<td>Variables <strong>negativamente correlacionadas</strong></td>
+</tr>
+<tr>
+<td>Flechas <strong>perpendiculares</strong> (90 grados)</td>
+<td>Variables <strong>no correlacionadas</strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="interpretacion-de-nuestros-resultados">Interpretacion de Nuestros Resultados:</h4>
+<p><strong>Grupo 1 - Cuadrante Inferior Izquierdo (Velocidad/Agilidad):</strong><br />
+- <code>Long.jump</code> (salto largo): Flecha larga hacia la izquierda<br />
+- <code>400m</code>: Similar direccion<br />
+- <code>110m.hurdle</code>: Similar direccion</p>
+<blockquote>
+<p><strong>Interpretacion:</strong> Estas pruebas estan <strong>correlacionadas positivamente entre si</strong>. Un atleta bueno en salto largo tiende a ser bueno en 400m y vallas. Esto tiene sentido: todas requieren <strong>velocidad explosiva y potencia de piernas</strong>.</p>
+</blockquote>
+<p><strong>Grupo 2 - Cuadrante Superior Izquierdo (Resistencia):</strong><br />
+- <code>1500m</code>: Flecha hacia arriba-izquierda<br />
+- <code>Shot.put</code> (lanzamiento de peso): Hacia arriba</p>
+<blockquote>
+<p><strong>Interpretacion:</strong> El 1500m (resistencia) y el lanzamiento de peso aparecen en direcciones diferentes al grupo de velocidad. Esto sugiere que <strong>la resistencia es una habilidad distinta</strong> de la velocidad explosiva.</p>
+</blockquote>
+<p><strong>Grupo 3 - Cuadrante Inferior Derecho:</strong><br />
+- <code>Pole.vault</code> (salto con pertiga): Flecha larga hacia abajo<br />
+- <code>Discus</code>: Similar direccion</p>
+<blockquote>
+<p><strong>Interpretacion:</strong> Estas pruebas tecnicas forman su propio grupo.</p>
+</blockquote>
+<p><strong>Variable Especial - <code>Long.jump</code>:</strong><br />
+- Es la flecha <strong>mas larga</strong> hacia la izquierda<br />
+- Correlacion con Dim.1: <strong>-0.74</strong> (muy alta)</p>
+<blockquote>
+<p><strong>Conclusion:</strong> El salto largo es la variable que <strong>mejor define</strong> la primera dimension. Un atleta con alta puntuacion en Dim.1 (derecha del mapa) tiende a tener <strong>peor</strong> salto largo.</p>
+</blockquote>
+<hr />
+<h3 id="43-mapa-de-individuos">4.3. MAPA DE INDIVIDUOS</h3>
+<p><strong>Ubicacion:</strong> Panel superior derecho</p>
+<p>Muestra donde se ubica cada atleta en el espacio de las dos primeras dimensiones, coloreado por la variable suplementaria <code>Competition</code>.</p>
+<h4 id="lectura-del-grafico">Lectura del Grafico:</h4>
+<ul>
+<li><strong>Puntos azules:</strong> Atletas de la competencia <strong>Decastar</strong></li>
+<li><strong>Puntos rojos:</strong> Atletas de los <strong>Juegos Olimpicos (OlympicG)</strong></li>
+</ul>
+<h4 id="interpretacion_1">Interpretacion:</h4>
+<ol>
+<li>
+<p><strong>Dispersion general:</strong> Los atletas se distribuyen ampliamente en el plano, sin formar grupos muy compactos. Esto confirma que <strong>hay diversidad de perfiles</strong> en el decatlon.</p>
+</li>
+<li>
+<p><strong>Separacion por competicion:</strong> Observa que los puntos rojos (Olimpicos) tienden a estar mas dispersos y algunos estan en posiciones extremas (ej. BERNARD en el extremo derecho). Los atletas Olimpicos muestran <strong>mayor variabilidad</strong> en sus perfiles.</p>
+</li>
+<li>
+<p><strong>Atletas destacados:</strong><br />
+   - <strong>BERNARD</strong> (extremo derecho): Perfil muy particular, diferente al promedio<br />
+   - <strong>Zsivoczky</strong> (abajo): Otro perfil atipico<br />
+   - <strong>BOURGUIGNON</strong> (arriba izquierda): Perfil diferente</p>
+</li>
+<li>
+<p><strong>Interpretacion combinada con el circulo:</strong><br />
+   - Los atletas a la <strong>izquierda</strong> del mapa tienden a ser buenos en <code>Long.jump</code>, <code>400m</code>, <code>110m.hurdle</code> (pruebas de velocidad)<br />
+   - Los atletas <strong>arriba</strong> tienden a ser buenos en <code>Shot.put</code>, <code>1500m</code> (fuerza/resistencia)</p>
+</li>
+</ol>
+<hr />
+<h3 id="44-contribuciones-de-variables-a-dim1">4.4. CONTRIBUCIONES DE VARIABLES A DIM.1</h3>
+<p><strong>Ubicacion:</strong> Panel inferior izquierdo</p>
+<p>Este grafico responde a la pregunta: <strong>Que variables "construyeron" el primer eje?</strong></p>
+<h4 id="resultados">Resultados:</h4>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Contribucion a Dim.1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Long.jump</strong></td>
+<td><strong>32.9%</strong></td>
+</tr>
+<tr>
+<td><strong>1500m</strong></td>
+<td><strong>19.9%</strong></td>
+</tr>
+<tr>
+<td><strong>400m</strong></td>
+<td><strong>12.0%</strong></td>
+</tr>
+<tr>
+<td><strong>110m.hurdle</strong></td>
+<td><strong>10.8%</strong></td>
+</tr>
+<tr>
+<td>High.jump</td>
+<td>7.6%</td>
+</tr>
+<tr>
+<td>Javeline</td>
+<td>6.6%</td>
+</tr>
+<tr>
+<td>Shot.put</td>
+<td>5.0%</td>
+</tr>
+<tr>
+<td>100m</td>
+<td>4.0%</td>
+</tr>
+<tr>
+<td>Pole.vault</td>
+<td>1.1%</td>
+</tr>
+<tr>
+<td>Discus</td>
+<td>0.1%</td>
+</tr>
+</tbody>
+</table>
+<h4 id="interpretacion_2">Interpretacion:</h4>
+<ul>
+<li>La <strong>linea roja punteada</strong> marca el umbral de contribucion esperada (10% = 100%/10 variables)</li>
+<li>Las barras <strong>rojas</strong> (sobre el umbral) son las variables que <strong>realmente definen</strong> esa dimension</li>
+<li>Las barras <strong>azules</strong> (bajo el umbral) contribuyen menos de lo esperado</li>
+</ul>
+<blockquote>
+<p><strong>Conclusion para Dim.1:</strong> Esta dimension esta dominada por <code>Long.jump</code> (32.9%), seguida de <code>1500m</code> (19.9%) y <code>400m</code> (12.0%). Esto sugiere que Dim.1 representa un <strong>continuo entre atletas explosivos (buenos en salto largo, 400m) vs atletas de resistencia (1500m)</strong>.</p>
+</blockquote>
+<hr />
+<h3 id="45-contribuciones-de-variables-a-dim2">4.5. CONTRIBUCIONES DE VARIABLES A DIM.2</h3>
+<p><strong>Ubicacion:</strong> Panel inferior centro</p>
+<h4 id="resultados_1">Resultados:</h4>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Contribucion a Dim.2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Shot.put</strong></td>
+<td><strong>34.1%</strong></td>
+</tr>
+<tr>
+<td><strong>Pole.vault</strong></td>
+<td><strong>30.7%</strong></td>
+</tr>
+<tr>
+<td><strong>1500m</strong></td>
+<td><strong>10.6%</strong></td>
+</tr>
+<tr>
+<td><strong>High.jump</strong></td>
+<td><strong>10.1%</strong></td>
+</tr>
+<tr>
+<td>Javeline</td>
+<td>8.7%</td>
+</tr>
+<tr>
+<td>Discus</td>
+<td>3.0%</td>
+</tr>
+<tr>
+<td>Long.jump</td>
+<td>1.2%</td>
+</tr>
+<tr>
+<td>100m</td>
+<td>0.9%</td>
+</tr>
+<tr>
+<td>400m</td>
+<td>0.7%</td>
+</tr>
+<tr>
+<td>110m.hurdle</td>
+<td>0.2%</td>
+</tr>
+</tbody>
+</table>
+<h4 id="interpretacion_3">Interpretacion:</h4>
+<blockquote>
+<p><strong>Conclusion para Dim.2:</strong> Esta dimension esta dominada por <code>Shot.put</code> (34.1%) y <code>Pole.vault</code> (30.7%). Representa un <strong>contraste entre atletas de lanzamiento (fuerza bruta) vs atletas tecnicos (salto con pertiga)</strong>.</p>
+</blockquote>
+<p><strong>Nota importante:</strong> Observa que <code>Shot.put</code> y <code>Pole.vault</code> apuntan en <strong>direcciones opuestas</strong> en el circulo de correlacion. Esto significa que:<br />
+- Atletas <strong>arriba</strong> en el mapa: Buenos en lanzamiento de peso<br />
+- Atletas <strong>abajo</strong> en el mapa: Buenos en salto con pertiga</p>
+<hr />
+<h3 id="46-biplot-individuos-variables">4.6. BIPLOT (Individuos + Variables)</h3>
+<p><strong>Ubicacion:</strong> Panel inferior derecho</p>
+<p>El biplot <strong>combina</strong> el mapa de individuos con las flechas de variables, permitiendo ver directamente que variables caracterizan a que atletas.</p>
+<h4 id="como-leerlo">Como Leerlo:</h4>
+<ol>
+<li><strong>Proyecta mentalmente</strong> cada atleta sobre cada flecha de variable</li>
+<li>Si la proyeccion cae en la <strong>direccion de la flecha</strong>: el atleta tiene valor <strong>alto</strong> en esa variable</li>
+<li>Si la proyeccion cae en la <strong>direccion opuesta</strong>: el atleta tiene valor <strong>bajo</strong> en esa variable</li>
+</ol>
+<h4 id="ejemplo-de-interpretacion">Ejemplo de Interpretacion:</h4>
+<ul>
+<li><strong>BERNARD</strong> (extremo derecho):</li>
+<li>Proyeccion sobre <code>Long.jump</code> (izquierda): <strong>opuesta</strong> = mal salto largo</li>
+<li>
+<p>Proyeccion sobre <code>Shot.put</code> (arriba): <strong>perpendicular</strong> = promedio</p>
+</li>
+<li>
+<p><strong>Atletas arriba-izquierda</strong>:</p>
+</li>
+<li>Buenos en <code>1500m</code> y <code>Shot.put</code></li>
+<li>Perfil de <strong>resistencia y fuerza</strong></li>
+</ul>
+<hr />
+<h2 id="6-metricas-avanzadas-de-factominer">6. Metricas Avanzadas de FactoMineR</h2>
+<h3 id="51-calidad-de-representacion-cos2">5.1. Calidad de Representacion ($\cos^2$)</h3>
+<p>El $\cos^2$ mide <strong>que tan bien representado</strong> esta un punto en el plano factorial.</p>
+<p>$$\cos^2 = \frac{\text{distancia al origen en el plano}^2}{\text{distancia al origen en el espacio original}^2}$$</p>
+<h4 id="interpretacion_4">Interpretacion:</h4>
+<table>
+<thead>
+<tr>
+<th>Valor de $\cos^2$</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cercano a <strong>1</strong></td>
+<td>El punto esta <strong>perfectamente representado</strong> en el plano</td>
+</tr>
+<tr>
+<td>Cercano a <strong>0</strong></td>
+<td>El punto esta <strong>mal representado</strong>, su informacion esta en otras dimensiones</td>
+</tr>
+</tbody>
+</table>
+<h4 id="resultados-para-los-atletas-top-5-mejor-representados">Resultados para los Atletas (Top 5 mejor representados):</h4>
+<table>
+<thead>
+<tr>
+<th>Atleta</th>
+<th>$\cos^2$ en Dim1+Dim2</th>
+<th>Interpretacion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bourguignon</td>
+<td>0.755</td>
+<td>75.5% de su variabilidad capturada</td>
+</tr>
+<tr>
+<td>BERNARD</td>
+<td>0.725</td>
+<td>72.5% de su variabilidad capturada</td>
+</tr>
+<tr>
+<td>Warners</td>
+<td>0.717</td>
+<td>71.7% de su variabilidad capturada</td>
+</tr>
+<tr>
+<td>Lorenzo</td>
+<td>0.679</td>
+<td>67.9% de su variabilidad capturada</td>
+</tr>
+<tr>
+<td>Clay</td>
+<td>0.638</td>
+<td>63.8% de su variabilidad capturada</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Aplicacion practica:</strong> Si vas a interpretar la posicion de un atleta especifico, <strong>primero verifica su $\cos^2$</strong>. Si es bajo (&lt; 0.5), su posicion en el mapa puede ser enganosa.</p>
+</blockquote>
+<hr />
+<h3 id="52-contribuciones">5.2. Contribuciones</h3>
+<p>Las contribuciones indican <strong>cuanto aporta</strong> cada individuo/variable a la construccion de un eje.</p>
+<h4 id="para-variables">Para Variables:</h4>
+<p>Ya vimos que <code>Long.jump</code> contribuye 32.9% a Dim.1. Esto significa que si eliminaramos el salto largo del analisis, <strong>la primera dimension cambiaria drasticamente</strong>.</p>
+<h4 id="para-individuos">Para Individuos:</h4>
+<table>
+<thead>
+<tr>
+<th>Atleta</th>
+<th>Contribucion a Dim.1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERNARD</td>
+<td>12.82%</td>
+</tr>
+<tr>
+<td>Warners</td>
+<td>12.42%</td>
+</tr>
+<tr>
+<td>Clay</td>
+<td>8.62%</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Interpretacion:</strong> BERNARD y Warners son atletas "influyentes" que "tiran" el eje hacia sus posiciones. Son atletas con perfiles extremos.</p>
+</blockquote>
+<hr />
+<h2 id="7-tabla-de-equivalencias-rpython">7. Tabla de Equivalencias R/Python</h2>
+<p>Para quienes vienen de R y quieren replicar analisis de FactoMineR:</p>
+<table>
+<thead>
+<tr>
+<th>FactoMineR (R)</th>
+<th>Prince (Python)</th>
+<th>Descripcion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>res.pca$eig</code></td>
+<td><code>pca.eigenvalues_summary</code></td>
+<td>Tabla de autovalores</td>
+</tr>
+<tr>
+<td><code>res.pca$ind$coord</code></td>
+<td><code>pca.row_coordinates(df)</code></td>
+<td>Coordenadas de individuos</td>
+</tr>
+<tr>
+<td><code>res.pca$ind$contrib</code></td>
+<td><code>pca.row_contributions_</code></td>
+<td>Contribuciones de individuos</td>
+</tr>
+<tr>
+<td><code>res.pca$ind$cos2</code></td>
+<td><code>pca.row_cosine_similarities(df)</code></td>
+<td>Cos2 de individuos</td>
+</tr>
+<tr>
+<td><code>res.pca$var$coord</code></td>
+<td><code>pca.column_coordinates</code></td>
+<td>Coordenadas de variables</td>
+</tr>
+<tr>
+<td><code>res.pca$var$cor</code></td>
+<td><code>pca.column_correlations</code></td>
+<td>Correlaciones de variables</td>
+</tr>
+<tr>
+<td><code>res.pca$var$contrib</code></td>
+<td><code>pca.column_contributions_</code></td>
+<td>Contribuciones de variables</td>
+</tr>
+<tr>
+<td><code>res.pca$var$cos2</code></td>
+<td><code>pca.column_cosine_similarities_</code></td>
+<td>Cos2 de variables</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-conclusiones-del-analisis-del-decathlon">8. Conclusiones del Analisis del Decathlon</h2>
+<h3 id="71-hallazgos-principales">7.1. Hallazgos Principales</h3>
+<ol>
+<li>
+<p><strong>El decatlon es multidimensional:</strong> Ninguna dimension explica mas del 17% de la varianza. Se necesitan al menos 4 componentes para capturar el 56% de la informacion.</p>
+</li>
+<li>
+<p><strong>Dimension 1 - Velocidad/Agilidad vs Resistencia:</strong><br />
+   - Dominada por: <code>Long.jump</code> (32.9%), <code>1500m</code> (19.9%), <code>400m</code> (12.0%)<br />
+   - Separa atletas explosivos de atletas de resistencia</p>
+</li>
+<li>
+<p><strong>Dimension 2 - Fuerza vs Tecnica:</strong><br />
+   - Dominada por: <code>Shot.put</code> (34.1%), <code>Pole.vault</code> (30.7%)<br />
+   - Separa atletas de lanzamiento de atletas tecnicos</p>
+</li>
+<li>
+<p><strong>Variable suplementaria (Competition):</strong><br />
+   - Los atletas olimpicos muestran mayor variabilidad en sus perfiles<br />
+   - No hay una separacion clara entre competiciones, lo que sugiere que <strong>el nivel de competencia no determina el tipo de perfil</strong></p>
+</li>
+</ol>
+<h3 id="72-implicaciones-practicas">7.2. Implicaciones Practicas</h3>
+<ul>
+<li><strong>Para entrenadores:</strong> Identificar en que cuadrante esta un atleta ayuda a disenar programas de entrenamiento personalizados</li>
+<li><strong>Para analistas:</strong> Las contribuciones revelan que variables son mas importantes para caracterizar el rendimiento global</li>
+</ul>
+<hr />
+<h2 id="9-archivos-generados">9. Archivos Generados</h2>
+<table>
+<thead>
+<tr>
+<th>Archivo</th>
+<th>Descripcion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>02_PCA_FactoMineR_style.py</code></td>
+<td>Codigo Python completo</td>
+</tr>
+<tr>
+<td><code>02_PCA_FactoMineR_style.md</code></td>
+<td>Este manual</td>
+</tr>
+<tr>
+<td><code>02_PCA_FactoMineR_graficos.png</code></td>
+<td>Panel de 6 graficos</td>
+</tr>
+<tr>
+<td><code>02_PCA_circulo_correlacion.png</code></td>
+<td>Circulo de correlacion individual</td>
+</tr>
+<tr>
+<td><code>02_PCA_resultados_FactoMineR.xlsx</code></td>
+<td>Excel con 7 hojas de resultados</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-ejercicio-propuesto-para-el-alumno">10. Ejercicio Propuesto para el Alumno</h2>
+<h3 id="preguntas-de-comprension">Preguntas de Comprension:</h3>
+<ol>
+<li>
+<p><strong>Si un atleta tiene coordenada negativa en Dim.1, que puedes inferir sobre su salto largo?</strong></p>
+</li>
+<li>
+<p><strong>Por que <code>Discus</code> tiene contribucion casi nula (0.1%) a Dim.1?</strong></p>
+</li>
+<li>
+<p><strong>Si el $\cos^2$ de un atleta en el plano Dim1-Dim2 es 0.30, deberiamos confiar en su posicion en el mapa? Por que?</strong></p>
+</li>
+<li>
+<p><strong>Observando el biplot, que tipo de perfil tiene el atleta YURKOV (arriba en el mapa)?</strong></p>
+</li>
+</ol>
+<h3 id="respuestas">Respuestas:</h3>
+<ol>
+<li>
+<p>Tiene buen salto largo (la correlacion de Long.jump con Dim.1 es negativa: -0.74)</p>
+</li>
+<li>
+<p>Porque la variabilidad del Discus esta representada principalmente en Dim.3 (contribucion 39.4%), no en Dim.1</p>
+</li>
+<li>
+<p>No deberiamos confiar mucho. Solo el 30% de su variabilidad esta capturada en ese plano. El 70% restante esta en otras dimensiones.</p>
+</li>
+<li>
+<p>YURKOV tiene valores altos en las variables que apuntan hacia arriba (<code>Shot.put</code>, <code>1500m</code>, <code>High.jump</code>): perfil de fuerza y resistencia.</p>
+</li>
+</ol>
+<hr />
+<h2 id="11-referencias-academicas">11. Referencias Academicas</h2>
+<h3 id="referencia-principal-del-tutorial">Referencia Principal del Tutorial</h3>
+<blockquote>
+<p><strong>FactoMineR Tutorial</strong><br />
+Husson, F., &amp; Josse, J.<br />
+<a href="http://factominer.free.fr/course/FactoTuto.html">http://factominer.free.fr/course/FactoTuto.html</a><br />
+<em>"This course presents the main methods used in Exploratory Data Analysis with the FactoMineR package."</em></p>
+</blockquote>
+<h3 id="articulo-original-de-factominer">Articulo Original de FactoMineR</h3>
+<blockquote>
+<p>Le, S., Josse, J., &amp; Husson, F. (2008).<br />
+<strong>FactoMineR: An R Package for Multivariate Analysis.</strong><br />
+<em>Journal of Statistical Software</em>, 25(1), 1-18.<br />
+DOI: 10.18637/jss.v025.i01</p>
+</blockquote>
+<h3 id="libro-de-referencia">Libro de Referencia</h3>
+<blockquote>
+<p>Husson, F., Le, S., &amp; Pages, J. (2017).<br />
+<strong>Exploratory Multivariate Analysis by Example Using R.</strong><br />
+2nd Edition. CRC Press.<br />
+ISBN: 978-1138196346</p>
+</blockquote>
+<hr />
+<h2 id="informacion-institucional">Informacion Institucional</h2>
+<p><strong>Autor/Referencia:</strong> @TodoEconometria<br />
+<strong>Profesor:</strong> Juan Marcelo Gutierrez Miranda<br />
+<strong>Area:</strong> Big Data, Ciencia de Datos &amp; Econometria Aplicada.</p>
+<p><strong>Hash ID de Certificacion:</strong><br />
+<code>4e8d9b1a5f6e7c3d2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c</code></p>
+    </div>
+</body>
+</html>
