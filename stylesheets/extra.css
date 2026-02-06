@@ -1,0 +1,138 @@
+/* Estilos personalizados para MkDocs Material */
+
+/* Mejoras de espaciado para tablas */
+.md-typeset table:not([class]) {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+
+.md-typeset table:not([class]) th {
+    font-weight: 700;
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+/* Botones mas destacados */
+.md-button {
+    margin: 0.2em;
+    transition: all 0.2s ease;
+}
+
+.md-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Bloques de codigo con mejor legibilidad */
+.highlight pre {
+    padding: 1em;
+    border-radius: 4px;
+}
+
+/* Admonitions personalizados */
+.md-typeset .admonition,
+.md-typeset details {
+    margin: 1.5em 0;
+    padding: 0.6em 0.8em;
+    border-left: 4px solid;
+    border-radius: 4px;
+}
+
+/* Mejora de cards en grid */
+.md-typeset .grid {
+    grid-gap: 1em;
+    margin: 1em 0;
+}
+
+/* Diagramas ASCII con mejor formato */
+pre code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    line-height: 1.4;
+}
+
+/* Mermaid diagrams mas grandes */
+.mermaid {
+    text-align: center;
+    margin: 2em 0;
+}
+
+.mermaid svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Mejora de tablas responsivas */
+@media screen and (max-width: 768px) {
+    .md-typeset table:not([class]) {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+/* Highlight de lineas importantes en codigo */
+.highlight .hll {
+    background-color: rgba(255, 235, 59, 0.3);
+    display: block;
+    margin: 0 -1em;
+    padding: 0 1em;
+}
+
+/* Breadcrumbs mejorados */
+.md-nav__link--active {
+    font-weight: 600;
+    color: var(--md-primary-fg-color);
+}
+
+/* Footer personalizado */
+.md-footer-meta {
+    background-color: var(--md-footer-bg-color);
+}
+
+/* Search box mas visible */
+.md-search__input {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.md-search__input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Tabs de contenido */
+.tabbed-set {
+    margin: 1.5em 0;
+}
+
+.tabbed-content {
+    padding: 1em;
+}
+
+/* Progress indicators */
+.md-typeset .task-list-indicator::before {
+    background-color: var(--md-primary-fg-color);
+}
+
+/* Blockquotes mejorados */
+.md-typeset blockquote {
+    border-left: 4px solid var(--md-primary-fg-color);
+    padding-left: 1em;
+    color: var(--md-default-fg-color--light);
+}
+
+/* Links externos con icono */
+.md-typeset a[href^="http"]::after {
+    content: " ↗";
+    font-size: 0.8em;
+    opacity: 0.5;
+}
+
+.md-typeset a[href^="http"]:hover::after {
+    opacity: 1;
+}
+
+/* Excluir links de navegacion */
+.md-nav a[href^="http"]::after,
+.md-footer a[href^="http"]::after {
+    content: none;
+}

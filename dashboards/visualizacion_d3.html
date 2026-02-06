@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualización Interactiva D3.js</title>
+    <!-- Cargar librería D3.js desde CDN -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f9; display: flex; flex-direction: column; align-items: center; }
+        h1 { color: #333; }
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        /* Estilo del Tooltip (la etiqueta flotante) */
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            padding: 8px;
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 4px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .axis-label { font-size: 12px; fill: #666; }
+    </style>
+</head>
+<body>
+
+    <h1>Gráfico Interactivo: Peso vs Altura (D3.js)</h1>
+    <p>Generado desde Python. Pasa el mouse sobre los puntos.</p>
+    
+    <div class="chart-container" id="chart"></div>
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        // 1. RECUPERAR DATOS DE PYTHON
+        const dataset = [{"peso": 77.45, "altura": 1.79, "imc": 24.29, "id": 0}, {"peso": 67.93, "altura": 1.81, "imc": 20.82, "id": 1}, {"peso": 79.72, "altura": 1.86, "imc": 23.08, "id": 2}, {"peso": 92.85, "altura": 1.86, "imc": 26.97, "id": 3}, {"peso": 66.49, "altura": 1.61, "imc": 25.58, "id": 4}, {"peso": 66.49, "altura": 1.66, "imc": 24.24, "id": 5}, {"peso": 93.69, "altura": 1.8, "imc": 28.87, "id": 6}, {"peso": 81.51, "altura": 1.8, "imc": 25.12, "id": 7}, {"peso": 62.96, "altura": 1.8, "imc": 19.4, "id": 8}, {"peso": 78.14, "altura": 2.14, "imc": 17.14, "id": 9}, {"peso": 63.05, "altura": 1.81, "imc": 19.31, "id": 10}, {"peso": 63.01, "altura": 1.86, "imc": 18.14, "id": 11}, {"peso": 73.63, "altura": 1.85, "imc": 21.62, "id": 12}, {"peso": 41.3, "altura": 1.82, "imc": 12.54, "id": 13}, {"peso": 44.13, "altura": 1.72, "imc": 14.94, "id": 14}, {"peso": 61.57, "altura": 1.83, "imc": 18.47, "id": 15}, {"peso": 54.81, "altura": 1.67, "imc": 19.59, "id": 16}, {"peso": 74.71, "altura": 1.73, "imc": 25.07, "id": 17}, {"peso": 56.38, "altura": 1.7, "imc": 19.47, "id": 18}, {"peso": 48.82, "altura": 1.76, "imc": 15.79, "id": 19}, {"peso": 91.98, "altura": 1.98, "imc": 23.43, "id": 20}, {"peso": 66.61, "altura": 1.56, "imc": 27.26, "id": 21}, {"peso": 71.01, "altura": 1.82, "imc": 21.47, "id": 22}, {"peso": 48.63, "altura": 1.59, "imc": 19.27, "id": 23}, {"peso": 61.83, "altura": 1.7, "imc": 21.33, "id": 24}, {"peso": 71.66, "altura": 1.86, "imc": 20.74, "id": 25}, {"peso": 52.74, "altura": 1.76, "imc": 17.09, "id": 26}, {"peso": 75.64, "altura": 1.64, "imc": 28.05, "id": 27}, {"peso": 60.99, "altura": 1.68, "imc": 21.65, "id": 28}, {"peso": 65.62, "altura": 1.82, "imc": 19.86, "id": 29}, {"peso": 60.97, "altura": 1.68, "imc": 21.68, "id": 30}, {"peso": 97.78, "altura": 1.77, "imc": 31.15, "id": 31}, {"peso": 69.8, "altura": 1.75, "imc": 22.67, "id": 32}, {"peso": 54.13, "altura": 1.68, "imc": 19.07, "id": 33}, {"peso": 82.34, "altura": 1.96, "imc": 21.34, "id": 34}, {"peso": 51.69, "altura": 1.81, "imc": 15.72, "id": 35}, {"peso": 73.13, "altura": 1.55, "imc": 30.54, "id": 36}, {"peso": 40.6, "altura": 1.77, "imc": 12.98, "id": 37}, {"peso": 50.08, "altura": 1.68, "imc": 17.66, "id": 38}, {"peso": 72.95, "altura": 1.84, "imc": 21.66, "id": 39}, {"peso": 81.08, "altura": 1.67, "imc": 29.05, "id": 40}, {"peso": 72.57, "altura": 1.74, "imc": 24.01, "id": 41}, {"peso": 68.27, "altura": 1.8, "imc": 21.06, "id": 42}, {"peso": 65.48, "altura": 1.84, "imc": 19.41, "id": 43}, {"peso": 47.82, "altura": 1.63, "imc": 18.0, "id": 44}, {"peso": 59.2, "altura": 1.72, "imc": 20.09, "id": 45}, {"peso": 63.09, "altura": 1.7, "imc": 21.77, "id": 46}, {"peso": 85.86, "altura": 1.68, "imc": 30.25, "id": 47}, {"peso": 75.15, "altura": 1.93, "imc": 20.25, "id": 48}, {"peso": 43.55, "altura": 1.79, "imc": 13.59, "id": 49}, {"peso": 74.86, "altura": 1.62, "imc": 28.39, "id": 50}, {"peso": 64.22, "altura": 1.84, "imc": 18.93, "id": 51}, {"peso": 59.85, "altura": 1.96, "imc": 15.54, "id": 52}, {"peso": 79.18, "altura": 1.85, "imc": 23.05, "id": 53}, {"peso": 85.46, "altura": 1.6, "imc": 33.47, "id": 54}, {"peso": 83.97, "altura": 1.7, "imc": 29.0, "id": 55}, {"peso": 57.41, "altura": 1.88, "imc": 16.3, "id": 56}, {"peso": 65.36, "altura": 1.68, "imc": 23.18, "id": 57}, {"peso": 74.97, "altura": 1.79, "imc": 23.28, "id": 58}, {"peso": 84.63, "altura": 1.83, "imc": 25.34, "id": 59}, {"peso": 62.81, "altura": 1.66, "imc": 22.87, "id": 60}, {"peso": 67.22, "altura": 1.74, "imc": 22.1, "id": 61}, {"peso": 53.4, "altura": 1.43, "imc": 26.27, "id": 62}, {"peso": 52.06, "altura": 1.65, "imc": 19.18, "id": 63}, {"peso": 82.19, "altura": 1.72, "imc": 27.63, "id": 64}, {"peso": 90.34, "altura": 1.63, "imc": 34.2, "id": 65}, {"peso": 68.92, "altura": 1.91, "imc": 18.83, "id": 66}, {"peso": 85.05, "altura": 1.61, "imc": 32.94, "id": 67}, {"peso": 75.42, "altura": 1.71, "imc": 25.92, "id": 68}, {"peso": 60.32, "altura": 1.76, "imc": 19.41, "id": 69}, {"peso": 75.42, "altura": 1.89, "imc": 21.02, "id": 70}, {"peso": 93.07, "altura": 1.61, "imc": 36.07, "id": 71}, {"peso": 69.46, "altura": 1.87, "imc": 19.94, "id": 72}, {"peso": 93.47, "altura": 1.75, "imc": 30.49, "id": 73}, {"peso": 30.7, "altura": 1.65, "imc": 11.25, "id": 74}, {"peso": 82.33, "altura": 1.8, "imc": 25.52, "id": 75}, {"peso": 71.31, "altura": 1.77, "imc": 22.76, "id": 76}, {"peso": 65.51, "altura": 1.69, "imc": 22.94, "id": 77}, {"peso": 71.38, "altura": 1.76, "imc": 23.12, "id": 78}, {"peso": 40.19, "altura": 1.71, "imc": 13.72, "id": 79}, {"peso": 66.7, "altura": 1.76, "imc": 21.5, "id": 80}, {"peso": 75.36, "altura": 1.82, "imc": 22.84, "id": 81}, {"peso": 92.17, "altura": 1.91, "imc": 25.3, "id": 82}, {"peso": 62.23, "altura": 1.63, "imc": 23.53, "id": 83}, {"peso": 57.87, "altura": 1.96, "imc": 15.01, "id": 84}, {"peso": 62.47, "altura": 1.55, "imc": 25.84, "id": 85}, {"peso": 83.73, "altura": 1.73, "imc": 27.82, "id": 86}, {"peso": 74.93, "altura": 1.81, "imc": 22.9, "id": 87}, {"peso": 62.05, "altura": 1.78, "imc": 19.63, "id": 88}, {"peso": 77.7, "altura": 1.69, "imc": 27.28, "id": 89}, {"peso": 71.46, "altura": 1.73, "imc": 23.9, "id": 90}, {"peso": 84.53, "altura": 1.7, "imc": 29.22, "id": 91}, {"peso": 59.47, "altura": 1.69, "imc": 20.8, "id": 92}, {"peso": 65.09, "altura": 1.83, "imc": 19.33, "id": 93}, {"peso": 64.12, "altura": 1.79, "imc": 20.11, "id": 94}, {"peso": 48.05, "altura": 1.68, "imc": 17.01, "id": 95}, {"peso": 74.44, "altura": 1.84, "imc": 21.99, "id": 96}, {"peso": 73.92, "altura": 1.78, "imc": 23.31, "id": 97}, {"peso": 70.08, "altura": 1.83, "imc": 20.9, "id": 98}, {"peso": 66.48, "altura": 1.81, "imc": 20.23, "id": 99}, {"peso": 48.77, "altura": 1.67, "imc": 17.55, "id": 100}, {"peso": 63.69, "altura": 1.69, "imc": 22.2, "id": 101}, {"peso": 64.86, "altura": 1.82, "imc": 19.48, "id": 102}, {"peso": 57.97, "altura": 1.81, "imc": 17.67, "id": 103}, {"peso": 67.58, "altura": 1.75, "imc": 22.12, "id": 104}, {"peso": 76.06, "altura": 1.76, "imc": 24.51, "id": 105}, {"peso": 98.29, "altura": 1.88, "imc": 27.88, "id": 106}, {"peso": 72.62, "altura": 1.69, "imc": 25.4, "id": 107}, {"peso": 73.86, "altura": 1.8, "imc": 22.68, "id": 108}, {"peso": 68.88, "altura": 1.73, "imc": 23.02, "id": 109}, {"peso": 41.22, "altura": 1.73, "imc": 13.8, "id": 110}, {"peso": 69.6, "altura": 1.86, "imc": 20.12, "id": 111}, {"peso": 70.9, "altura": 1.83, "imc": 21.11, "id": 112}, {"peso": 106.95, "altura": 1.83, "imc": 31.89, "id": 113}, {"peso": 67.11, "altura": 1.88, "imc": 18.98, "id": 114}, {"peso": 74.52, "altura": 1.75, "imc": 24.28, "id": 115}, {"peso": 69.48, "altura": 1.82, "imc": 21.02, "id": 116}, {"peso": 52.47, "altura": 1.72, "imc": 17.76, "id": 117}, {"peso": 87.14, "altura": 1.78, "imc": 27.43, "id": 118}, {"peso": 81.28, "altura": 1.74, "imc": 26.94, "id": 119}, {"peso": 81.87, "altura": 1.76, "imc": 26.44, "id": 120}, {"peso": 56.36, "altura": 1.81, "imc": 17.21, "id": 121}, {"peso": 91.04, "altura": 1.67, "imc": 32.72, "id": 122}, {"peso": 48.97, "altura": 1.96, "imc": 12.76, "id": 123}, {"peso": 78.8, "altura": 1.65, "imc": 28.97, "id": 124}, {"peso": 102.86, "altura": 1.63, "imc": 38.78, "id": 125}, {"peso": 55.14, "altura": 1.87, "imc": 15.84, "id": 126}, {"peso": 61.51, "altura": 1.83, "imc": 18.38, "id": 127}, {"peso": 71.49, "altura": 1.81, "imc": 21.77, "id": 128}, {"peso": 62.45, "altura": 1.81, "imc": 19.0, "id": 129}, {"peso": 46.74, "altura": 1.75, "imc": 15.28, "id": 130}, {"peso": 71.03, "altura": 1.66, "imc": 25.77, "id": 131}, {"peso": 54.07, "altura": 1.76, "imc": 17.5, "id": 132}, {"peso": 77.1, "altura": 1.68, "imc": 27.24, "id": 133}, {"peso": 56.21, "altura": 1.85, "imc": 16.47, "id": 134}, {"peso": 93.25, "altura": 1.74, "imc": 30.97, "id": 135}, {"peso": 58.25, "altura": 1.67, "imc": 20.95, "id": 136}, {"peso": 65.17, "altura": 1.72, "imc": 22.08, "id": 137}, {"peso": 82.2, "altura": 1.79, "imc": 25.62, "id": 138}, {"peso": 51.54, "altura": 1.69, "imc": 17.97, "id": 139}, {"peso": 73.41, "altura": 1.67, "imc": 26.39, "id": 140}, {"peso": 89.61, "altura": 1.77, "imc": 28.46, "id": 141}, {"peso": 45.89, "altura": 1.77, "imc": 14.57, "id": 142}, {"peso": 72.77, "altura": 1.7, "imc": 25.2, "id": 143}, {"peso": 73.9, "altura": 1.7, "imc": 25.48, "id": 144}, {"peso": 81.73, "altura": 1.77, "imc": 25.99, "id": 145}, {"peso": 51.45, "altura": 1.61, "imc": 19.97, "id": 146}, {"peso": 50.19, "altura": 1.61, "imc": 19.38, "id": 147}, {"peso": 77.83, "altura": 1.68, "imc": 27.64, "id": 148}, {"peso": 74.45, "altura": 1.73, "imc": 24.92, "id": 149}, {"peso": 73.76, "altura": 1.78, "imc": 23.25, "id": 150}, {"peso": 75.2, "altura": 1.9, "imc": 20.88, "id": 151}, {"peso": 59.8, "altura": 1.84, "imc": 17.74, "id": 152}, {"peso": 73.48, "altura": 1.73, "imc": 24.44, "id": 153}, {"peso": 74.4, "altura": 1.75, "imc": 24.35, "id": 154}, {"peso": 59.28, "altura": 1.65, "imc": 21.78, "id": 155}, {"peso": 97.99, "altura": 1.75, "imc": 32.06, "id": 156}, {"peso": 77.11, "altura": 1.72, "imc": 26.03, "id": 157}, {"peso": 52.13, "altura": 1.78, "imc": 16.41, "id": 158}, {"peso": 79.85, "altura": 1.67, "imc": 28.72, "id": 159}, {"peso": 55.38, "altura": 1.8, "imc": 17.06, "id": 160}, {"peso": 81.81, "altura": 1.9, "imc": 22.58, "id": 161}, {"peso": 87.38, "altura": 1.74, "imc": 28.89, "id": 162}, {"peso": 57.69, "altura": 1.79, "imc": 18.0, "id": 163}, {"peso": 84.45, "altura": 1.82, "imc": 25.52, "id": 164}, {"peso": 76.19, "altura": 1.71, "imc": 26.06, "id": 165}, {"peso": 82.33, "altura": 1.77, "imc": 26.21, "id": 166}, {"peso": 98.45, "altura": 1.75, "imc": 32.1, "id": 167}, {"peso": 66.32, "altura": 1.76, "imc": 21.42, "id": 168}, {"peso": 58.69, "altura": 1.67, "imc": 20.98, "id": 169}, {"peso": 56.66, "altura": 1.75, "imc": 18.45, "id": 170}, {"peso": 57.76, "altura": 1.8, "imc": 17.83, "id": 171}, {"peso": 68.84, "altura": 1.9, "imc": 19.17, "id": 172}, {"peso": 75.12, "altura": 1.85, "imc": 22.05, "id": 173}, {"peso": 74.15, "altura": 1.97, "imc": 19.2, "id": 174}, {"peso": 82.41, "altura": 1.67, "imc": 29.43, "id": 175}, {"peso": 70.2, "altura": 1.84, "imc": 20.8, "id": 176}, {"peso": 91.8, "altura": 1.77, "imc": 29.36, "id": 177}, {"peso": 66.03, "altura": 1.97, "imc": 17.03, "id": 178}, {"peso": 110.8, "altura": 1.67, "imc": 39.77, "id": 179}, {"peso": 79.39, "altura": 1.67, "imc": 28.6, "id": 180}, {"peso": 57.14, "altura": 1.69, "imc": 20.01, "id": 181}, {"peso": 53.94, "altura": 1.54, "imc": 22.81, "id": 182}, {"peso": 77.24, "altura": 1.7, "imc": 26.81, "id": 183}, {"peso": 66.65, "altura": 1.67, "imc": 23.78, "id": 184}, {"peso": 80.71, "altura": 1.77, "imc": 25.91, "id": 185}, {"peso": 77.1, "altura": 1.78, "imc": 24.22, "id": 186}, {"peso": 68.91, "altura": 1.94, "imc": 18.35, "id": 187}, {"peso": 57.3, "altura": 1.85, "imc": 16.83, "id": 188}, {"peso": 47.28, "altura": 1.69, "imc": 16.51, "id": 189}, {"peso": 63.3, "altura": 1.66, "imc": 22.97, "id": 190}, {"peso": 82.85, "altura": 1.8, "imc": 25.59, "id": 191}, {"peso": 73.21, "altura": 1.62, "imc": 27.97, "id": 192}, {"peso": 51.31, "altura": 1.93, "imc": 13.73, "id": 193}, {"peso": 72.6, "altura": 1.87, "imc": 20.81, "id": 194}, {"peso": 75.78, "altura": 1.7, "imc": 26.13, "id": 195}, {"peso": 56.74, "altura": 1.58, "imc": 22.77, "id": 196}, {"peso": 72.31, "altura": 1.89, "imc": 20.34, "id": 197}, {"peso": 70.87, "altura": 1.74, "imc": 23.45, "id": 198}, {"peso": 52.86, "altura": 1.87, "imc": 15.05, "id": 199}];
+
+        // 2. CONFIGURACIÓN DEL GRÁFICO
+        const width = 800;
+        const height = 500;
+        const margin = {top: 40, right: 40, bottom: 60, left: 60};
+        const innerWidth = width - margin.left - margin.right;
+        const innerHeight = height - margin.top - margin.bottom;
+
+        // Crear el lienzo SVG
+        const svg = d3.select("#chart")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        // 3. ESCALAS
+        const xScale = d3.scaleLinear()
+            .domain([d3.min(dataset, d => d.peso) - 5, d3.max(dataset, d => d.peso) + 5])
+            .range([0, innerWidth]);
+
+        const yScale = d3.scaleLinear()
+            .domain([d3.min(dataset, d => d.altura) - 0.05, d3.max(dataset, d => d.altura) + 0.05])
+            .range([innerHeight, 0]);
+
+        const colorScale = d3.scaleSequential(d3.interpolateViridis)
+            .domain([d3.min(dataset, d => d.imc), d3.max(dataset, d => d.imc)]);
+
+        const rScale = d3.scaleLinear()
+            .domain([d3.min(dataset, d => d.imc), d3.max(dataset, d => d.imc)])
+            .range([4, 10]); // Radio entre 4px y 10px
+
+        // 4. EJES
+        const xAxis = d3.axisBottom(xScale);
+        const yAxis = d3.axisLeft(yScale);
+
+        svg.append("g")
+            .attr("transform", `translate(0, ${innerHeight})`)
+            .call(xAxis);
+
+        svg.append("g")
+            .call(yAxis);
+
+        // Etiquetas de ejes
+        svg.append("text")
+            .attr("class", "axis-label")
+            .attr("x", innerWidth / 2)
+            .attr("y", innerHeight + 40)
+            .style("text-anchor", "middle")
+            .text("Peso (kg)");
+
+        svg.append("text")
+            .attr("class", "axis-label")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerHeight / 2)
+            .attr("y", -40)
+            .style("text-anchor", "middle")
+            .text("Altura (m)");
+
+        // 5. DIBUJAR PUNTOS (CÍRCULOS)
+        const tooltip = d3.select("#tooltip");
+
+        svg.selectAll("circle")
+            .data(dataset)
+            .enter()
+            .append("circle")
+            .attr("cx", d => xScale(d.peso))
+            .attr("cy", d => yScale(d.altura))
+            .attr("r", d => rScale(d.imc))
+            .attr("fill", d => colorScale(d.imc))
+            .attr("opacity", 0.7)
+            .attr("stroke", "#333")
+            .attr("stroke-width", 1)
+            .on("mouseover", function(event, d) {
+                d3.select(this)
+                    .transition().duration(100)
+                    .attr("r", d => rScale(d.imc) + 5) // Hacer más grande
+                    .attr("opacity", 1);
+
+                tooltip.style("opacity", 1)
+                    .html(`
+                        <strong>ID:</strong> ${d.id}<br>
+                        <strong>Peso:</strong> ${d.peso} kg<br>
+                        <strong>Altura:</strong> ${d.altura} m<br>
+                        <strong>IMC:</strong> ${d.imc}
+                    `)
+                    .style("left", (event.pageX + 10) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", function(d) {
+                d3.select(this)
+                    .transition().duration(200)
+                    .attr("r", d => rScale(d.imc)) // Volver a tamaño normal
+                    .attr("opacity", 0.7);
+                
+                tooltip.style("opacity", 0);
+            });
+
+    </script>
+</body>
+</html>

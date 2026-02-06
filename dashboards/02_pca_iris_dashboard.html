@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard PCA + Clustering: Iris Dataset</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', 'Consolas', monospace;
+            background-color: #0a0a0a;
+            color: #c0c0c0;
+            line-height: 1.6;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Matrix Rain Canvas */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(10, 14, 10, 0.92);
+            border-radius: 4px;
+            border: 1px solid #1a3a1a;
+            box-shadow: 0 0 40px rgba(57, 255, 20, 0.08), inset 0 0 80px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(180deg, #0d1a0d 0%, #0a0f0a 100%);
+            color: #39FF14;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            border-bottom: 2px solid #1a3a1a;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(57, 255, 20, 0.03) 2px,
+                rgba(57, 255, 20, 0.03) 4px
+            );
+            pointer-events: none;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 20px rgba(57, 255, 20, 0.6), 0 0 40px rgba(57, 255, 20, 0.3);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #7aff7a;
+            opacity: 0.8;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 1px;
+        }
+
+        .header .subtitle {
+            font-size: 0.85em;
+            margin-top: 10px;
+            color: #4a8a4a;
+        }
+
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            background: #080c08;
+            border-bottom: 2px solid #39FF14;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 0.95em;
+            font-weight: 600;
+            color: #4a8a4a;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+
+        .tab:hover {
+            background: rgba(57, 255, 20, 0.08);
+            color: #39FF14;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+        }
+
+        .tab.active {
+            color: #39FF14;
+            background: rgba(57, 255, 20, 0.05);
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #39FF14;
+            box-shadow: 0 0 10px #39FF14;
+        }
+
+        .tab i {
+            margin-right: 6px;
+        }
+
+        /* Content */
+        .content {
+            padding: 40px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(13, 20, 13, 0.8);
+            border-radius: 4px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #1a3a1a;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.04);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #2a5a2a;
+            box-shadow: 0 0 25px rgba(57, 255, 20, 0.08);
+        }
+
+        .card h2 {
+            color: #39FF14;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #1a3a1a;
+            padding-bottom: 10px;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .card h2 i {
+            margin-right: 8px;
+        }
+
+        .card h3 {
+            color: #7aff7a;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            letter-spacing: 1px;
+        }
+
+        .card h3 i {
+            margin-right: 6px;
+            color: #39FF14;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #0d1a0d 0%, #0a140a 100%);
+            color: #39FF14;
+            padding: 25px;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid #1a3a1a;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #39FF14;
+            box-shadow: 0 0 25px rgba(57, 255, 20, 0.15);
+            transform: scale(1.03);
+        }
+
+        .stat-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 10px 0;
+            text-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+        }
+
+        .stat-card .label {
+            font-size: 0.85em;
+            color: #4a8a4a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(10, 14, 10, 0.9);
+            border: 1px solid #1a3a1a;
+        }
+
+        th {
+            background: #0d1a0d;
+            color: #39FF14;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #39FF14;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85em;
+        }
+
+        td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #1a2a1a;
+            color: #a0c0a0;
+        }
+
+        tr:hover {
+            background: rgba(57, 255, 20, 0.04);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+            border-left: 3px solid;
+        }
+
+        .alert-info {
+            background: rgba(0, 80, 40, 0.15);
+            border-color: #39FF14;
+            color: #7aff7a;
+        }
+
+        .alert-success {
+            background: rgba(0, 60, 0, 0.2);
+            border-color: #00cc44;
+            color: #66ff88;
+        }
+
+        .alert-warning {
+            background: rgba(80, 60, 0, 0.2);
+            border-color: #ccaa00;
+            color: #ffdd44;
+        }
+
+        .alert-danger {
+            background: rgba(80, 0, 0, 0.15);
+            border-color: #ff3333;
+            color: #ff6666;
+        }
+
+        .alert strong {
+            font-weight: 700;
+            margin-right: 5px;
+        }
+
+        .alert i {
+            margin-right: 5px;
+        }
+
+        /* Code blocks */
+        pre {
+            background: #050805;
+            color: #39FF14;
+            padding: 20px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #1a3a1a;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin: 8px 0;
+            color: #a0c0a0;
+        }
+
+        li strong {
+            color: #7aff7a;
+        }
+
+        /* Images */
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid #1a3a1a;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .image-container img:hover {
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.2);
+        }
+
+        .image-caption {
+            margin-top: 15px;
+            font-style: italic;
+            color: #4a8a4a;
+            font-size: 0.9em;
+        }
+
+        /* Interpretation boxes */
+        .interpretation {
+            background: rgba(57, 255, 20, 0.04);
+            border-left: 3px solid #39FF14;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .interpretation h4 {
+            color: #39FF14;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .interpretation h4 i {
+            margin-right: 6px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #050805;
+            color: #4a8a4a;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #1a3a1a;
+        }
+
+        .footer a {
+            color: #39FF14;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                flex: 1 1 50%;
+                text-align: center;
+                padding: 12px 15px;
+                font-size: 0.85em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 2px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 3px;
+            letter-spacing: 1px;
+        }
+
+        .badge-primary {
+            background: rgba(57, 255, 20, 0.15);
+            color: #39FF14;
+            border: 1px solid #39FF14;
+        }
+
+        .badge-success {
+            background: rgba(0, 204, 68, 0.15);
+            color: #00cc44;
+            border: 1px solid #00cc44;
+        }
+
+        .badge-warning {
+            background: rgba(204, 170, 0, 0.15);
+            color: #ccaa00;
+            border: 1px solid #ccaa00;
+        }
+
+        .badge-danger {
+            background: rgba(255, 51, 51, 0.15);
+            color: #ff3333;
+            border: 1px solid #ff3333;
+        }
+
+        /* Progress bars */
+        .progress-bar {
+            background: #0a140a;
+            border-radius: 2px;
+            height: 25px;
+            margin: 10px 0;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #1a3a1a;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #0d3d0d 0%, #39FF14 100%);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a0a0a;
+            font-weight: 700;
+            font-size: 0.8em;
+            transition: width 1s ease;
+            letter-spacing: 1px;
+        }
+
+        /* Highlight */
+        .highlight {
+            background: rgba(57, 255, 20, 0.15);
+            color: #39FF14;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-weight: 700;
+            border: 1px solid rgba(57, 255, 20, 0.3);
+        }
+
+        /* Grid layout for comparison */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .comparison-item {
+            background: rgba(13, 20, 13, 0.6);
+            padding: 20px;
+            border-radius: 4px;
+            border: 1px solid #1a3a1a;
+        }
+
+        .comparison-item h4 {
+            color: #39FF14;
+            margin-bottom: 10px;
+        }
+
+        .comparison-item h4 i {
+            margin-right: 6px;
+        }
+
+        /* Glow animation for header */
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(57, 255, 20, 0.6), 0 0 40px rgba(57, 255, 20, 0.3); }
+            50% { text-shadow: 0 0 30px rgba(57, 255, 20, 0.8), 0 0 60px rgba(57, 255, 20, 0.4); }
+        }
+
+        .header h1 {
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        /* Scanlines overlay */
+        .container::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.08) 2px,
+                rgba(0, 0, 0, 0.08) 4px
+            );
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1a3a1a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #39FF14;
+        }
+
+        /* Links */
+        a {
+            color: #39FF14;
+        }
+        a:hover {
+            text-shadow: 0 0 8px rgba(57, 255, 20, 0.5);
+        }
+
+        /* Table row highlight styles */
+        .row-highlight {
+            background: rgba(57, 255, 20, 0.06) !important;
+        }
+        .row-highlight-strong {
+            background: rgba(57, 255, 20, 0.1) !important;
+        }
+        .row-success {
+            background: rgba(0, 204, 68, 0.08) !important;
+        }
+        .row-warning {
+            background: rgba(204, 170, 0, 0.08) !important;
+        }
+        .row-danger {
+            background: rgba(255, 51, 51, 0.08) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrix-bg"></canvas>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fa-solid fa-seedling"></i> PCA + Clustering: Iris</h1>
+            <p>Analisis Exploratorio Multivariante + Agrupacion No Supervisada</p>
+            <p class="subtitle">@TodoEconometria | Prof. Juan Marcelo Gutierrez Miranda</p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="openTab(event, 'overview')"><i class="fa-solid fa-chart-bar"></i> Resumen</button>
+            <button class="tab" onclick="openTab(event, 'dataset')"><i class="fa-solid fa-database"></i> Dataset</button>
+            <button class="tab" onclick="openTab(event, 'pca')"><i class="fa-solid fa-chart-line"></i> PCA</button>
+            <button class="tab" onclick="openTab(event, 'clustering')"><i class="fa-solid fa-bullseye"></i> Clustering</button>
+            <button class="tab" onclick="openTab(event, 'interpretation')"><i class="fa-solid fa-lightbulb"></i> Interpretacion</button>
+            <button class="tab" onclick="openTab(event, 'conclusions')"><i class="fa-solid fa-check-circle"></i> Conclusiones</button>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Tab 1: Overview -->
+            <div id="overview" class="tab-content active">
+                <div class="card">
+                    <h2><i class="fa-solid fa-chart-bar"></i> Resumen Ejecutivo</h2>
+
+                    <div class="alert alert-info">
+                        <strong><i class="fa-solid fa-bullseye"></i> Objetivo:</strong> Aplicar PCA para reducir dimensionalidad de 4D a 2D, y luego usar
+                        K-Means para identificar grupos naturales en el dataset Iris (150 flores, 3 especies).
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="label">Varianza Explicada (2D)</div>
+                            <div class="value">96%</div>
+                            <div class="label">Dim.1 + Dim.2</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="label">Silhouette Score</div>
+                            <div class="value">0.55</div>
+                            <div class="label">Buena Separacion</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="label">Pureza de Clusters</div>
+                            <div class="value">89.3%</div>
+                            <div class="label">Alta Concordancia</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="label">Clusters Optimos</div>
+                            <div class="value">K=3</div>
+                            <div class="label">Validado</div>
+                        </div>
+                    </div>
+
+                    <h3><i class="fa-solid fa-key"></i> Hallazgos Clave</h3>
+                    <ul>
+                        <li><strong>Reduccion Efectiva:</strong> PCA reduce de 4D a 2D manteniendo 96% de la informacion</li>
+                        <li><strong>Variables Discriminantes:</strong> Petal Length y Petal Width son las mas importantes (73% de varianza en Dim.1)</li>
+                        <li><strong>Clustering Exitoso:</strong> K-Means identifica correctamente las 3 especies en 89.3% de los casos</li>
+                        <li><strong>Separabilidad:</strong> Setosa es perfectamente separable; Versicolor y Virginica tienen superposicion natural</li>
+                    </ul>
+
+                    <div class="image-container">
+                        <img src="02_pca_iris_clustering.png" alt="Dashboard Principal PCA + Clustering">
+                        <p class="image-caption">Figura 1: Dashboard completo del analisis PCA + Clustering (9 graficos)</p>
+                    </div>
+
+                    <h3><i class="fa-solid fa-chalkboard-teacher"></i> Guia Didactica: Como Leer Cada Grafico</h3>
+                    <p>La imagen anterior contiene 9 graficos organizados en una cuadricula 3x3. A continuacion se explica que muestra cada uno y como interpretarlo:</p>
+
+                    <div class="comparison-grid">
+                        <!-- Row 1 -->
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-chart-bar"></i> [Fila 1, Col 1] Scree Plot</h4>
+                            <p><strong>Que muestra:</strong> Barras azules con el porcentaje de varianza que explica cada dimension del PCA, y una linea roja con la varianza acumulada.</p>
+                            <p><strong>Como leerlo:</strong> Busca donde la linea roja se "aplana". Aqui Dim.1 explica ~73% y Dim.2 ~23%. Con solo 2 dimensiones ya se acumula ~96%, por eso descartamos Dim.3 y Dim.4 (aportan casi nada). La linea gris punteada marca el umbral esperado (25% = 100/4 variables).</p>
+                            <div class="alert alert-info">
+                                <strong><i class="fa-solid fa-lightbulb"></i> Clave:</strong> Si la primera barra es mucho mas alta que las demas, significa que una sola dimension captura la mayor parte de la informacion. Eso es lo ideal para reducir dimensiones.
+                            </div>
+                        </div>
+
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-compass-drafting"></i> [Fila 1, Col 2] Circulo de Correlacion</h4>
+                            <p><strong>Que muestra:</strong> Flechas que representan cada variable original proyectada en el plano PCA. La circunferencia gris es el circulo unitario (radio = 1).</p>
+                            <p><strong>Como leerlo:</strong></p>
+                            <ul>
+                                <li><strong>Flecha larga</strong> (cerca del borde) = variable bien representada en este plano 2D</li>
+                                <li><strong>Flechas en la misma direccion</strong> = variables correlacionadas positivamente (Petal Length y Petal Width apuntan juntas)</li>
+                                <li><strong>Flechas opuestas</strong> = correlacion negativa</li>
+                                <li><strong>Flechas perpendiculares</strong> = variables independientes (Sepal Width es perpendicular a los petalos)</li>
+                            </ul>
+                            <p>Los colores van de rojo (mala representacion) a verde (excelente representacion) segun el cos2.</p>
+                        </div>
+
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-braille"></i> [Fila 1, Col 3] PCA Biplot (Especies Reales)</h4>
+                            <p><strong>Que muestra:</strong> Las 150 flores proyectadas en el plano 2D del PCA, coloreadas por su especie real (Setosa=rojo, Versicolor=teal, Virginica=azul).</p>
+                            <p><strong>Como leerlo:</strong> Los grupos bien separados indican que el PCA logra distinguir las especies. Setosa (izquierda) esta completamente separada. Versicolor (centro) y Virginica (derecha) se superponen parcialmente. Las lineas punteadas marcan los ejes x=0 e y=0.</p>
+                            <div class="alert alert-info">
+                                <strong><i class="fa-solid fa-lightbulb"></i> Clave:</strong> Este grafico usa las etiquetas reales. Sirve como "referencia" para comparar con el clustering no supervisado.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-grid">
+                        <!-- Row 2 -->
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-arrow-right"></i> [Fila 2, Col 1] Contribuciones a Dim.1</h4>
+                            <p><strong>Que muestra:</strong> Barras horizontales con el porcentaje de contribucion de cada variable a la Dimension 1.</p>
+                            <p><strong>Como leerlo:</strong> Las barras rojas superan el umbral esperado (linea roja punteada al 25%) y son las variables que mas "pesan" en esa dimension. Aqui Petal Length (~42%) y Petal Width (~42%) dominan Dim.1. Sepal Width contribuye casi nada (~2%).</p>
+                            <p><strong>Conclusion:</strong> Dim.1 es esencialmente una medida del tamano del petalo.</p>
+                        </div>
+
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-arrow-up"></i> [Fila 2, Col 2] Contribuciones a Dim.2</h4>
+                            <p><strong>Que muestra:</strong> Lo mismo que el grafico anterior, pero para la Dimension 2.</p>
+                            <p><strong>Como leerlo:</strong> Sepal Width domina con ~72% de contribucion (barra roja). Las medidas de petalo aportan muy poco a esta dimension.</p>
+                            <p><strong>Conclusion:</strong> Dim.2 captura principalmente la variacion del ancho del sepalo, que es independiente del tamano del petalo.</p>
+                        </div>
+
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-chart-line"></i> [Fila 2, Col 3] Metodo del Codo</h4>
+                            <p><strong>Que muestra:</strong> Linea azul con la inercia (suma de distancias intra-cluster) para K=2 hasta K=7. La linea roja vertical marca K=3.</p>
+                            <p><strong>Como leerlo:</strong> Busca el "codo": el punto donde la curva deja de bajar drasticamente. La inercia cae mucho de K=2 a K=3, pero despues la mejora es minima. Eso confirma que K=3 es el numero optimo de clusters.</p>
+                            <div class="alert alert-info">
+                                <strong><i class="fa-solid fa-lightbulb"></i> Clave:</strong> Mas clusters siempre reducen la inercia, pero dividir demasiado pierde significado. El codo marca el balance optimo.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comparison-grid">
+                        <!-- Row 3 -->
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-chart-area"></i> [Fila 3, Col 1] Silhouette Score</h4>
+                            <p><strong>Que muestra:</strong> Linea verde con el Silhouette Score para cada valor de K (2 a 7). La linea roja vertical marca K=3 y la linea verde horizontal muestra su valor.</p>
+                            <p><strong>Como leerlo:</strong> El Silhouette Score mide que tan bien separados estan los clusters (rango -1 a 1). Valores mas altos = mejor separacion. Aunque K=2 tiene el score mas alto (0.68), sabemos que hay 3 especies. K=3 obtiene 0.55, que es "buena separacion". Despues de K=3 el score baja consistentemente.</p>
+                        </div>
+
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-object-group"></i> [Fila 3, Col 2] Clusters K-Means</h4>
+                            <p><strong>Que muestra:</strong> Las mismas 150 flores en el plano PCA, pero ahora coloreadas por el cluster asignado por K-Means (sin usar etiquetas reales). Las X negras grandes marcan los centroides.</p>
+                            <p><strong>Como leerlo:</strong> Compara visualmente este grafico con el Biplot de especies reales (Fila 1, Col 3). Si los colores coinciden en forma y posicion, el algoritmo descubrio los mismos grupos que las especies biologicas. Cluster 0 = Setosa, Cluster 1 ~ Versicolor, Cluster 2 ~ Virginica.</p>
+                            <div class="alert alert-info">
+                                <strong><i class="fa-solid fa-lightbulb"></i> Clave:</strong> Los centroides (X negras) representan el "centro de gravedad" de cada cluster. La distancia entre centroides indica que tan separados estan los grupos.
+                            </div>
+                        </div>
+
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-table-cells"></i> [Fila 3, Col 3] Confusion Matrix</h4>
+                            <p><strong>Que muestra:</strong> Heatmap 3x3 que cruza los clusters asignados (eje Y) con las especies reales (eje X). Los numeros en cada celda indican cuantas flores caen en esa combinacion.</p>
+                            <p><strong>Como leerlo:</strong> Los valores altos en la diagonal = buena correspondencia. Valores fuera de la diagonal = errores. Setosa tiene 50/50 en un solo cluster (perfecto). Versicolor tiene 48 correctas y 2 confundidas. Virginica tiene 36 correctas y 14 confundidas con Versicolor.</p>
+                            <p><strong>Pureza (89.3%):</strong> (50+48+36)/150 = 134/150 flores correctamente agrupadas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Dataset -->
+            <div id="dataset" class="tab-content">
+                <div class="card">
+                    <h2><i class="fa-solid fa-database"></i> El Dataset Iris</h2>
+
+                    <div class="alert alert-info">
+                        <strong><i class="fa-solid fa-book"></i> Historia:</strong> El dataset Iris fue introducido por Ronald Fisher en 1936 en su
+                        paper "The use of multiple measurements in taxonomic problems". Es uno de los datasets mas
+                        famosos en Machine Learning.
+                    </div>
+
+                    <h3><i class="fa-solid fa-clipboard-list"></i> Caracteristicas del Dataset</h3>
+                    <table>
+                        <tr>
+                            <th>Caracteristica</th>
+                            <th>Descripcion</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Observaciones</strong></td>
+                            <td>150 flores</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Especies</strong></td>
+                            <td>3 (Setosa, Versicolor, Virginica)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Variables</strong></td>
+                            <td>4 medidas en centimetros</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Distribucion</strong></td>
+                            <td>50 flores por especie (balanceado)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ano</strong></td>
+                            <td>1936 (Fisher)</td>
+                        </tr>
+                    </table>
+
+                    <h3><i class="fa-solid fa-ruler"></i> Variables Medidas</h3>
+                    <div class="comparison-grid">
+                        <div class="comparison-item">
+                            <h4>Sepal Length</h4>
+                            <p><strong>Largo del sepalo</strong> en centimetros</p>
+                            <p>Rango: 4.3 - 7.9 cm</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%">Media: 5.8 cm</div>
+                            </div>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>Sepal Width</h4>
+                            <p><strong>Ancho del sepalo</strong> en centimetros</p>
+                            <p>Rango: 2.0 - 4.4 cm</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%">Media: 3.1 cm</div>
+                            </div>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>Petal Length</h4>
+                            <p><strong>Largo del petalo</strong> en centimetros</p>
+                            <p>Rango: 1.0 - 6.9 cm</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 55%">Media: 3.8 cm</div>
+                            </div>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>Petal Width</h4>
+                            <p><strong>Ancho del petalo</strong> en centimetros</p>
+                            <p>Rango: 0.1 - 2.5 cm</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 48%">Media: 1.2 cm</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <strong><i class="fa-solid fa-lightbulb"></i> Nota Botanica:</strong> El <strong>sepalo</strong> es la parte verde que protege la
+                        flor antes de abrirse. El <strong>petalo</strong> es la parte colorida de la flor.
+                    </div>
+
+                    <div class="image-container">
+                        <img src="02_pca_iris_eda.png" alt="Analisis Exploratorio de Datos">
+                        <p class="image-caption">Figura 2: Analisis Exploratorio de Datos (EDA) - Distribuciones y correlaciones (6 graficos, cuadricula 2x3)</p>
+                    </div>
+
+                    <h3><i class="fa-solid fa-chalkboard-teacher"></i> Guia Didactica: Como Leer Cada Grafico del EDA</h3>
+                    <p>La imagen anterior contiene 6 graficos organizados en 2 filas x 3 columnas. Cada uno revela un aspecto diferente de los datos antes de aplicar PCA:</p>
+
+                    <div class="comparison-grid">
+                        <!-- Row 1 of EDA -->
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-box"></i> [Fila 1, Col 1] Boxplots</h4>
+                            <p><strong>Que muestra:</strong> Un diagrama de cajas para cada una de las 4 variables. Cada caja muestra la mediana (linea central), los cuartiles Q1 y Q3 (bordes de la caja), los bigotes (rango intercuartil x 1.5) y los outliers (puntos fuera).</p>
+                            <p><strong>Como leerlo:</strong></p>
+                            <ul>
+                                <li><strong>Caja ancha</strong> = gran variabilidad en esa variable</li>
+                                <li><strong>Mediana descentrada</strong> = distribucion asimetrica</li>
+                                <li><strong>Puntos aislados</strong> = outliers (valores atipicos)</li>
+                            </ul>
+                            <p>Petal Length tiene el rango mas amplio (1-6.9 cm), lo que anticipa que sera una variable discriminante.</p>
+                        </div>
+
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-table-cells"></i> [Fila 1, Col 2] Matriz de Correlacion</h4>
+                            <p><strong>Que muestra:</strong> Heatmap con los coeficientes de correlacion de Pearson entre cada par de variables. Se muestra solo el <strong>triangulo inferior</strong> porque la matriz es simetrica (la correlacion de A con B es igual a la de B con A). Colores calidos (rojo) = correlacion positiva alta. Colores frios (azul) = correlacion negativa.</p>
+                            <p><strong>Como leerlo:</strong></p>
+                            <ul>
+                                <li><strong>Petal Length vs Petal Width: r = 0.96</strong> (casi perfecto) -> medir una predice la otra</li>
+                                <li><strong>Sepal Width vs Petal Length: r ~ -0.42</strong> (negativa moderada)</li>
+                                <li>La diagonal siempre es 1.00 (variable consigo misma)</li>
+                            </ul>
+                            <div class="alert alert-info">
+                                <strong><i class="fa-solid fa-lightbulb"></i> Clave:</strong> La alta correlacion entre variables de petalo explica por que el PCA las agrupa en una sola dimension. El triangulo superior se omite por ser identico al inferior.
+                            </div>
+                        </div>
+
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-chart-column"></i> [Fila 1, Col 3] Histograma Sepal Length</h4>
+                            <p><strong>Que muestra:</strong> Tres histogramas superpuestos (uno por especie, con transparencia) mostrando como se distribuye el largo del sepalo en cada especie.</p>
+                            <p><strong>Como leerlo:</strong> Donde los histogramas se superponen, es dificil distinguir especies usando solo esa variable. Aqui las tres especies se mezclan bastante, lo que indica que Sepal Length sola no es suficiente para clasificar.</p>
+                        </div>
+                    </div>
+
+                    <div class="comparison-grid">
+                        <!-- Row 2 of EDA -->
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-braille"></i> [Fila 2, Col 1] Scatter: Sepal Length vs Width</h4>
+                            <p><strong>Que muestra:</strong> 150 puntos (flores) en un plano donde el eje X es el largo del sepalo y el eje Y es el ancho, coloreados por especie.</p>
+                            <p><strong>Como leerlo:</strong> Si los grupos de colores se separan claramente, esas dos variables bastan para distinguir especies. Aqui Setosa se separa parcialmente (sepalos anchos y cortos), pero Versicolor y Virginica se mezclan mucho. Conclusion: las medidas de sepalo solas no discriminan bien.</p>
+                        </div>
+
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-braille"></i> [Fila 2, Col 2] Scatter: Petal Length vs Width</h4>
+                            <p><strong>Que muestra:</strong> El mismo tipo de scatter plot, pero ahora con las medidas de petalo.</p>
+                            <p><strong>Como leerlo:</strong> Setosa (petalos minusculos) se aísla completamente abajo a la izquierda. Versicolor y Virginica se separan razonablemente pero con algo de superposicion. Este es el grafico mas revelador del EDA: las medidas de petalo son las variables clave para la clasificacion.</p>
+                            <div class="alert alert-info">
+                                <strong><i class="fa-solid fa-lightbulb"></i> Clave:</strong> Compara este grafico con el Biplot PCA del dashboard de 9 graficos. La separacion es casi identica, confirmando que el PCA captura este patron.
+                            </div>
+                        </div>
+
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-guitar"></i> [Fila 2, Col 3] Violin Plot</h4>
+                            <p><strong>Que muestra:</strong> Para cada variable, un "violin" por especie que combina un boxplot con la forma de la distribucion (densidad de probabilidad). Mas ancho = mas observaciones en ese rango de valores.</p>
+                            <p><strong>Como leerlo:</strong></p>
+                            <ul>
+                                <li><strong>Violines que no se superponen</strong> = la variable discrimina bien entre esas especies</li>
+                                <li><strong>Violines superpuestos</strong> = la variable no distingue esas especies</li>
+                            </ul>
+                            <p>En Petal Length y Petal Width los violines de Setosa estan completamente separados de los otros dos, pero Versicolor y Virginica se solapan parcialmente.</p>
+                        </div>
+                    </div>
+
+                    <h3><i class="fa-solid fa-search"></i> Observaciones del EDA</h3>
+                    <ul>
+                        <li><strong>Correlacion Alta:</strong> Petal Length y Petal Width estan altamente correlacionadas (r = 0.96)</li>
+                        <li><strong>Separabilidad:</strong> Setosa es claramente diferente en las medidas de petalo</li>
+                        <li><strong>Superposicion:</strong> Versicolor y Virginica tienen rangos superpuestos</li>
+                        <li><strong>Distribucion Normal:</strong> La mayoria de variables siguen distribucion aproximadamente normal</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tab 3: PCA -->
+            <div id="pca" class="tab-content">
+                <div class="card">
+                    <h2><i class="fa-solid fa-chart-line"></i> Analisis de Componentes Principales (PCA)</h2>
+
+                    <div class="alert alert-info">
+                        <strong><i class="fa-solid fa-bullseye"></i> Objetivo del PCA:</strong> Reducir las 4 dimensiones originales a 2 dimensiones
+                        principales que capturen la mayor varianza posible, facilitando la visualizacion y el
+                        clustering.
+                    </div>
+
+                    <h3><i class="fa-solid fa-chart-bar"></i> Varianza Explicada por Dimension</h3>
+                    <table>
+                        <tr>
+                            <th>Dimension</th>
+                            <th>Autovalor</th>
+                            <th>Varianza (%)</th>
+                            <th>Varianza Acumulada (%)</th>
+                            <th>Interpretacion</th>
+                        </tr>
+                        <tr class="row-highlight-strong">
+                            <td><strong>Dim.1</strong></td>
+                            <td>2.92</td>
+                            <td><span class="highlight">72.96%</span></td>
+                            <td>72.96%</td>
+                            <td>Tamano del petalo</td>
+                        </tr>
+                        <tr class="row-highlight">
+                            <td><strong>Dim.2</strong></td>
+                            <td>0.91</td>
+                            <td><span class="highlight">22.85%</span></td>
+                            <td>95.81%</td>
+                            <td>Ancho del sepalo</td>
+                        </tr>
+                        <tr>
+                            <td>Dim.3</td>
+                            <td>0.15</td>
+                            <td>3.67%</td>
+                            <td>99.48%</td>
+                            <td>Varianza residual</td>
+                        </tr>
+                        <tr>
+                            <td>Dim.4</td>
+                            <td>0.02</td>
+                            <td>0.52%</td>
+                            <td>100.00%</td>
+                            <td>Ruido</td>
+                        </tr>
+                    </table>
+
+                    <div class="interpretation">
+                        <h4><i class="fa-solid fa-lightbulb"></i> Interpretacion de la Varianza</h4>
+                        <p><strong>Las primeras 2 dimensiones capturan 95.81% de la varianza total.</strong> Esto
+                            significa que podemos reducir de 4D a 2D perdiendo solo ~4% de informacion. Esta es una
+                            reduccion excelente que nos permite visualizar los datos en un plano 2D sin perder
+                            practicamente nada de la estructura original.</p>
+                    </div>
+
+                    <h3><i class="fa-solid fa-bullseye"></i> Contribuciones de Variables a las Dimensiones</h3>
+
+                    <h4>Dimension 1 (72.96% de varianza)</h4>
+                    <table>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Contribucion (%)</th>
+                            <th>Correlacion</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Petal Length</strong></td>
+                            <td><span class="badge badge-danger">41.93%</span></td>
+                            <td>0.99</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Petal Width</strong></td>
+                            <td><span class="badge badge-danger">41.78%</span></td>
+                            <td>0.99</td>
+                        </tr>
+                        <tr>
+                            <td>Sepal Length</td>
+                            <td><span class="badge badge-warning">14.59%</span></td>
+                            <td>0.85</td>
+                        </tr>
+                        <tr>
+                            <td>Sepal Width</td>
+                            <td><span class="badge badge-primary">1.70%</span></td>
+                            <td>-0.37</td>
+                        </tr>
+                    </table>
+
+                    <div class="interpretation">
+                        <h4><i class="fa-solid fa-lightbulb"></i> Interpretacion de Dim.1</h4>
+                        <p><strong>Dim.1 representa el "tamano del petalo".</strong> Las variables Petal Length y Petal
+                            Width dominan esta dimension con mas del 83% de contribucion combinada. Flores con valores
+                            altos en Dim.1 tienen petalos grandes (Virginica), mientras que valores bajos indican
+                            petalos pequenos (Setosa).</p>
+                    </div>
+
+                    <h4>Dimension 2 (22.85% de varianza)</h4>
+                    <table>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Contribucion (%)</th>
+                            <th>Correlacion</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Sepal Width</strong></td>
+                            <td><span class="badge badge-danger">72.08%</span></td>
+                            <td>0.94</td>
+                        </tr>
+                        <tr>
+                            <td>Sepal Length</td>
+                            <td><span class="badge badge-warning">19.03%</span></td>
+                            <td>-0.48</td>
+                        </tr>
+                        <tr>
+                            <td>Petal Width</td>
+                            <td><span class="badge badge-primary">5.71%</span></td>
+                            <td>0.26</td>
+                        </tr>
+                        <tr>
+                            <td>Petal Length</td>
+                            <td><span class="badge badge-primary">3.18%</span></td>
+                            <td>0.20</td>
+                        </tr>
+                    </table>
+
+                    <div class="interpretation">
+                        <h4><i class="fa-solid fa-lightbulb"></i> Interpretacion de Dim.2</h4>
+                        <p><strong>Dim.2 representa el "ancho del sepalo".</strong> Sepal Width domina esta dimension
+                            con 72% de contribucion. Esta dimension ayuda a diferenciar entre especies que tienen
+                            petalos de tamano similar pero sepalos de diferentes anchos.</p>
+                    </div>
+
+                    <h3><i class="fa-solid fa-sync-alt"></i> Circulo de Correlacion</h3>
+                    <div class="alert alert-warning">
+                        <strong><i class="fa-solid fa-exclamation-triangle"></i> Como Leer el Circulo de Correlacion:</strong>
+                        <ul>
+                            <li><strong>Flechas largas:</strong> Variables bien representadas en el plano 2D</li>
+                            <li><strong>Flechas en la misma direccion:</strong> Variables correlacionadas positivamente</li>
+                            <li><strong>Flechas opuestas:</strong> Variables correlacionadas negativamente</li>
+                            <li><strong>Flechas perpendiculares:</strong> Variables no correlacionadas</li>
+                        </ul>
+                    </div>
+
+                    <div class="interpretation">
+                        <h4><i class="fa-solid fa-lightbulb"></i> Observaciones del Circulo de Correlacion</h4>
+                        <ul>
+                            <li><strong>Petal Length y Petal Width:</strong> Flechas casi identicas -> Altamente correlacionadas (r = 0.96)</li>
+                            <li><strong>Sepal Width:</strong> Perpendicular a las medidas de petalo -> Independiente del tamano del petalo</li>
+                            <li><strong>Sepal Length:</strong> Posicion intermedia -> Correlacionada con ambas dimensiones</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 4: Clustering -->
+            <div id="clustering" class="tab-content">
+                <div class="card">
+                    <h2><i class="fa-solid fa-bullseye"></i> Clustering K-Means</h2>
+
+                    <div class="alert alert-info">
+                        <strong><i class="fa-solid fa-bullseye"></i> Objetivo del Clustering:</strong> Identificar grupos naturales en el espacio 2D del
+                        PCA sin usar las etiquetas de especies, y luego validar si los clusters encontrados coinciden
+                        con las especies reales.
+                    </div>
+
+                    <h3><i class="fa-solid fa-hashtag"></i> Determinacion del Numero Optimo de Clusters</h3>
+
+                    <h4>Metodo del Codo (Elbow Method)</h4>
+                    <table>
+                        <tr>
+                            <th>K</th>
+                            <th>Inercia</th>
+                            <th>Silhouette Score</th>
+                            <th>Evaluacion</th>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>152.35</td>
+                            <td>0.68</td>
+                            <td><span class="badge badge-warning">Muy pocos clusters</span></td>
+                        </tr>
+                        <tr class="row-success">
+                            <td><strong>3</strong></td>
+                            <td>78.85</td>
+                            <td><strong>0.55</strong></td>
+                            <td><span class="badge badge-success"><i class="fa-solid fa-check"></i> OPTIMO</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>57.23</td>
+                            <td>0.50</td>
+                            <td><span class="badge badge-warning">Sobre-segmentacion</span></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>46.45</td>
+                            <td>0.48</td>
+                            <td><span class="badge badge-danger">Demasiados clusters</span></td>
+                        </tr>
+                    </table>
+
+                    <div class="interpretation">
+                        <h4><i class="fa-solid fa-lightbulb"></i> Interpretacion del Metodo del Codo</h4>
+                        <p><strong>El "codo" se encuentra en K=3.</strong> La inercia disminuye significativamente de
+                            K=2 a K=3 (de 152.35 a 78.85), pero la reduccion es menor despues de K=3. Esto sugiere que 3
+                            clusters es el numero optimo. Ademas, el Silhouette Score es maximo en K=3 (0.55),
+                            confirmando esta eleccion.</p>
+                    </div>
+
+                    <h3><i class="fa-solid fa-chart-bar"></i> Metricas de Evaluacion del Clustering</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="label">Silhouette Score</div>
+                            <div class="value">0.55</div>
+                            <div class="label">Buena Separacion</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="label">Davies-Bouldin Index</div>
+                            <div class="value">0.66</div>
+                            <div class="label">Clusters Compactos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="label">Calinski-Harabasz</div>
+                            <div class="value">561.63</div>
+                            <div class="label">Alta Separacion</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="label">Pureza</div>
+                            <div class="value">89.3%</div>
+                            <div class="label">Excelente</div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <strong><i class="fa-solid fa-check-circle"></i> Interpretacion de Metricas:</strong>
+                        <ul>
+                            <li><strong>Silhouette Score (0.55):</strong> Valor entre 0.5-0.7 indica buena separacion entre clusters</li>
+                            <li><strong>Davies-Bouldin (0.66):</strong> Valor cercano a 0 es mejor; 0.66 indica clusters razonablemente compactos</li>
+                            <li><strong>Calinski-Harabasz (561.63):</strong> Valor alto indica buena separacion entre clusters</li>
+                            <li><strong>Pureza (89.3%):</strong> El 89.3% de las flores estan en el cluster correcto</li>
+                        </ul>
+                    </div>
+
+                    <h3><i class="fa-solid fa-search"></i> Confusion Matrix: Clusters vs Especies Reales</h3>
+                    <table>
+                        <tr>
+                            <th>Especie Real</th>
+                            <th>Cluster 0</th>
+                            <th>Cluster 1</th>
+                            <th>Cluster 2</th>
+                            <th>Total</th>
+                            <th>Precision</th>
+                        </tr>
+                        <tr class="row-success">
+                            <td><strong>Setosa</strong></td>
+                            <td><span class="badge badge-success">50</span></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>50</td>
+                            <td><strong>100%</strong></td>
+                        </tr>
+                        <tr class="row-warning">
+                            <td><strong>Versicolor</strong></td>
+                            <td>0</td>
+                            <td><span class="badge badge-success">48</span></td>
+                            <td><span class="badge badge-warning">2</span></td>
+                            <td>50</td>
+                            <td><strong>96%</strong></td>
+                        </tr>
+                        <tr class="row-danger">
+                            <td><strong>Virginica</strong></td>
+                            <td>0</td>
+                            <td><span class="badge badge-warning">14</span></td>
+                            <td><span class="badge badge-success">36</span></td>
+                            <td>50</td>
+                            <td><strong>72%</strong></td>
+                        </tr>
+                    </table>
+
+                    <div class="interpretation">
+                        <h4><i class="fa-solid fa-lightbulb"></i> Analisis de la Confusion Matrix</h4>
+                        <ul>
+                            <li><strong>Setosa (Cluster 0):</strong> Perfectamente separada (100% de precision). Todas
+                                las 50 flores de Setosa fueron correctamente asignadas al Cluster 0.</li>
+                            <li><strong>Versicolor (Cluster 1):</strong> Muy bien separada (96% de precision). Solo 2
+                                flores fueron confundidas con Virginica.</li>
+                            <li><strong>Virginica (Cluster 2):</strong> Moderadamente separada (72% de precision). 14
+                                flores fueron confundidas con Versicolor debido a la superposicion natural entre estas
+                                especies.</li>
+                        </ul>
+                    </div>
+
+                    <h3><i class="fa-solid fa-palette"></i> Centroides de los Clusters</h3>
+                    <table>
+                        <tr>
+                            <th>Cluster</th>
+                            <th>Dim.1 (Coord.)</th>
+                            <th>Dim.2 (Coord.)</th>
+                            <th>Especie Dominante</th>
+                            <th>N Flores</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Cluster 0</strong></td>
+                            <td>-2.68</td>
+                            <td>0.32</td>
+                            <td>Setosa</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cluster 1</strong></td>
+                            <td>0.33</td>
+                            <td>-0.52</td>
+                            <td>Versicolor</td>
+                            <td>62</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cluster 2</strong></td>
+                            <td>1.72</td>
+                            <td>0.20</td>
+                            <td>Virginica</td>
+                            <td>38</td>
+                        </tr>
+                    </table>
+
+                    <div class="alert alert-warning">
+                        <strong><i class="fa-solid fa-exclamation-triangle"></i> Observacion Importante:</strong> El Cluster 1 tiene 62 flores (48 Versicolor + 14
+                        Virginica), mientras que el Cluster 2 tiene solo 38 flores (36 Virginica + 2 Versicolor). Esto
+                        refleja la superposicion natural entre Versicolor y Virginica en el espacio de caracteristicas.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 5: Interpretation -->
+            <div id="interpretation" class="tab-content">
+                <div class="card">
+                    <h2><i class="fa-solid fa-lightbulb"></i> Interpretacion Detallada por Especie</h2>
+
+                    <div class="comparison-grid">
+                        <!-- Setosa -->
+                        <div class="comparison-item" style="border-color: #00cc44;">
+                            <h4><i class="fa-solid fa-seedling"></i> Setosa (Cluster 0)</h4>
+                            <p><strong>Caracteristicas Morfologicas:</strong></p>
+                            <ul>
+                                <li>Petal Length: ~1.5 cm (muy pequeno)</li>
+                                <li>Petal Width: ~0.2 cm (muy pequeno)</li>
+                                <li>Sepal Width: ~3.4 cm (relativamente grande)</li>
+                            </ul>
+                            <p><strong>Posicion en PCA:</strong></p>
+                            <ul>
+                                <li>Dim.1: Valores muy negativos (-2.68)</li>
+                                <li>Dim.2: Valores positivos (0.32)</li>
+                            </ul>
+                            <p><strong>Separabilidad:</strong></p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%; background: linear-gradient(90deg, #003300, #00cc44);">100% Perfecta</div>
+                            </div>
+                            <div class="alert alert-success" style="margin-top: 10px;">
+                                <strong><i class="fa-solid fa-check-circle"></i> Conclusion:</strong> Setosa es linealmente separable del resto. Sus petalos
+                                extremadamente pequenos la hacen unica y facilmente identificable.
+                            </div>
+                        </div>
+
+                        <!-- Versicolor -->
+                        <div class="comparison-item" style="border-color: #ccaa00;">
+                            <h4><i class="fa-solid fa-seedling"></i> Versicolor (Cluster 1)</h4>
+                            <p><strong>Caracteristicas Morfologicas:</strong></p>
+                            <ul>
+                                <li>Petal Length: ~4.3 cm (mediano)</li>
+                                <li>Petal Width: ~1.3 cm (mediano)</li>
+                                <li>Sepal Width: ~2.8 cm (mediano)</li>
+                            </ul>
+                            <p><strong>Posicion en PCA:</strong></p>
+                            <ul>
+                                <li>Dim.1: Valores cercanos a 0 (0.33)</li>
+                                <li>Dim.2: Valores ligeramente negativos (-0.52)</li>
+                            </ul>
+                            <p><strong>Separabilidad:</strong></p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 96%; background: linear-gradient(90deg, #333300, #ccaa00);">96% Buena</div>
+                            </div>
+                            <div class="alert alert-warning" style="margin-top: 10px;">
+                                <strong><i class="fa-solid fa-exclamation-triangle"></i> Conclusion:</strong> Versicolor es mayormente separable, pero tiene una
+                                pequena superposicion con Virginica (4% de error). Esto es esperado debido a la
+                                similitud morfologica entre ambas especies.
+                            </div>
+                        </div>
+
+                        <!-- Virginica -->
+                        <div class="comparison-item" style="border-color: #ff3333;">
+                            <h4><i class="fa-solid fa-seedling"></i> Virginica (Cluster 2)</h4>
+                            <p><strong>Caracteristicas Morfologicas:</strong></p>
+                            <ul>
+                                <li>Petal Length: ~5.5 cm (grande)</li>
+                                <li>Petal Width: ~2.0 cm (grande)</li>
+                                <li>Sepal Width: ~3.0 cm (mediano)</li>
+                            </ul>
+                            <p><strong>Posicion en PCA:</strong></p>
+                            <ul>
+                                <li>Dim.1: Valores muy positivos (1.72)</li>
+                                <li>Dim.2: Valores cercanos a 0 (0.20)</li>
+                            </ul>
+                            <p><strong>Separabilidad:</strong></p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 72%; background: linear-gradient(90deg, #330000, #ff3333);">72% Moderada</div>
+                            </div>
+                            <div class="alert alert-danger" style="margin-top: 10px;">
+                                <strong><i class="fa-solid fa-exclamation-triangle"></i> Conclusion:</strong> Virginica tiene la mayor superposicion con Versicolor
+                                (28% de error). Esto refleja que son especies evolutivamente mas cercanas con
+                                caracteristicas morfologicas similares.
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3><i class="fa-solid fa-microscope"></i> Por Que Versicolor y Virginica se Superponen?</h3>
+
+                    <div class="interpretation">
+                        <h4><i class="fa-solid fa-lightbulb"></i> Razones Biologicas</h4>
+                        <ul>
+                            <li><strong>Evolucion Compartida:</strong> Versicolor y Virginica son especies evolutivamente mas cercanas que Setosa</li>
+                            <li><strong>Caracteristicas Similares:</strong> Ambas tienen petalos de tamano mediano-grande con rangos superpuestos</li>
+                            <li><strong>Variabilidad Natural:</strong> Existe variabilidad natural dentro de cada especie que causa superposicion</li>
+                        </ul>
+                    </div>
+
+                    <div class="interpretation">
+                        <h4><i class="fa-solid fa-lightbulb"></i> Razones Estadisticas</h4>
+                        <ul>
+                            <li><strong>Rangos Superpuestos:</strong> Las medidas de petalo de Versicolor y Virginica tienen rangos que se superponen</li>
+                            <li><strong>Distribuciones Gaussianas:</strong> Las distribuciones de ambas especies se solapan en las colas</li>
+                            <li><strong>Limites Difusos:</strong> No existe una frontera clara en el espacio de 4 dimensiones</li>
+                        </ul>
+                    </div>
+
+                    <h3><i class="fa-solid fa-chart-bar"></i> Visualizacion de la Separacion</h3>
+                    <div class="alert alert-info">
+                        <strong><i class="fa-solid fa-palette"></i> Interpretacion del Biplot:</strong>
+                        <p>En el espacio 2D del PCA, podemos ver claramente:</p>
+                        <ul>
+                            <li><strong>Setosa:</strong> Grupo compacto en la esquina inferior izquierda (Dim.1 negativo)</li>
+                            <li><strong>Versicolor:</strong> Grupo central (Dim.1 cercano a 0, Dim.2 negativo)</li>
+                            <li><strong>Virginica:</strong> Grupo en la derecha (Dim.1 positivo), con superposicion con Versicolor</li>
+                        </ul>
+                    </div>
+
+                    <h3><i class="fa-solid fa-bullseye"></i> Validacion del Metodo No Supervisado</h3>
+                    <div class="alert alert-success">
+                        <strong><i class="fa-solid fa-check-circle"></i> Hallazgo Clave:</strong> Sin conocer las etiquetas de especies, K-Means descubrio 3
+                        grupos naturales que coinciden en 89.3% con las especies reales. Esto valida que:
+                        <ul>
+                            <li>Las especies tienen diferencias morfologicas reales y medibles</li>
+                            <li>El PCA captura correctamente la estructura de los datos</li>
+                            <li>K-Means es efectivo para este tipo de datos</li>
+                            <li>La superposicion Versicolor-Virginica es natural, no un error del algoritmo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 6: Conclusions -->
+            <div id="conclusions" class="tab-content">
+                <div class="card">
+                    <h2><i class="fa-solid fa-check-circle"></i> Conclusiones y Recomendaciones</h2>
+
+                    <h3><i class="fa-solid fa-bullseye"></i> Conclusiones Principales</h3>
+
+                    <div class="alert alert-success">
+                        <strong>1. PCA es Altamente Efectivo</strong>
+                        <ul>
+                            <li>Reduce de 4D a 2D manteniendo <strong>96% de la informacion</strong></li>
+                            <li>Las 2 primeras dimensiones son suficientes para visualizacion y clustering</li>
+                            <li>La perdida de solo 4% de informacion es insignificante</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <strong>2. Las Medidas de Petalo son Clave</strong>
+                        <ul>
+                            <li><strong>Petal Length</strong> y <strong>Petal Width</strong> son las variables mas discriminantes</li>
+                            <li>Dim.1 (que representa el tamano del petalo) explica <strong>73% de la varianza</strong></li>
+                            <li>Para clasificacion de Iris, enfocarse en medidas de petalo es optimo</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <strong>3. K-Means Funciona Excelentemente</strong>
+                        <ul>
+                            <li>Identifica correctamente las 3 especies en <strong>89.3% de los casos</strong></li>
+                            <li>Setosa es perfectamente separable (100%)</li>
+                            <li>La superposicion Versicolor-Virginica es natural y esperada</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <strong>4. Validacion del Metodo No Supervisado</strong>
+                        <ul>
+                            <li>Sin conocer las etiquetas, K-Means descubre los 3 grupos naturales</li>
+                            <li>Esto valida que las especies tienen diferencias morfologicas reales</li>
+                            <li>El metodo es robusto y confiable para este tipo de datos</li>
+                        </ul>
+                    </div>
+
+                    <h3><i class="fa-solid fa-graduation-cap"></i> Lecciones para Estudiantes</h3>
+
+                    <div class="card" style="background: rgba(57, 255, 20, 0.03); border-color: #1a3a1a;">
+                        <h3>Leccion 1: La Importancia de la Reduccion de Dimensionalidad</h3>
+                        <p><strong>ANTES DE PCA:</strong> 4 variables -> Dificil de visualizar -> Dificil de interpretar</p>
+                        <p><strong>DESPUES DE PCA:</strong> 2 dimensiones -> Facil de visualizar -> Patrones claros</p>
+                        <div class="alert alert-info">
+                            <strong><i class="fa-solid fa-lightbulb"></i> Moraleja:</strong> No siempre necesitas todas las variables. A veces, menos es
+                            mas. El PCA te ayuda a identificar que variables realmente importan.
+                        </div>
+                    </div>
+
+                    <div class="card" style="background: rgba(57, 255, 20, 0.03); border-color: #1a3a1a;">
+                        <h3>Leccion 2: El Clustering No Supervisado Puede Descubrir Estructura Real</h3>
+                        <p><strong>SIN ETIQUETAS:</strong> K-Means encuentra 3 grupos</p>
+                        <p><strong>CON ETIQUETAS:</strong> Hay 3 especies reales</p>
+                        <p><strong>COINCIDENCIA:</strong> 89.3%</p>
+                        <div class="alert alert-info">
+                            <strong><i class="fa-solid fa-lightbulb"></i> Moraleja:</strong> Los datos tienen estructura natural. Los algoritmos pueden
+                            encontrarla sin supervision. Esto es el poder del Machine Learning no supervisado.
+                        </div>
+                    </div>
+
+                    <div class="card" style="background: rgba(57, 255, 20, 0.03); border-color: #1a3a1a;">
+                        <h3>Leccion 3: No Todos los Grupos son Perfectamente Separables</h3>
+                        <p><strong>Setosa:</strong> 100% separable</p>
+                        <p><strong>Versicolor/Virginica:</strong> Superposicion natural (28% de error en Virginica)</p>
+                        <div class="alert alert-info">
+                            <strong><i class="fa-solid fa-lightbulb"></i> Moraleja:</strong> En datos reales, la superposicion es normal. No esperes
+                            clusters perfectos. La naturaleza es compleja y tiene variabilidad inherente.
+                        </div>
+                    </div>
+
+                    <div class="card" style="background: rgba(57, 255, 20, 0.03); border-color: #1a3a1a;">
+                        <h3>Leccion 4: Validar, Validar, Validar</h3>
+                        <p><strong>Metodo del Codo:</strong> Sugiere K=3</p>
+                        <p><strong>Silhouette Score:</strong> Confirma K=3</p>
+                        <p><strong>Pureza:</strong> Valida que K=3 es correcto (89.3%)</p>
+                        <div class="alert alert-info">
+                            <strong><i class="fa-solid fa-lightbulb"></i> Moraleja:</strong> Usa multiples metricas para validar tus decisiones. Una sola
+                            metrica puede ser enganosa. La convergencia de multiples metricas da confianza.
+                        </div>
+                    </div>
+
+                    <h3><i class="fa-solid fa-wrench"></i> Recomendaciones Practicas</h3>
+
+                    <h4>Para Clasificacion de Especies de Iris:</h4>
+                    <ol>
+                        <li><strong>Enfocarse en medidas de petalo</strong> (son las mas discriminantes)</li>
+                        <li><strong>Usar PCA para visualizacion</strong> (reduce complejidad sin perder informacion)</li>
+                        <li><strong>K=3 es optimo</strong> (validado por multiples metricas)</li>
+                        <li><strong>Considerar la superposicion natural</strong> entre Versicolor y Virginica</li>
+                    </ol>
+
+                    <h4>Para Analisis de Datos Similares:</h4>
+                    <ol>
+                        <li><strong>Siempre hacer EDA primero</strong> (entender distribuciones y correlaciones)</li>
+                        <li><strong>Estandarizar antes de PCA</strong> (variables en diferentes escalas sesgan resultados)</li>
+                        <li><strong>Validar numero de clusters</strong> (no asumir K, usar Elbow + Silhouette)</li>
+                        <li><strong>Comparar con ground truth</strong> (si esta disponible, como en este caso)</li>
+                        <li><strong>Documentar decisiones</strong> (por que elegiste K=3, por que 2 dimensiones, etc.)</li>
+                    </ol>
+
+                    <h3><i class="fa-solid fa-rocket"></i> Extensiones Posibles</h3>
+
+                    <div class="comparison-grid">
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-project-diagram"></i> Otros Algoritmos de Clustering</h4>
+                            <ul>
+                                <li>DBSCAN (clusters de forma arbitraria)</li>
+                                <li>Hierarchical Clustering (dendrogramas)</li>
+                                <li>Gaussian Mixture Models (probabilistico)</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-brain"></i> Clasificacion Supervisada</h4>
+                            <ul>
+                                <li>Random Forest</li>
+                                <li>SVM (Support Vector Machines)</li>
+                                <li>Neural Networks</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4><i class="fa-solid fa-flask"></i> Analisis Adicionales</h4>
+                            <ul>
+                                <li>LDA (Linear Discriminant Analysis)</li>
+                                <li>t-SNE (visualizacion no lineal)</li>
+                                <li>UMAP (reduccion de dimensionalidad)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3><i class="fa-solid fa-book-open"></i> Referencias Academicas</h3>
+                    <ul>
+                        <li><strong>Fisher, R. A. (1936).</strong> The use of multiple measurements in taxonomic
+                            problems. <em>Annals of Eugenics</em>, 7(2), 179-188.</li>
+                        <li><strong>Anderson, E. (1935).</strong> The irises of the Gaspe Peninsula. <em>Bulletin of the
+                                American Iris Society</em>, 59, 2-5.</li>
+                        <li><strong>Husson, F., Le, S., & Pages, J. (2017).</strong> Exploratory Multivariate Analysis
+                            by Example Using R. CRC Press.</li>
+                        <li><strong>Pedregosa, F., et al. (2011).</strong> Scikit-learn: Machine Learning in Python.
+                            <em>JMLR</em> 12, pp. 2825-2830.</li>
+                    </ul>
+
+                    <div class="alert alert-info">
+                        <strong><i class="fa-solid fa-book"></i> Recursos Adicionales:</strong>
+                        <ul>
+                            <li><a href="https://scikit-learn.org/stable/modules/decomposition.html#pca"
+                                    target="_blank">Scikit-learn: PCA Tutorial</a></li>
+                            <li><a href="https://scikit-learn.org/stable/modules/clustering.html#k-means"
+                                    target="_blank">Scikit-learn: K-Means Tutorial</a></li>
+                            <li><a href="http://factominer.free.fr/course/FactoTuto.html" target="_blank">FactoMineR
+                                    Tutorial</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Autor:</strong> <a href="https://github.com/TodoEconometria" target="_blank">@TodoEconometria</a></p>
+            <p><strong>Profesor:</strong> Juan Marcelo Gutierrez Miranda</p>
+            <p><strong>Fecha:</strong> Enero 2026</p>
+            <p style="margin-top: 15px; opacity: 0.5; font-size: 0.8em;">
+                Hash ID de Certificacion: 4e8d9b1a5f6e7c3d2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // === TAB NAVIGATION ===
+        function openTab(evt, tabName) {
+            var tabContents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            var tabs = document.getElementsByClassName("tab");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // === PROGRESS BAR ANIMATION ===
+        window.addEventListener('load', function () {
+            var progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(function (bar) {
+                var width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(function () {
+                    bar.style.width = width;
+                }, 100);
+            });
+        });
+
+        // === MATRIX RAIN ===
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const alphabet = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = Math.floor(canvas.width / fontSize);
+
+        const rainDrops = [];
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        };
+
+        setInterval(draw, 30);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+
+</html>

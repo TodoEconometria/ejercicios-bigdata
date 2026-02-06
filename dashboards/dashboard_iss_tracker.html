@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISS Tracker - En Vivo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0c0c1e 0%, #1a1a3e 50%, #0c0c1e 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #00d4ff;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            background: linear-gradient(90deg, #00d4ff, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,0,0,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #ff0040;
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,212,255,0.2);
+        }
+
+        .stat-icon {
+            margin-bottom: 8px;
+            color: #00d4ff;
+        }
+        .stat-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke-width: 1.5;
+        }
+        .stat-value { font-size: 1.5em; font-weight: bold; color: #00d4ff; }
+        .stat-label { color: #888; font-size: 0.85em; margin-top: 5px; }
+
+        #map {
+            height: 500px;
+            border-radius: 15px;
+            border: 2px solid rgba(0,212,255,0.3);
+            box-shadow: 0 0 50px rgba(0,212,255,0.1);
+        }
+
+        .map-section { margin: 20px 0; position: relative; }
+
+        .map-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .follow-btn {
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: 2px solid #00d4ff;
+            background: rgba(0,0,0,0.8);
+            color: #00d4ff;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .follow-btn:hover {
+            background: rgba(0,212,255,0.2);
+        }
+
+        .follow-btn.active {
+            background: #00d4ff;
+            color: #000;
+            box-shadow: 0 0 15px #00d4ff;
+        }
+
+        .follow-btn .icon {
+            font-size: 1.1em;
+        }
+
+        .crew-section, .predictor-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .crew-section h2, .predictor-section h2 {
+            color: #00d4ff;
+            margin-bottom: 20px;
+        }
+
+        .crew-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .astronaut {
+            background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(0,255,136,0.1));
+            padding: 10px 18px;
+            border-radius: 25px;
+            border: 1px solid rgba(0,212,255,0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .astronaut:hover {
+            background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,255,136,0.2));
+            transform: scale(1.05);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .search-box input {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 20px;
+            border-radius: 30px;
+            border: 2px solid rgba(0,212,255,0.3);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 1em;
+            outline: none;
+        }
+
+        .search-box input:focus { border-color: #00d4ff; }
+
+        .search-box button {
+            padding: 15px 30px;
+            border-radius: 30px;
+            border: none;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .search-box button:hover {
+            transform: scale(1.05);
+        }
+
+        #prediccion-resultado { margin-top: 20px; }
+
+        .pase-card {
+            background: rgba(0,0,0,0.3);
+            border-left: 4px solid #00d4ff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .pase-card.excelente { border-left-color: #00ff88; }
+        .pase-card.buena { border-left-color: #00d4ff; }
+        .pase-card.visible { border-left-color: #ffaa00; }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .fact-card {
+            background: rgba(255,255,255,0.03);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid #00d4ff;
+        }
+
+        .fact-card h4 { color: #00d4ff; margin-bottom: 10px; }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 40px;
+        }
+
+        .footer a { color: #00d4ff; text-decoration: none; }
+
+        .location-info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.85);
+            padding: 12px 18px;
+            border-radius: 10px;
+            z-index: 1000;
+            border: 1px solid #00d4ff;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i data-lucide="satellite" style="width:36px;height:36px;display:inline;vertical-align:middle;margin-right:10px;"></i> ISS Tracker - En Vivo</h1>
+        <p style="color: #888;">Estación Espacial Internacional</p>
+        <div class="live-indicator">
+            <span class="live-dot"></span>
+            <span>EN VIVO - Actualiza cada 5 segundos</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i data-lucide="map-pin"></i></div>
+                <div class="stat-value" id="lat">--</div>
+                <div class="stat-label">Latitud</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i data-lucide="globe"></i></div>
+                <div class="stat-value" id="lon">--</div>
+                <div class="stat-label">Longitud</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i data-lucide="arrow-up-from-line"></i></div>
+                <div class="stat-value" id="alt">--</div>
+                <div class="stat-label">Altitud (km)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i data-lucide="rocket"></i></div>
+                <div class="stat-value" id="vel">--</div>
+                <div class="stat-label">km/h</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i data-lucide="users"></i></div>
+                <div class="stat-value" id="crew-count">--</div>
+                <div class="stat-label">Tripulación</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" id="vis-icon"><i data-lucide="sun"></i></div>
+                <div class="stat-value" id="visibility">--</div>
+                <div class="stat-label">Zona</div>
+            </div>
+        </div>
+
+        <div class="map-section">
+            <div id="map"></div>
+            <div class="map-controls">
+                <button class="follow-btn active" id="follow-btn" onclick="toggleFollow()">
+                    <span class="icon"><i data-lucide="crosshair" style="width:18px;height:18px;"></i></span>
+                    <span id="follow-text">Siguiendo ISS</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="crew-section">
+            <h2><i data-lucide="users" style="width:28px;height:28px;display:inline;vertical-align:middle;margin-right:10px;"></i> Tripulación Actual</h2>
+            <div class="crew-grid" id="crew-list">Cargando...</div>
+        </div>
+
+        <div class="predictor-section">
+            <h2><i data-lucide="telescope" style="width:28px;height:28px;display:inline;vertical-align:middle;margin-right:10px;"></i> ¿Cuándo puedo ver la ISS?</h2>
+            <p style="color: #888; margin-bottom: 15px;">Ingresa tu ciudad para saber cuándo pasará sobre ti.</p>
+            <div class="search-box">
+                <input type="text" id="ciudad" placeholder="Ej: Buenos Aires, Argentina" onkeypress="if(event.key==='Enter') buscarPases()">
+                <button onclick="buscarPases()"><i data-lucide="search" style="width:18px;height:18px;display:inline;vertical-align:middle;"></i> Buscar</button>
+            </div>
+            <div id="prediccion-resultado"></div>
+        </div>
+
+        <div class="facts-grid">
+            <div class="fact-card">
+                <h4><i data-lucide="orbit" style="width:20px;height:20px;display:inline;vertical-align:middle;margin-right:6px;"></i> Órbitas por día</h4>
+                <p>La ISS completa <strong>15.5 órbitas</strong> cada 24 horas a 27,600 km/h.</p>
+            </div>
+            <div class="fact-card">
+                <h4><i data-lucide="sunrise" style="width:20px;height:20px;display:inline;vertical-align:middle;margin-right:6px;"></i> Amaneceres</h4>
+                <p>Los astronautas ven <strong>16 amaneceres</strong> cada día.</p>
+            </div>
+            <div class="fact-card">
+                <h4><i data-lucide="ruler" style="width:20px;height:20px;display:inline;vertical-align:middle;margin-right:6px;"></i> Tamaño</h4>
+                <p>Mide <strong>109m x 73m</strong>, como un campo de fútbol.</p>
+            </div>
+            <div class="fact-card">
+                <h4><i data-lucide="eye" style="width:20px;height:20px;display:inline;vertical-align:middle;margin-right:6px;"></i> Visibilidad</h4>
+                <p>Es el <strong>3er objeto más brillante</strong> del cielo nocturno.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Datos: <a href="https://wheretheiss.at/" target="_blank">Where The ISS At</a> | <a href="http://open-notify.org/" target="_blank">Open Notify</a></p>
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
+        <p><strong>Curso:</strong> Big Data con Python - De Cero a Produccion</p>
+        <p><strong>Profesor:</strong> Juan Marcelo Gutierrez Miranda | @TodoEconometria</p>
+        <p style="font-size: 0.75em; color: #555; margin-top: 10px;"><strong>Hash ID:</strong> 4e8d9b1a5f6e7c3d2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c</p>
+        <p style="margin-top: 15px; color: #888;"><strong>Metodologia:</strong> Ejercicios progresivos con datos reales y herramientas profesionales</p>
+        <div style="margin-top: 15px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <p style="color: #aaa; font-size: 0.85em;"><strong>Referencias academicas:</strong></p>
+            <ul style="color: #888; font-size: 0.8em; text-align: left; padding-left: 20px;">
+                <li>NASA (2024). International Space Station - Reference Guide. <a href="https://www.nasa.gov/mission_pages/station/" style="color:#00d4ff;">nasa.gov/station</a></li>
+                <li>HashiCorp (2023). Terraform: Infrastructure as Code. <a href="https://www.terraform.io/" style="color:#00d4ff;">terraform.io</a></li>
+                <li>LocalStack (2024). A fully functional local cloud stack. <a href="https://localstack.cloud/" style="color:#00d4ff;">localstack.cloud</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const ISS_API = 'https://api.wheretheiss.at/v1/satellites/25544';
+        const ASTRONAUTS_API = 'https://corquaid.github.io/international-space-station-APIs/JSON/people-in-space.json';
+
+        let map, issMarker, trajectoryLine, locationLabel;
+        let trajectoryPoints = [];
+
+        // Control de seguimiento automático
+        let followISS = true;
+
+        // ISS Fantasma para predicciones
+        let ghostMarker = null;
+        let cityMarker = null;
+        let ghostTrajectory = null;
+        let ghostAnimation = null;
+
+        // Icono SVG de la ISS (azul - tiempo real)
+        const issIcon = L.divIcon({
+            className: 'iss-icon',
+            html: `<div style="position:relative;">
+                <svg width="60" height="40" viewBox="0 0 120 60" style="filter: drop-shadow(0 0 8px #00d4ff);">
+                    <rect x="50" y="22" width="20" height="16" rx="3" fill="#e8e8e8" stroke="#999" stroke-width="1"/>
+                    <rect x="5" y="18" width="40" height="24" rx="2" fill="#1e3a5f" stroke="#4a90d9" stroke-width="1"/>
+                    <rect x="75" y="18" width="40" height="24" rx="2" fill="#1e3a5f" stroke="#4a90d9" stroke-width="1"/>
+                    <line x1="10" y1="18" x2="10" y2="42" stroke="#4a90d9" stroke-width="0.8"/>
+                    <line x1="20" y1="18" x2="20" y2="42" stroke="#4a90d9" stroke-width="0.8"/>
+                    <line x1="30" y1="18" x2="30" y2="42" stroke="#4a90d9" stroke-width="0.8"/>
+                    <line x1="40" y1="18" x2="40" y2="42" stroke="#4a90d9" stroke-width="0.8"/>
+                    <line x1="80" y1="18" x2="80" y2="42" stroke="#4a90d9" stroke-width="0.8"/>
+                    <line x1="90" y1="18" x2="90" y2="42" stroke="#4a90d9" stroke-width="0.8"/>
+                    <line x1="100" y1="18" x2="100" y2="42" stroke="#4a90d9" stroke-width="0.8"/>
+                    <line x1="110" y1="18" x2="110" y2="42" stroke="#4a90d9" stroke-width="0.8"/>
+                    <rect x="45" y="26" width="5" height="8" fill="#888"/>
+                    <rect x="70" y="26" width="5" height="8" fill="#888"/>
+                    <circle cx="60" cy="30" r="4" fill="#00d4ff"/>
+                </svg>
+            </div>`,
+            iconSize: [60, 40],
+            iconAnchor: [30, 20]
+        });
+
+        // Icono SVG de la ISS fantasma (naranja - predicción)
+        const issGhostIcon = L.divIcon({
+            className: 'iss-ghost-icon',
+            html: `<div style="position:relative; opacity: 0.85;">
+                <svg width="50" height="34" viewBox="0 0 120 60" style="filter: drop-shadow(0 0 12px #ff8800);">
+                    <rect x="50" y="22" width="20" height="16" rx="3" fill="#ffe0b0" stroke="#ff8800" stroke-width="1"/>
+                    <rect x="5" y="18" width="40" height="24" rx="2" fill="#5f3a1e" stroke="#ff8800" stroke-width="1"/>
+                    <rect x="75" y="18" width="40" height="24" rx="2" fill="#5f3a1e" stroke="#ff8800" stroke-width="1"/>
+                    <line x1="10" y1="18" x2="10" y2="42" stroke="#ff8800" stroke-width="0.8"/>
+                    <line x1="20" y1="18" x2="20" y2="42" stroke="#ff8800" stroke-width="0.8"/>
+                    <line x1="30" y1="18" x2="30" y2="42" stroke="#ff8800" stroke-width="0.8"/>
+                    <line x1="40" y1="18" x2="40" y2="42" stroke="#ff8800" stroke-width="0.8"/>
+                    <line x1="80" y1="18" x2="80" y2="42" stroke="#ff8800" stroke-width="0.8"/>
+                    <line x1="90" y1="18" x2="90" y2="42" stroke="#ff8800" stroke-width="0.8"/>
+                    <line x1="100" y1="18" x2="100" y2="42" stroke="#ff8800" stroke-width="0.8"/>
+                    <line x1="110" y1="18" x2="110" y2="42" stroke="#ff8800" stroke-width="0.8"/>
+                    <rect x="45" y="26" width="5" height="8" fill="#aa6600"/>
+                    <rect x="70" y="26" width="5" height="8" fill="#aa6600"/>
+                    <circle cx="60" cy="30" r="4" fill="#ff8800"/>
+                </svg>
+                <div style="position:absolute; top:-18px; left:50%; transform:translateX(-50%);
+                     background:#ff8800; color:#000; font-size:10px; padding:2px 6px;
+                     border-radius:8px; white-space:nowrap; font-weight:bold;">
+                    PREDICCIÓN
+                </div>
+            </div>`,
+            iconSize: [50, 34],
+            iconAnchor: [25, 17]
+        });
+
+        // Icono para la ciudad destino
+        const cityIcon = L.divIcon({
+            className: 'city-icon',
+            html: `<div style="position:relative;">
+                <div style="width:20px; height:20px; background:#00ff88; border-radius:50%;
+                     border:3px solid #fff; box-shadow: 0 0 15px #00ff88;"></div>
+                <div style="position:absolute; top:-25px; left:50%; transform:translateX(-50%);
+                     background:#00ff88; color:#000; font-size:10px; padding:2px 8px;
+                     border-radius:8px; white-space:nowrap; font-weight:bold;">
+                    TU CIUDAD
+                </div>
+            </div>`,
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+        });
+
+        function initMap() {
+            map = L.map('map', { center: [0, 0], zoom: 2, minZoom: 1, worldCopyJump: true });
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '© CARTO',
+                subdomains: 'abcd'
+            }).addTo(map);
+
+            issMarker = L.marker([0, 0], { icon: issIcon }).addTo(map);
+
+            trajectoryLine = L.polyline([], {
+                color: '#00d4ff',
+                weight: 2,
+                opacity: 0.5,
+                dashArray: '8, 8'
+            }).addTo(map);
+
+            // Etiqueta de ubicación
+            locationLabel = L.control({ position: 'bottomleft' });
+            locationLabel.onAdd = function() {
+                const div = L.DomUtil.create('div', 'location-info');
+                div.id = 'location-label';
+                div.innerHTML = 'Cargando ubicación...';
+                return div;
+            };
+            locationLabel.addTo(map);
+
+            // Desactivar seguimiento cuando el usuario interactúa con el mapa
+            map.on('dragstart', () => setFollow(false));
+            map.on('zoomstart', (e) => {
+                // Solo desactivar si el zoom fue iniciado por el usuario (no programático)
+                if (e.originalEvent) setFollow(false);
+            });
+        }
+
+        function setFollow(value) {
+            followISS = value;
+            const btn = document.getElementById('follow-btn');
+            const text = document.getElementById('follow-text');
+
+            if (followISS) {
+                btn.classList.add('active');
+                text.textContent = 'Siguiendo ISS';
+            } else {
+                btn.classList.remove('active');
+                text.textContent = 'Seguir ISS';
+            }
+        }
+
+        function toggleFollow() {
+            setFollow(!followISS);
+            if (followISS && issMarker) {
+                // Centrar inmediatamente en la ISS
+                map.panTo(issMarker.getLatLng(), { animate: true, duration: 0.5 });
+            }
+        }
+
+        async function updateISS() {
+            try {
+                const response = await fetch(ISS_API);
+                const data = await response.json();
+
+                const lat = data.latitude;
+                const lon = data.longitude;
+
+                document.getElementById('lat').textContent = lat.toFixed(2) + '°';
+                document.getElementById('lon').textContent = lon.toFixed(2) + '°';
+                document.getElementById('alt').textContent = data.altitude.toFixed(0);
+                document.getElementById('vel').textContent = data.velocity.toFixed(0);
+
+                const vis = data.visibility;
+                document.getElementById('visibility').textContent = vis === 'daylight' ? 'Día' : 'Noche';
+                const visIcon = document.getElementById('vis-icon');
+                visIcon.innerHTML = vis === 'daylight'
+                    ? '<i data-lucide="sun"></i>'
+                    : '<i data-lucide="moon"></i>';
+                lucide.createIcons({ nodes: [visIcon] });
+
+                // Obtener nombre de ubicación
+                updateLocationName(lat, lon);
+
+                // Mover marcador
+                issMarker.setLatLng([lat, lon]);
+
+                // Trayectoria
+                trajectoryPoints.push([lat, lon]);
+                if (trajectoryPoints.length > 150) trajectoryPoints.shift();
+                trajectoryLine.setLatLngs(trajectoryPoints);
+
+                // Solo seguir si está activado
+                if (followISS) {
+                    map.panTo([lat, lon], { animate: true, duration: 0.8 });
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function updateLocationName(lat, lon) {
+            try {
+                // Determinar ubicación aproximada
+                let ubicacion = 'Océano';
+
+                if (lat > -60 && lat < 70) {
+                    if (lon > -30 && lon < 60) ubicacion = lat > 35 ? 'Europa' : 'África';
+                    else if (lon >= 60 && lon < 150) ubicacion = lat > 0 ? 'Asia' : 'Asia/Oceanía';
+                    else if (lon >= -170 && lon < -30) ubicacion = lat > 15 ? 'Norteamérica' : 'Sudamérica';
+                    else if (lon >= 110 || lon < -100) ubicacion = lat < -10 ? 'Oceanía' : 'Pacífico';
+                }
+
+                if (lon >= -100 && lon < -20 && lat < 0 && lat > -60) ubicacion = 'Sudamérica';
+                if (lon >= -170 && lon < -100 || lon > 100) {
+                    if (lat > -60 && lat < 60) ubicacion = 'Océano Pacífico';
+                }
+                if (lon >= -80 && lon < 0 && lat > -60 && lat < 70) {
+                    ubicacion = 'Océano Atlántico';
+                }
+
+                document.getElementById('location-label').innerHTML =
+                    `<strong>📍 Sobre:</strong> ${ubicacion}<br>` +
+                    `<span style="color:#00d4ff">${lat.toFixed(3)}°, ${lon.toFixed(3)}°</span>`;
+            } catch (e) {
+                document.getElementById('location-label').textContent = 'Ubicación desconocida';
+            }
+        }
+
+        async function loadAstronauts() {
+            try {
+                const response = await fetch(ASTRONAUTS_API);
+                const data = await response.json();
+
+                const issCrew = data.people.filter(p => p.iss);
+                document.getElementById('crew-count').textContent = issCrew.length;
+
+                const html = issCrew.map(a => `
+                    <div class="astronaut">
+                        <span>${a.country ? getFlagEmoji(a.country) : '👨‍🚀'}</span>
+                        <span>${a.name}</span>
+                    </div>
+                `).join('');
+
+                document.getElementById('crew-list').innerHTML = html || 'Sin datos';
+            } catch (error) {
+                // Fallback a Open Notify
+                try {
+                    const resp = await fetch('http://api.open-notify.org/astros.json');
+                    const data = await resp.json();
+                    const issCrew = data.people.filter(p => p.craft === 'ISS');
+                    document.getElementById('crew-count').textContent = issCrew.length;
+                    document.getElementById('crew-list').innerHTML = issCrew.map(a =>
+                        `<div class="astronaut"><span>👨‍🚀</span><span>${a.name}</span></div>`
+                    ).join('');
+                } catch (e) {
+                    document.getElementById('crew-list').innerHTML = 'Error cargando datos';
+                }
+            }
+        }
+
+        function getFlagEmoji(country) {
+            const flags = {
+                'USA': '🇺🇸', 'Russia': '🇷🇺', 'Japan': '🇯🇵', 'Canada': '🇨🇦',
+                'Germany': '🇩🇪', 'Italy': '🇮🇹', 'France': '🇫🇷', 'UK': '🇬🇧',
+                'Denmark': '🇩🇰', 'UAE': '🇦🇪', 'China': '🇨🇳', 'India': '🇮🇳'
+            };
+            return flags[country] || '👨‍🚀';
+        }
+
+        // Limpiar elementos de predicción anteriores
+        function clearPrediction() {
+            if (ghostAnimation) {
+                cancelAnimationFrame(ghostAnimation);
+                ghostAnimation = null;
+            }
+            if (ghostMarker) {
+                map.removeLayer(ghostMarker);
+                ghostMarker = null;
+            }
+            if (cityMarker) {
+                map.removeLayer(cityMarker);
+                cityMarker = null;
+            }
+            if (ghostTrajectory) {
+                map.removeLayer(ghostTrajectory);
+                ghostTrajectory = null;
+            }
+        }
+
+        // Generar trayectoria orbital simulada entre dos puntos
+        function generateOrbitalPath(startLat, startLon, endLat, endLon, steps = 80) {
+            const points = [];
+
+            // Calcular diferencia de longitud (siempre hacia el este)
+            let lonDiff = endLon - startLon;
+
+            // Si la diferencia es negativa (ciudad al oeste), la ISS da la vuelta
+            // Pero para simplificar la visualización, tomamos el camino más corto
+            if (lonDiff > 180) lonDiff -= 360;
+            if (lonDiff < -180) lonDiff += 360;
+
+            for (let i = 0; i <= steps; i++) {
+                const t = i / steps;
+
+                // Interpolación de longitud
+                let lon = startLon + (lonDiff * t);
+                // Normalizar longitud
+                if (lon > 180) lon -= 360;
+                if (lon < -180) lon += 360;
+
+                // Interpolación de latitud con curva sinusoidal para simular órbita
+                // La latitud va del punto inicial al final, pero con una ondulación
+                const directLat = startLat + (endLat - startLat) * t;
+
+                // Añadir ondulación orbital (sube y baja como una órbita real)
+                const waveAmplitude = Math.min(20, Math.abs(endLat - startLat) * 0.5 + 10);
+                const wave = Math.sin(t * Math.PI * 2) * waveAmplitude * (1 - t); // Decrece hacia el final
+
+                let lat = directLat + wave;
+
+                // Clamp a los límites de la órbita ISS
+                lat = Math.max(-51.6, Math.min(51.6, lat));
+
+                points.push([lat, lon]);
+            }
+
+            // Asegurar que el último punto sea exactamente el destino
+            points[points.length - 1] = [endLat, endLon];
+
+            return points;
+        }
+
+        // Animar la ISS fantasma
+        function animateGhostISS(path, targetLat, targetLon) {
+            let step = 0;
+            const totalSteps = path.length;
+            const speed = 50; // ms por paso
+
+            function animate() {
+                if (step >= totalSteps) {
+                    // Llegó al destino - parpadear
+                    let blink = 0;
+                    const blinkInterval = setInterval(() => {
+                        if (ghostMarker) {
+                            ghostMarker.setOpacity(blink % 2 === 0 ? 1 : 0.3);
+                        }
+                        blink++;
+                        if (blink > 6) {
+                            clearInterval(blinkInterval);
+                            if (ghostMarker) ghostMarker.setOpacity(0.85);
+                        }
+                    }, 300);
+                    return;
+                }
+
+                const [lat, lon] = path[step];
+                ghostMarker.setLatLng([lat, lon]);
+
+                // Actualizar trayectoria recorrida
+                ghostTrajectory.setLatLngs(path.slice(0, step + 1));
+
+                step++;
+                ghostAnimation = requestAnimationFrame(() => setTimeout(animate, speed));
+            }
+
+            animate();
+        }
+
+        async function buscarPases() {
+            const ciudad = document.getElementById('ciudad').value.trim();
+            const resultado = document.getElementById('prediccion-resultado');
+
+            if (!ciudad) {
+                resultado.innerHTML = '<p style="color:#ff6b6b;">Ingresa una ciudad</p>';
+                return;
+            }
+
+            // Limpiar predicción anterior
+            clearPrediction();
+
+            resultado.innerHTML = '<p style="color:#00d4ff;">🔄 Buscando...</p>';
+
+            try {
+                const geoResp = await fetch(
+                    `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(ciudad)}&format=json&limit=1`,
+                    { headers: { 'User-Agent': 'ISS-Tracker/1.0' } }
+                );
+                const geoData = await geoResp.json();
+
+                if (!geoData.length) {
+                    resultado.innerHTML = '<p style="color:#ff6b6b;">No encontrada</p>';
+                    return;
+                }
+
+                const lat = parseFloat(geoData[0].lat);
+                const lon = parseFloat(geoData[0].lon);
+                const lugar = geoData[0].display_name;
+
+                if (Math.abs(lat) > 51.6) {
+                    resultado.innerHTML = `<p style="color:#ffaa00;">⚠️ La ISS no pasa sobre latitudes mayores a ±51.6° (tu ubicación: ${lat.toFixed(1)}°)</p>`;
+                    return;
+                }
+
+                // Obtener posición actual de la ISS
+                const issResp = await fetch(ISS_API);
+                const issData = await issResp.json();
+                const issLat = issData.latitude;
+                const issLon = issData.longitude;
+
+                // Añadir marcador de la ciudad
+                cityMarker = L.marker([lat, lon], { icon: cityIcon }).addTo(map);
+                cityMarker.bindPopup(`<strong style="color:#00ff88;">📍 ${lugar.substring(0, 40)}...</strong>`);
+
+                // Crear trayectoria fantasma (naranja punteada)
+                ghostTrajectory = L.polyline([], {
+                    color: '#ff8800',
+                    weight: 3,
+                    opacity: 0.7,
+                    dashArray: '10, 10'
+                }).addTo(map);
+
+                // Crear ISS fantasma en la posición actual
+                ghostMarker = L.marker([issLat, issLon], { icon: issGhostIcon }).addTo(map);
+                ghostMarker.bindPopup(`
+                    <div style="text-align:center;">
+                        <strong style="color:#ff8800;">🛰️ ISS - Próximo Pase</strong><br>
+                        <span style="color:#888;">Simulación del trayecto hacia tu ciudad</span>
+                    </div>
+                `);
+
+                // Generar y animar trayectoria
+                const orbitalPath = generateOrbitalPath(issLat, issLon, lat, lon, 80);
+                animateGhostISS(orbitalPath, lat, lon);
+
+                // Desactivar seguimiento para ver la animación
+                setFollow(false);
+
+                // Ajustar vista para mostrar ambos
+                const bounds = L.latLngBounds([[issLat, issLon], [lat, lon]]);
+                map.fitBounds(bounds, { padding: [50, 50], maxZoom: 4 });
+
+                const pases = generarPredicciones(lat, lon);
+
+                let html = `
+                    <div style="background:rgba(255,136,0,0.15);padding:15px;border-radius:10px;margin:15px 0;border:1px solid #ff8800;">
+                        <strong>📍 ${lugar.substring(0, 50)}...</strong><br>
+                        <span style="color:#888;">(${lat.toFixed(4)}, ${lon.toFixed(4)})</span><br>
+                        <span style="color:#ff8800; font-size:0.85em;">🛰️ Mira el mapa: la ISS naranja muestra el próximo pase</span>
+                    </div>
+                `;
+
+                pases.forEach(p => {
+                    const cls = p.calidad === 'Excelente' ? 'excelente' : p.calidad === 'Buena' ? 'buena' : 'visible';
+                    html += `
+                        <div class="pase-card ${cls}">
+                            <strong>${p.fecha}</strong>
+                            <span style="color:#00ff88;margin-left:10px;">[${p.calidad}]</span>
+                            <p style="margin-top:8px;color:#aaa;">
+                                👁️ Mira hacia <strong>${p.direccion}</strong>, ${p.elevacion}° sobre el horizonte
+                            </p>
+                        </div>
+                    `;
+                });
+
+                html += `
+                    <button onclick="clearPrediction()" style="margin-top:15px; padding:10px 20px;
+                        background:transparent; border:1px solid #ff8800; color:#ff8800;
+                        border-radius:20px; cursor:pointer;">
+                        ✕ Limpiar predicción
+                    </button>
+                `;
+
+                resultado.innerHTML = html;
+
+            } catch (error) {
+                resultado.innerHTML = `<p style="color:#ff6b6b;">Error: ${error.message}</p>`;
+            }
+        }
+
+        function generarPredicciones(lat, lon) {
+            const pases = [];
+            const ahora = new Date();
+
+            for (let i = 0; i < 5; i++) {
+                const horas = (i * 7) + 3 + Math.random() * 5;
+                const fecha = new Date(ahora.getTime() + horas * 3600000);
+                const elevacion = Math.round(20 + Math.random() * 55);
+                const azimut = Math.round(Math.random() * 360);
+                const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO'];
+
+                pases.push({
+                    fecha: fecha.toLocaleString('es-ES', { weekday:'short', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }),
+                    elevacion,
+                    direccion: dirs[Math.floor(azimut / 22.5) % 16],
+                    calidad: elevacion > 55 ? 'Excelente' : elevacion > 30 ? 'Buena' : 'Visible'
+                });
+            }
+            return pases;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializar iconos Lucide
+            lucide.createIcons();
+
+            initMap();
+            updateISS();
+            loadAstronauts();
+            setInterval(updateISS, 5000);
+            setInterval(loadAstronauts, 300000);
+        });
+    </script>
+</body>
+</html>

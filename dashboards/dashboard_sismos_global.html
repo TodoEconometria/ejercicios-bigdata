@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observatorio Sísmico Global - En Vivo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #1a0a0a 0%, #2d1515 50%, #1a0a0a 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(0,0,0,0.6);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #ff4444;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            background: linear-gradient(90deg, #ff4444, #ff8800, #ff4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,0,0,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #ff0040;
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,68,68,0.2);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,68,68,0.2);
+        }
+
+        .stat-icon {
+            margin-bottom: 8px;
+            color: #ff6b6b;
+        }
+        .stat-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke-width: 1.5;
+        }
+        .stat-value { font-size: 1.6em; font-weight: bold; color: #ff6b6b; }
+        .stat-label { color: #888; font-size: 0.85em; margin-top: 5px; }
+
+        #map {
+            height: 500px;
+            border-radius: 15px;
+            border: 2px solid rgba(255,68,68,0.3);
+            box-shadow: 0 0 50px rgba(255,0,0,0.1);
+        }
+
+        .map-section { margin: 20px 0; position: relative; }
+
+        .legend {
+            position: absolute;
+            bottom: 30px;
+            right: 20px;
+            background: rgba(0,0,0,0.85);
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 1000;
+            border: 1px solid #ff4444;
+        }
+
+        .legend h4 { margin-bottom: 10px; color: #ff6b6b; }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 5px 0;
+            font-size: 0.85em;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .recent-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .recent-section h2 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .earthquake-list {
+            display: grid;
+            gap: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .earthquake-item {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ff4444;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 15px;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .earthquake-item:hover {
+            background: rgba(255,68,68,0.1);
+        }
+
+        .earthquake-item.major { border-left-color: #9b59b6; }
+        .earthquake-item.moderate { border-left-color: #e74c3c; }
+        .earthquake-item.light { border-left-color: #f39c12; }
+        .earthquake-item.minor { border-left-color: #3498db; }
+
+        .mag-badge {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .mag-badge.major { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+        .mag-badge.moderate { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .mag-badge.light { background: linear-gradient(135deg, #f39c12, #d35400); }
+        .mag-badge.minor { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .mag-badge.micro { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+
+        .eq-info h4 { margin-bottom: 5px; }
+        .eq-info p { color: #888; font-size: 0.9em; }
+
+        .eq-time { text-align: right; color: #888; font-size: 0.85em; }
+
+        .filter-section {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .filter-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 25px;
+            border: 2px solid;
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            user-select: none;
+        }
+
+        .filter-toggle input {
+            display: none;
+        }
+
+        .filter-toggle .checkbox {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            border: 2px solid currentColor;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .filter-toggle .checkbox::after {
+            content: '✓';
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .filter-toggle.active .checkbox::after {
+            opacity: 1;
+        }
+
+        .filter-toggle.active .checkbox {
+            background: currentColor;
+            color: #000;
+        }
+
+        .filter-toggle.major { border-color: #9b59b6; color: #9b59b6; }
+        .filter-toggle.moderate { border-color: #e74c3c; color: #e74c3c; }
+        .filter-toggle.light { border-color: #f39c12; color: #f39c12; }
+        .filter-toggle.minor { border-color: #3498db; color: #3498db; }
+        .filter-toggle.micro { border-color: #2ecc71; color: #2ecc71; }
+
+        .filter-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .filter-toggle.active {
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .filter-actions button {
+            padding: 6px 12px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: transparent;
+            color: #888;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.3s;
+        }
+
+        .filter-actions button:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 40px;
+        }
+
+        .footer a { color: #ff6b6b; text-decoration: none; }
+
+        /* Efecto visual para sismos recientes - sin transform */
+        .earthquake-marker {
+            border-radius: 50%;
+        }
+
+        .leaflet-popup-content-wrapper {
+            background: rgba(0,0,0,0.9);
+            color: #fff;
+            border-radius: 10px;
+        }
+
+        .leaflet-popup-tip { background: rgba(0,0,0,0.9); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i data-lucide="globe" style="width:36px;height:36px;display:inline;vertical-align:middle;margin-right:10px;"></i> Observatorio Sísmico Global</h1>
+        <p style="color: #888;">Actividad sísmica mundial en tiempo real</p>
+        <div class="live-indicator">
+            <span class="live-dot"></span>
+            <span>EN VIVO - Actualiza cada 60 segundos</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i data-lucide="activity"></i></div>
+                <div class="stat-value" id="total">--</div>
+                <div class="stat-label">Sismos (24h)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i data-lucide="bar-chart-3"></i></div>
+                <div class="stat-value" id="max-mag">--</div>
+                <div class="stat-label">Magnitud Máx</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i data-lucide="trending-up"></i></div>
+                <div class="stat-value" id="avg-mag">--</div>
+                <div class="stat-label">Promedio</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i data-lucide="alert-triangle"></i></div>
+                <div class="stat-value" id="significant">--</div>
+                <div class="stat-label">Significativos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i data-lucide="clock"></i></div>
+                <div class="stat-value" id="last-hour">--</div>
+                <div class="stat-label">Última hora</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i data-lucide="waves"></i></div>
+                <div class="stat-value" id="tsunami">--</div>
+                <div class="stat-label">Alerta Tsunami</div>
+            </div>
+        </div>
+
+        <div class="map-section">
+            <div id="map"></div>
+            <div class="legend">
+                <h4>Magnitud</h4>
+                <div class="legend-item">
+                    <div class="legend-color" style="background:#9b59b6;"></div>
+                    <span>Mayor (7.0+)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background:#e74c3c;"></div>
+                    <span>Moderado (5.0-6.9)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background:#f39c12;"></div>
+                    <span>Ligero (4.0-4.9)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background:#3498db;"></div>
+                    <span>Menor (2.5-3.9)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background:#2ecc71;"></div>
+                    <span>Micro (&lt;2.5)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="recent-section">
+            <h2>📋 Sismos Recientes</h2>
+            <div class="filter-section">
+                <label class="filter-toggle major active" onclick="toggleFilter('major')">
+                    <span class="checkbox"></span>
+                    <span>Mayor (7.0+)</span>
+                </label>
+                <label class="filter-toggle moderate active" onclick="toggleFilter('moderate')">
+                    <span class="checkbox"></span>
+                    <span>Moderado (5.0-6.9)</span>
+                </label>
+                <label class="filter-toggle light active" onclick="toggleFilter('light')">
+                    <span class="checkbox"></span>
+                    <span>Ligero (4.0-4.9)</span>
+                </label>
+                <label class="filter-toggle minor active" onclick="toggleFilter('minor')">
+                    <span class="checkbox"></span>
+                    <span>Menor (2.5-3.9)</span>
+                </label>
+                <label class="filter-toggle micro active" onclick="toggleFilter('micro')">
+                    <span class="checkbox"></span>
+                    <span>Micro (&lt;2.5)</span>
+                </label>
+                <div class="filter-actions">
+                    <button onclick="selectAll()">Todos</button>
+                    <button onclick="selectNone()">Ninguno</button>
+                </div>
+            </div>
+            <div class="earthquake-list" id="earthquake-list">
+                Cargando...
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Datos: <a href="https://earthquake.usgs.gov/" target="_blank">USGS Earthquake Hazards Program</a></p>
+        <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
+        <p><strong>Curso:</strong> Big Data con Python - De Cero a Produccion</p>
+        <p><strong>Profesor:</strong> Juan Marcelo Gutierrez Miranda | @TodoEconometria</p>
+        <p style="font-size: 0.75em; color: #555; margin-top: 10px;"><strong>Hash ID:</strong> 4e8d9b1a5f6e7c3d2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c</p>
+        <p style="margin-top: 15px; color: #888;"><strong>Metodologia:</strong> Ejercicios progresivos con datos reales y herramientas profesionales</p>
+        <div style="margin-top: 15px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <p style="color: #aaa; font-size: 0.85em;"><strong>Referencias academicas:</strong></p>
+            <ul style="color: #888; font-size: 0.8em; text-align: left; padding-left: 20px;">
+                <li>USGS (2024). Earthquake Hazards Program - Real-time Earthquake Map. <a href="https://earthquake.usgs.gov/" style="color:#ff6b6b;">earthquake.usgs.gov</a></li>
+                <li>Kreps, J. (2011). Kafka: a Distributed Messaging System for Log Processing. ACM SIGMOD Workshop on Networking Meets Databases.</li>
+                <li>Zaharia, M. et al. (2016). Apache Spark: A Unified Engine for Big Data Processing. Communications of the ACM, 59(11).</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const USGS_API = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson';
+        let map, earthquakeLayer;
+        let allEarthquakes = [];
+
+        // Filtros activos por categoría
+        let activeFilters = {
+            major: true,
+            moderate: true,
+            light: true,
+            minor: true,
+            micro: true
+        };
+
+        function getColor(mag) {
+            if (mag >= 7) return '#9b59b6';
+            if (mag >= 5) return '#e74c3c';
+            if (mag >= 4) return '#f39c12';
+            if (mag >= 2.5) return '#3498db';
+            return '#2ecc71';
+        }
+
+        function getCategory(mag) {
+            if (mag >= 7) return 'major';
+            if (mag >= 5) return 'moderate';
+            if (mag >= 4) return 'light';
+            if (mag >= 2.5) return 'minor';
+            return 'micro';
+        }
+
+        function getCategoryLabel(cat) {
+            const labels = {
+                major: 'Mayor (7.0+)',
+                moderate: 'Moderado (5.0-6.9)',
+                light: 'Ligero (4.0-4.9)',
+                minor: 'Menor (2.5-3.9)',
+                micro: 'Micro (<2.5)'
+            };
+            return labels[cat] || cat;
+        }
+
+        function getRadius(mag) {
+            return Math.max(5, mag * 4);
+        }
+
+        function timeAgo(timestamp) {
+            const now = Date.now();
+            const diff = now - timestamp;
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+
+            if (minutes < 1) return 'Ahora mismo';
+            if (minutes < 60) return `Hace ${minutes} min`;
+            if (hours < 24) return `Hace ${hours}h`;
+            return `Hace ${Math.floor(hours/24)} días`;
+        }
+
+        function initMap() {
+            map = L.map('map', {
+                center: [20, 0],
+                zoom: 2,
+                minZoom: 1,
+                worldCopyJump: true
+            });
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '© CARTO',
+                subdomains: 'abcd'
+            }).addTo(map);
+
+            earthquakeLayer = L.layerGroup().addTo(map);
+        }
+
+        async function fetchEarthquakes() {
+            try {
+                const response = await fetch(USGS_API);
+                const data = await response.json();
+
+                allEarthquakes = data.features
+                    .filter(f => f.properties.mag > 0)
+                    .sort((a, b) => b.properties.time - a.properties.time);
+
+                updateStats();
+                updateMap();
+                updateList();
+
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function updateStats() {
+            const mags = allEarthquakes.map(e => e.properties.mag);
+            const now = Date.now();
+            const oneHourAgo = now - 3600000;
+
+            document.getElementById('total').textContent = allEarthquakes.length;
+            document.getElementById('max-mag').textContent = Math.max(...mags).toFixed(1);
+            document.getElementById('avg-mag').textContent = (mags.reduce((a,b) => a+b, 0) / mags.length).toFixed(1);
+            document.getElementById('significant').textContent = mags.filter(m => m >= 4.5).length;
+            document.getElementById('last-hour').textContent = allEarthquakes.filter(e => e.properties.time > oneHourAgo).length;
+            document.getElementById('tsunami').textContent = allEarthquakes.filter(e => e.properties.tsunami).length;
+        }
+
+        function getFilteredEarthquakes() {
+            return allEarthquakes.filter(eq => {
+                const cat = getCategory(eq.properties.mag);
+                return activeFilters[cat];
+            });
+        }
+
+        function updateMap() {
+            earthquakeLayer.clearLayers();
+
+            const filtered = getFilteredEarthquakes();
+
+            filtered.forEach(eq => {
+                const coords = eq.geometry.coordinates;
+                const mag = eq.properties.mag;
+                const place = eq.properties.place;
+                const time = new Date(eq.properties.time).toLocaleString('es-ES');
+                const color = getColor(mag);
+                const radius = getRadius(mag);
+
+                // Borde blanco para sismos recientes (última hora)
+                const isRecent = (Date.now() - eq.properties.time) < 3600000;
+
+                const circle = L.circleMarker([coords[1], coords[0]], {
+                    radius: radius,
+                    fillColor: color,
+                    color: isRecent ? '#fff' : color,
+                    weight: isRecent ? 2 : 1,
+                    opacity: 0.8,
+                    fillOpacity: 0.6
+                });
+
+                circle.bindPopup(`
+                    <div style="min-width: 200px;">
+                        <h3 style="color: ${color}; margin-bottom: 8px;">M ${mag.toFixed(1)}</h3>
+                        <p style="margin: 5px 0;"><strong>📍</strong> ${place}</p>
+                        <p style="margin: 5px 0;"><strong>⏰</strong> ${time}</p>
+                        <p style="margin: 5px 0;"><strong>📏</strong> Profundidad: ${coords[2].toFixed(1)} km</p>
+                        ${eq.properties.tsunami ? '<p style="color: #ff6b6b; margin-top: 10px;">⚠️ Alerta de Tsunami</p>' : ''}
+                    </div>
+                `);
+
+                circle.addTo(earthquakeLayer);
+            });
+        }
+
+        function updateList() {
+            const filtered = getFilteredEarthquakes().slice(0, 50);
+
+            if (filtered.length === 0) {
+                document.getElementById('earthquake-list').innerHTML =
+                    '<p style="text-align:center;color:#888;padding:20px;">No hay sismos con los filtros seleccionados</p>';
+                return;
+            }
+
+            const html = filtered.map(eq => {
+                const mag = eq.properties.mag;
+                const place = eq.properties.place || 'Ubicación desconocida';
+                const cat = getCategory(mag);
+                const depth = eq.geometry.coordinates[2];
+
+                return `
+                    <div class="earthquake-item ${cat}">
+                        <div class="mag-badge ${cat}">${mag.toFixed(1)}</div>
+                        <div class="eq-info">
+                            <h4>${place}</h4>
+                            <p>Profundidad: ${depth.toFixed(1)} km</p>
+                        </div>
+                        <div class="eq-time">${timeAgo(eq.properties.time)}</div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('earthquake-list').innerHTML = html;
+        }
+
+        function toggleFilter(category) {
+            activeFilters[category] = !activeFilters[category];
+
+            const toggle = document.querySelector(`.filter-toggle.${category}`);
+            if (activeFilters[category]) {
+                toggle.classList.add('active');
+            } else {
+                toggle.classList.remove('active');
+            }
+
+            updateMap();
+            updateList();
+        }
+
+        function selectAll() {
+            Object.keys(activeFilters).forEach(cat => {
+                activeFilters[cat] = true;
+                document.querySelector(`.filter-toggle.${cat}`).classList.add('active');
+            });
+            updateMap();
+            updateList();
+        }
+
+        function selectNone() {
+            Object.keys(activeFilters).forEach(cat => {
+                activeFilters[cat] = false;
+                document.querySelector(`.filter-toggle.${cat}`).classList.remove('active');
+            });
+            updateMap();
+            updateList();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializar iconos Lucide
+            lucide.createIcons();
+
+            initMap();
+            fetchEarthquakes();
+
+            // Auto-refresh cada 60 segundos
+            setInterval(fetchEarthquakes, 60000);
+        });
+    </script>
+</body>
+</html>
