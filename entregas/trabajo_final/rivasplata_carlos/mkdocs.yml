@@ -1,0 +1,60 @@
+site_name: Dashboard Big Data - Magreb
+site_author: Carlos Rivasplata
+site_description: Un pipeline de Big Data de extremo a extremo para analizar el desarrollo político-económico en el Magreb.
+
+theme:
+  name: material
+  language: es
+  # NUEVO: Logo y Favicon
+  logo: material/chart-bar
+  favicon: material/chart-bar
+
+  # NUEVO: Paleta de colores más profesional
+  palette:
+    # Modo Claro
+    - scheme: default
+      primary: indigo
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
+    # Modo Oscuro
+    - scheme: slate
+      primary: indigo
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo claro
+
+  # NUEVO: Funcionalidades extra
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - toc.integrate
+    - navigation.top # Botón para volver arriba
+    - navigation.tracking # El índice te sigue al hacer scroll
+    - search.suggest # Sugerencias en la búsqueda
+    - search.highlight # Resaltar resultados de búsqueda
+    - content.code.copy # Botón para copiar código
+
+# NUEVO: Enlaces sociales en el footer
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/CarlosRivasplata
+
+# Navegación con títulos profesionales y alineados
+nav:
+  - Resumen Ejecutivo: index.md
+  - Arquitectura de Infraestructura: 02_INFRAESTRUCTURA.md
+  - Análisis de Datos y Hallazgos: 03_RESULTADOS.md
+  - Discusión Teórica y Preguntas: 05_RESPUESTAS.md
+
+# Las extensiones se mantienen igual
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html

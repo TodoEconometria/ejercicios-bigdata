@@ -1,0 +1,66 @@
+# docker-compose.yml - Mini-cluster: PostgreSQL + Spark (Master/Worker)
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: qog_postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  spark-master:
+    image: apache/spark:3.5.4-python3
+    container_name: qog_spark_master
+    command: >
+      /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
+      --host spark-master
+      --port ${SPARK_MASTER_PORT}
+    environment:
+      - SPARK_NO_DAEMONIZE=true
+    ports:
+      - "${SPARK_MASTER_PORT}:7077"
+      - "${SPARK_MASTER_UI_PORT}:8080"
+    volumes:
+      - ./datos:/workspace/datos
+      - ./src:/workspace/src
+      - ./outputs:/workspace/outputs
+      - ./requirements.txt:/workspace/requirements.txt
+      - ./pipeline.py:/workspace/pipeline.py  # Montamos pipeline.py
+    restart: unless-stopped
+
+  spark-worker:
+    image: apache/spark:3.5.4-python3
+    container_name: qog_spark_worker
+    depends_on:
+      - spark-master
+    command: >
+      /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker
+      spark://spark-master:${SPARK_MASTER_PORT}
+    environment:
+      - SPARK_NO_DAEMONIZE=true
+      # Ajusta recursos del worker (puedes subir/bajar según tu Mac)
+      - SPARK_WORKER_MEMORY=2g
+      - SPARK_WORKER_CORES=2
+    ports:
+      - "${SPARK_WORKER_UI_PORT}:8081"
+    volumes:
+      - ./datos:/workspace/datos
+      - ./src:/workspace/src
+      - ./outputs:/workspace/outputs
+      - ./requirements.txt:/workspace/requirements.txt
+      - ./pipeline.py:/workspace/pipeline.py  # Montamos pipeline.py también aquí
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

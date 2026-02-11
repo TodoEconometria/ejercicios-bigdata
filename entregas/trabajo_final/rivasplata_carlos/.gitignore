@@ -1,0 +1,18 @@
+# Ignorar datos y salidas
+datos/
+postgres/
+logs/
+__pycache__/
+.venv/
+.idea/
+.DS_Store
+
+# Ignorar archivos temporales en outputs (como parquets intermedios si los hubiera fuera de lugar)
+outputs/*
+
+# PERMITIR subir la carpeta de gráficos y su contenido (¡Importante para el README!)
+!outputs/graficos/
+!outputs/graficos/*
+
+# Permitir la imagen de la UI (si estuviera suelta, aunque ahora está en graficos)
+!outputs/spark_ui.jpeg
