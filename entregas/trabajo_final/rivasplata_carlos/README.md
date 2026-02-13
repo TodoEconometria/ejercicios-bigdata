@@ -2,7 +2,9 @@
 
 **Alumno:** Carlos Rivasplata  
 **Docente:** Juan Marcelo Gutiérrez  
-**Curso:** ESPECIALISTA EN BIG DATA
+**Curso:** Big Data con Python
+
+**🚀 Ver Dashboard Interactivo:** [https://carlosrivasplata.github.io/ejercicios-bigdata/](https://carlosrivasplata.github.io/ejercicios-bigdata/)
 
 ---
 
