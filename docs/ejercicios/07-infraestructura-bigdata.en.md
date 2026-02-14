@@ -1,4 +1,4 @@
-# Module 07: Big Data Infrastructure
+# Module 07: Big Data Infrastructure﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌‌​​​‍​​‌‌‌​​​‍​​‌‌​​‌​‍​​‌‌​‌‌‌‍​​‌‌​‌​‌‍​‌‌​​‌​‌﻿
 
 **Level:** Intermediate-Advanced | **Type:** Theoretical-Conceptual with practical examples
 
@@ -6,7 +6,7 @@
 
 ## Objective
 
-Understand **how the infrastructure is built** that supports processing large volumes of data. Not just use the tools, but understand why they exist, how they connect to each other, and how they are orchestrated.
+Understand **how the infrastructure is built** that supports processing large volumes of data. Not just use the tools, but understand why they exist, how they connect to each other, and how they are orchestrated.﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌‌​​​‍​​‌‌‌​​​‍​​‌‌​​‌​‍​​‌‌​‌‌‌‍​​‌‌​‌​‌‍​‌‌​​‌​‌﻿
 
 This module lays the foundation for the **Capstone Project**, where each student builds their own Docker + Spark infrastructure from scratch.
 
@@ -228,7 +228,7 @@ The complete content for each section is in the README files of the module folde
 | **Catalyst** | Spark SQL query optimizer |
 | **Shuffle** | Data redistribution between nodes (network-intensive) |
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌‌​​​‍​​‌‌‌​​​‍​​‌‌​​‌​‍​​‌‌​‌‌‌‍​​‌‌​‌​‌‍​‌‌​​‌​‌﻿---
 
 **Course:** Big Data with Python - From Zero to Production
 **Instructor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

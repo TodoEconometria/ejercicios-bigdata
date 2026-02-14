@@ -1,6 +1,6 @@
-# Dashboard PRO: Series Temporales ARIMA/SARIMA
+# Dashboard PRO: Series Temporales ARIMA/SARIMA﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌​‍​‌‌​​‌​‌‍​​‌‌​‌​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​​‌‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​﻿
 
-Dashboard interactivo con diseño profesional inspirado en terminales financieras tipo Bloomberg,
+Dashboard interactivo con diseño profesional inspirado en terminales financieras tipo Bloomberg,﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌​‍​‌‌​​‌​‌‍​​‌‌​‌​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​​‌‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​﻿
 para el analisis completo de series temporales siguiendo la metodologia Box-Jenkins.
 
 [Abrir Dashboard PRO](dashboard_arima_pro.html){target="_blank" .md-button .md-button--primary}
@@ -57,7 +57,7 @@ Este dashboard fue creado siguiendo las mejores practicas de visualizacion finan
 - Exportador dashboard: `.profesor/soluciones/TRABAJO_FINAL/export_arima_pro.py`
 - Guia teorica: [Series Temporales ARIMA](../ejercicios/07-series-temporales-arima.md)
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌​‍​‌‌​​‌​‌‍​​‌‌​‌​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​​‌‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​﻿---
 
 **Curso:** Big Data con Python - De Cero a Produccion
 **Profesor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

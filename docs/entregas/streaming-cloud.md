@@ -1,6 +1,6 @@
-# Entregas: Streaming y Cloud (Modulos 08-09)
+# Entregas: Streaming y Cloud (Modulos 08-09)﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌‌‍​​‌‌‌​​‌‍​​‌‌​​‌‌‍​​‌‌​‌​‌‍​‌‌​​‌​​‍​‌‌​​​​‌‍​‌‌​​‌​​‍​‌‌​​​​‌﻿
 
-Esta guia explica como entregar los ejercicios de **Streaming con Kafka** y **Cloud con LocalStack**.
+Esta guia explica como entregar los ejercicios de **Streaming con Kafka** y **Cloud con LocalStack**.﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌‌‍​​‌‌‌​​‌‍​​‌‌​​‌‌‍​​‌‌​‌​‌‍​‌‌​​‌​​‍​‌‌​​​​‌‍​‌‌​​‌​​‍​‌‌​​​​‌﻿
 
 ---
 
@@ -239,7 +239,7 @@ El reto de Spark Streaming es avanzado. Puedes hacer los retos 1-5 sin Spark.
 El codigo es identico. La diferencia es que LocalStack corre en tu maquina
 sin costos. Si tu codigo funciona en LocalStack, funciona en AWS.
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌‌‍​​‌‌‌​​‌‍​​‌‌​​‌‌‍​​‌‌​‌​‌‍​‌‌​​‌​​‍​‌‌​​​​‌‍​‌‌​​‌​​‍​‌‌​​​​‌﻿---
 
 **Curso:** Big Data con Python - De Cero a Produccion
 **Profesor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

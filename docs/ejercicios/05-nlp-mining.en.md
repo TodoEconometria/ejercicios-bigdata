@@ -1,4 +1,4 @@
-# Module 05: NLP and Text Mining
+# Module 05: NLP and Text Mining﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌​‌‍​‌‌​​​​‌‍​​‌‌​​​​‍​​‌‌​‌​‌‍​‌‌​​‌​‌‍​​‌‌​​​​‍​​‌‌​​‌​‍​‌‌​​​‌‌﻿
 
 > **Status:** Available
 
@@ -6,7 +6,7 @@
 
 ## General Description
 
-Introduction to unstructured data processing using Natural Language Processing techniques. From basic tokenization to sentiment analysis and document similarity.
+Introduction to unstructured data processing using Natural Language Processing techniques. From basic tokenization to sentiment analysis and document similarity.﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌​‌‍​‌‌​​​​‌‍​​‌‌​​​​‍​​‌‌​‌​‌‍​‌‌​​‌​‌‍​​‌‌​​​​‍​​‌‌​​‌​‍​‌‌​​​‌‌﻿
 
 **Level:** Intermediate-Advanced
 **Technologies:** Python, NLTK, TF-IDF, Scikit-learn
@@ -106,7 +106,7 @@ Explore the results visually:
 - [Jaccard Similarity](../dashboards/04_similitud_jaccard.md)
 - [Vectorization and Clustering](../dashboards/05_vectorizacion_y_clustering.md)
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌​‌‍​‌‌​​​​‌‍​​‌‌​​​​‍​​‌‌​‌​‌‍​‌‌​​‌​‌‍​​‌‌​​​​‍​​‌‌​​‌​‍​‌‌​​​‌‌﻿---
 
 **Course:** Big Data with Python - From Zero to Production
 **Instructor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

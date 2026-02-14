@@ -1,4 +1,4 @@
-# Educational Guide: Document Vectorization and Clustering
+# Educational Guide: Document Vectorization and Clustering﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌​‍​​‌‌​‌‌‌‍​​‌‌​‌‌‌‍​​‌‌​​​​‍​‌‌​​‌​​‍​‌‌​​‌​​‍​‌‌​​​‌‌‍​​‌‌​‌‌‌﻿
 
 ## Topic Analysis with Artificial Intelligence (NLP & Machine Learning)
 
@@ -8,7 +8,7 @@
 >
 > **Original author/Reference:** @TodoEconometria
 > **Professor:** Juan Marcelo Gutierrez Miranda
-> **Methodology:** Advanced Courses in Big Data, Data Science, AI Application Development & Applied Econometrics.
+> **Methodology:** Advanced Courses in Big Data, Data Science, AI Application Development & Applied Econometrics.﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌​‍​​‌‌​‌‌‌‍​​‌‌​‌‌‌‍​​‌‌​​​​‍​‌‌​​‌​​‍​‌‌​​‌​​‍​‌‌​​​‌‌‍​​‌‌​‌‌‌﻿
 > **Certification Hash ID:** `4e8d9b1a5f6e7c3d2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c`
 > **Repository:** [https://github.com/TodoEconometria/certificaciones](https://github.com/TodoEconometria/certificaciones)
 >
@@ -146,7 +146,7 @@ For further study of the methodology, the following fundamental sources are reco
 - **Pedregosa, F., et al. (2011).** *Scikit-learn: Machine Learning in Python*. JMLR. (Official documentation of the framework used).
 - **Manning, C. D., et al. (2008).** *Introduction to Information Retrieval*. Cambridge University Press. (Foundational theory for TF-IDF).
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌​‍​​‌‌​‌‌‌‍​​‌‌​‌‌‌‍​​‌‌​​​​‍​‌‌​​‌​​‍​‌‌​​‌​​‍​‌‌​​​‌‌‍​​‌‌​‌‌‌﻿---
 
 ## Institutional Information
 

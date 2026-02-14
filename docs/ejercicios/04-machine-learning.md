@@ -1,6 +1,6 @@
-# Módulo 04: Machine Learning
+# Módulo 04: Machine Learning﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​‌‌​‍​​‌‌​‌‌‌‍​‌‌​​‌​‌‍​​‌‌​​​‌‍​‌‌​​‌​‌‍​‌‌​​​‌‌‍​​‌‌​​‌​‍​‌‌​​‌​​﻿
 
-Técnicas de aprendizaje automático aplicadas a Big Data: desde clustering tradicional hasta Computer Vision con Deep Learning.
+Técnicas de aprendizaje automático aplicadas a Big Data: desde clustering tradicional hasta Computer Vision con Deep Learning.﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​‌‌​‍​​‌‌​‌‌‌‍​‌‌​​‌​‌‍​​‌‌​​​‌‍​‌‌​​‌​‌‍​‌‌​​​‌‌‍​​‌‌​​‌​‍​‌‌​​‌​​﻿
 
 ---
 
@@ -77,7 +77,7 @@ Metodología Box-Jenkins para análisis y pronóstico de series temporales.
 - [ARIMA/SARIMA - Metodología Box-Jenkins](07-series-temporales-arima.md)
 - [Dashboard ARIMA Interactivo](../dashboards/04_series_temporales_arima.html){target="_blank"}
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​‌‌​‍​​‌‌​‌‌‌‍​‌‌​​‌​‌‍​​‌‌​​​‌‍​‌‌​​‌​‌‍​‌‌​​​‌‌‍​​‌‌​​‌​‍​‌‌​​‌​​﻿---
 
 **Curso:** Big Data con Python - De Cero a Producción
 **Profesor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

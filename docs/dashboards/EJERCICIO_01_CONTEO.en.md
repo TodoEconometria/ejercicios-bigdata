@@ -1,6 +1,6 @@
-# Exercise 1: Text Anatomy and the Rhythm of Words
+# Exercise 1: Text Anatomy and the Rhythm of Words﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌‌‍​​‌‌​​​‌‍​​‌‌‌​​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​​‌‌​​‌‌‍​​‌‌​​‌‌‍​​‌‌‌​​​﻿
 
-> **"Check out Guitar George, he knows-all the chords..."**
+> **"Check out Guitar George, he knows-all the chords..."**﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌‌‍​​‌‌​​​‌‍​​‌‌‌​​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​​‌‌​​‌‌‍​​‌‌​​‌‌‍​​‌‌‌​​​﻿
 > *Wrapped in the rhythm of Sultans of Swing, we'll learn to dissect language to find its hidden melody.*
 
 ---
@@ -47,7 +47,7 @@ This is where we visualize the frequency spectrum. See those giant bars? Those a
 * **Do you see the noise?** Articles like "the", "a", or "of" tend to dominate the chart. They're like amplifier feedback: they're there, but they're not the melody.
 * **Sultans of Swing:** Just like in a great Knopfler solo, every word has its place, but some (the *stopwords*) appear too often and drown out the real message.
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌‌‍​​‌‌​​​‌‍​​‌‌‌​​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​​‌‌​​‌‌‍​​‌‌​​‌‌‍​​‌‌‌​​​﻿---
 **Certification Hash:** `4e8d9b1a5f6e7c3d2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c`
 **Master of Ceremonies:** Juan Marcelo Gutierrez Miranda (@TodoEconometria)
 **Vibe:** Rock & Data

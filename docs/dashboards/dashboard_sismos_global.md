@@ -1,4 +1,4 @@
-# Observatorio Sismico Global
+# Observatorio Sismico Global﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​​‌‍​​‌‌​‌‌‌‍​​‌‌‌​​​‍​​‌‌‌​​‌‍​​‌‌​​‌‌﻿
 
 **Dashboard interactivo de actividad sismica mundial en tiempo real**
 
@@ -6,7 +6,7 @@
 
 ## Descripcion
 
-Este dashboard muestra la actividad sismica de las ultimas 24 horas utilizando datos
+Este dashboard muestra la actividad sismica de las ultimas 24 horas utilizando datos﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​​‌‍​​‌‌​‌‌‌‍​​‌‌‌​​​‍​​‌‌‌​​‌‍​​‌‌​​‌‌﻿
 del **USGS Earthquake Hazards Program** (Servicio Geologico de Estados Unidos).
 
 ## Caracteristicas
@@ -55,7 +55,7 @@ Los datos provienen de la API publica del USGS:
 - **Plotly**: Visualizaciones interactivas
 - **USGS API**: Fuente de datos oficial
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​​‌‍​​‌‌​‌‌‌‍​​‌‌‌​​​‍​​‌‌‌​​‌‍​​‌‌​​‌‌﻿---
 
 **Curso:** Big Data con Python - De Cero a Produccion
 **Profesor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

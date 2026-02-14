@@ -1,4 +1,4 @@
-# Time Series: ARIMA/SARIMA with Box-Jenkins Methodology
+# Time Series: ARIMA/SARIMA with Box-Jenkins Methodology﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌‌​​​‍​​‌‌​​​‌‍​​‌‌​‌​​‍​​‌‌​​‌‌‍​​‌‌‌​​‌‍​​‌‌​‌​​‍​‌‌​​​​‌‍​​‌‌​​​​﻿
 
 > **Status:** Available
 
@@ -6,7 +6,7 @@
 
 ## General Description
 
-We will learn to model time series using the complete **Box-Jenkins Methodology**:
+We will learn to model time series using the complete **Box-Jenkins Methodology**:﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌‌​​​‍​​‌‌​​​‌‍​​‌‌​‌​​‍​​‌‌​​‌‌‍​​‌‌‌​​‌‍​​‌‌​‌​​‍​‌‌​​​​‌‍​​‌‌​​​​﻿
 identification, estimation, diagnostics, and forecasting. We will work with ARIMA and SARIMA models
 to capture both trends and seasonality.
 
@@ -135,7 +135,7 @@ original series, decomposition, stationarity, ACF/PACF, diagnostics, and forecas
 - [statsmodels ARIMA Documentation](https://www.statsmodels.org/stable/generated/statsmodels.tsa.arima.model.ARIMA.html)
 - [statsmodels SARIMAX](https://www.statsmodels.org/stable/generated/statsmodels.tsa.statespace.sarimax.SARIMAX.html)
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌‌​​​‍​​‌‌​​​‌‍​​‌‌​‌​​‍​​‌‌​​‌‌‍​​‌‌‌​​‌‍​​‌‌​‌​​‍​‌‌​​​​‌‍​​‌‌​​​​﻿---
 
 **Course:** Big Data with Python - From Zero to Production
 **Instructor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

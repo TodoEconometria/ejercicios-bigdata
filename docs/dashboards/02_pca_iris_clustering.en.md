@@ -1,4 +1,4 @@
-# PCA + K-Means Clustering: Iris Dataset
+# PCA + K-Means Clustering: Iris Dataset﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌‌‍​​‌‌​‌​​‍​‌‌​​‌​​‍​​‌‌​‌‌‌‍​‌‌​​‌​‌‍​‌‌​​‌​​‍​​‌‌​​‌​‍​‌‌​​‌​​﻿
 
 **Author:** @TodoEconometria | **Professor:** Juan Marcelo Gutierrez Miranda
 
@@ -7,7 +7,7 @@
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
-2. [The Iris Dataset: A Machine Learning Classic](#2-the-iris-dataset-a-machine-learning-classic)
+2. [The Iris Dataset: A Machine Learning Classic](#2-the-iris-dataset-a-machine-learning-classic)﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌‌‍​​‌‌​‌​​‍​‌‌​​‌​​‍​​‌‌​‌‌‌‍​‌‌​​‌​‌‍​‌‌​​‌​​‍​​‌‌​​‌​‍​‌‌​​‌​​﻿
 3. [Why Combine PCA + Clustering](#3-why-combine-pca--clustering)
 4. [Principal Component Analysis (PCA)](#4-principal-component-analysis-pca)
 5. [K-Means Clustering](#5-k-means-clustering)
@@ -539,6 +539,6 @@ In the PCA 2D space, the clusters look like this:
 2. Validate with metrics (purity, confusion matrix)
 3. Visualize in 2D with PCA (even with more than 3 clusters)
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌‌‍​​‌‌​‌​​‍​‌‌​​‌​​‍​​‌‌​‌‌‌‍​‌‌​​‌​‌‍​‌‌​​‌​​‍​​‌‌​​‌​‍​‌‌​​‌​​﻿---
 
 **END OF DOCUMENT**

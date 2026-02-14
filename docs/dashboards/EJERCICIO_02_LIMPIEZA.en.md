@@ -1,6 +1,6 @@
-# Exercise 2: The Noise Filter (Anti-Stopwords)
+# Exercise 2: The Noise Filter (Anti-Stopwords)﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌‌​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​​​‍​‌‌​​​​‌﻿
 
-> **"You hear the guitar, it's a-clean and it's a-pure..."**
+> **"You hear the guitar, it's a-clean and it's a-pure..."**﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌‌​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​​​‍​‌‌​​​​‌﻿
 > *Like going from chaotic distortion to a crystal-clear solo, in this exercise we'll filter out language noise so the essence shines through.*
 
 ---
@@ -46,7 +46,7 @@ Observe how in the left chart empty words dominate, while on the right the **pur
 * **Silence is Power:** By removing 70% of useless words, the analysis becomes 100% more precise.
 * **Sultans of Data:** Now that you've cleaned the track, we're ready for the next level: sentiment analysis and similarity.
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌‌​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​​​‍​‌‌​​​​‌﻿---
 **Certification Hash:** `4e8d9b1a5f6e7c3d2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c`
 **Master of Ceremonies:** Juan Marcelo Gutierrez Miranda (@TodoEconometria)
 **Vibe:** Heavy Clean Sound

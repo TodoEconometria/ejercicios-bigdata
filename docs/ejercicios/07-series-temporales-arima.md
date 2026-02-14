@@ -1,4 +1,4 @@
-# Series Temporales: ARIMA/SARIMA con Metodologia Box-Jenkins
+# Series Temporales: ARIMA/SARIMA con Metodologia Box-Jenkins﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌‌‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​​‌‌​​‌‌‍​​‌‌‌​​​‍​​‌‌​‌​‌‍​​‌‌​​‌‌‍​​‌‌​‌​‌﻿
 
 > **Estado:** Disponible
 
@@ -6,7 +6,7 @@
 
 ## Descripcion General
 
-Aprenderemos a modelar series temporales utilizando la **Metodologia Box-Jenkins** completa:
+Aprenderemos a modelar series temporales utilizando la **Metodologia Box-Jenkins** completa:﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌‌‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​​‌‌​​‌‌‍​​‌‌‌​​​‍​​‌‌​‌​‌‍​​‌‌​​‌‌‍​​‌‌​‌​‌﻿
 identificacion, estimacion, diagnostico y pronostico. Trabajaremos con modelos ARIMA y SARIMA
 para capturar tanto tendencias como estacionalidad.
 
@@ -135,7 +135,7 @@ serie original, descomposicion, estacionariedad, ACF/PACF, diagnostico y pronost
 - [statsmodels ARIMA Documentation](https://www.statsmodels.org/stable/generated/statsmodels.tsa.arima.model.ARIMA.html)
 - [statsmodels SARIMAX](https://www.statsmodels.org/stable/generated/statsmodels.tsa.statespace.sarimax.SARIMAX.html)
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌‌‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​​‌‌​​‌‌‍​​‌‌‌​​​‍​​‌‌​‌​‌‍​​‌‌​​‌‌‍​​‌‌​‌​‌﻿---
 
 **Curso:** Big Data con Python - De Cero a Produccion
 **Profesor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

@@ -1,4 +1,4 @@
-# Modulo 07: Infraestructura Big Data
+# Modulo 07: Infraestructura Big Data﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌‌‍​‌‌​​​​‌‍​‌‌​​​‌​‍​‌‌​​​‌‌‍​​‌‌​​​​‍​​‌‌​​​​‍​​‌‌​‌​​‍​​‌‌​​‌​﻿
 
 **Nivel:** Intermedio-Avanzado | **Tipo:** Teorico-Conceptual con ejemplos practicos
 
@@ -6,7 +6,7 @@
 
 ## Objetivo
 
-Entender **como se construye** la infraestructura que soporta el procesamiento de grandes volumenes de datos. No solo usar las herramientas, sino comprender por que existen, como se conectan entre si y como se orquestan.
+Entender **como se construye** la infraestructura que soporta el procesamiento de grandes volumenes de datos. No solo usar las herramientas, sino comprender por que existen, como se conectan entre si y como se orquestan.﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌‌‍​‌‌​​​​‌‍​‌‌​​​‌​‍​‌‌​​​‌‌‍​​‌‌​​​​‍​​‌‌​​​​‍​​‌‌​‌​​‍​​‌‌​​‌​﻿
 
 Este modulo sienta las bases para el **Trabajo Final**, donde cada alumno construye su propia infraestructura Docker + Spark desde cero.
 
@@ -228,7 +228,7 @@ El contenido completo de cada seccion esta en los README de la carpeta del modul
 | **Catalyst** | Optimizador de queries de Spark SQL |
 | **Shuffle** | Redistribucion de datos entre nodos (costoso en red) |
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌‌‍​‌‌​​​​‌‍​‌‌​​​‌​‍​‌‌​​​‌‌‍​​‌‌​​​​‍​​‌‌​​​​‍​​‌‌​‌​​‍​​‌‌​​‌​﻿---
 
 **Curso:** Big Data con Python - De Cero a Produccion
 **Profesor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

@@ -1,4 +1,4 @@
-# Trabajo Final: Pipeline de Big Data con Infraestructura Docker
+# Trabajo Final: Pipeline de Big Data con Infraestructura Docker﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​​​‌‍​‌‌​​‌​‌‍​‌‌​​‌​‌‍​​‌‌​​‌​‍​‌‌​​​​‌‍​‌‌​​‌​​﻿
 
 **Curso:** Big Data con Python - Prof. Juan Marcelo Gutierrez Miranda (@TodoEconometria)
 
@@ -6,7 +6,7 @@
 
 ## Objetivo
 
-Construir **desde cero** una infraestructura de procesamiento de datos usando Docker,
+Construir **desde cero** una infraestructura de procesamiento de datos usando Docker,﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​​​‌‍​‌‌​​‌​‌‍​‌‌​​‌​‌‍​​‌‌​​‌​‍​‌‌​​​​‌‍​‌‌​​‌​​﻿
 Apache Spark y PostgreSQL. A partir del dataset Quality of Government (QoG),
 disenar y ejecutar un pipeline ETL + analisis que responda una pregunta de
 investigacion formulada por ti.
@@ -205,7 +205,7 @@ Copia la plantilla desde `trabajo_final/plantilla/` a tu carpeta de entrega.
 - **QoG Codebook:** [qog.pol.gu.se](https://www.gu.se/en/quality-government/qog-data) (descargar codebook para ver variables)
 - **Guia de Inicio Rapido:** `trabajo_final/GUIA_INICIO_RAPIDO.md`
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​​​‌‍​‌‌​​‌​‌‍​‌‌​​‌​‌‍​​‌‌​​‌​‍​‌‌​​​​‌‍​‌‌​​‌​​﻿---
 
 **Curso:** Big Data con Python - De Cero a Produccion
 **Profesor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

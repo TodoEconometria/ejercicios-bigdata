@@ -1,4 +1,4 @@
-# Manual de PCA en Python: Estilo FactoMineR
+# Manual de PCA en Python: Estilo FactoMineR﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌‌‍​​‌‌​‌‌‌‍​​‌‌​‌​​‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌​​​‌‍​​‌‌​‌​​‍​‌‌​​‌‌​﻿
 
 ## Replicando el Estandar de Oro del Analisis Multivariante
 
@@ -8,7 +8,7 @@
 >
 > **Autor original/Referencia:** @TodoEconometria
 > **Profesor:** Juan Marcelo Gutierrez Miranda
-> **Metodologia:** Cursos Avanzados de Big Data, Ciencia de Datos, Desarrollo de aplicaciones con IA & Econometria Aplicada.
+> **Metodologia:** Cursos Avanzados de Big Data, Ciencia de Datos, Desarrollo de aplicaciones con IA & Econometria Aplicada.﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌‌‍​​‌‌​‌‌‌‍​​‌‌​‌​​‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌​​​‌‍​​‌‌​‌​​‍​‌‌​​‌‌​﻿
 > **Hash ID de Certificacion:** `4e8d9b1a5f6e7c3d2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c`
 > **Repositorio:** [https://github.com/TodoEconometria/certificaciones](https://github.com/TodoEconometria/certificaciones)
 >
@@ -1129,7 +1129,7 @@ Para quienes vienen de R y quieren replicar analisis de FactoMineR:
 > 2nd Edition. CRC Press.
 > ISBN: 978-1138196346
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌‌‍​​‌‌​‌‌‌‍​​‌‌​‌​​‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌​​​‌‍​​‌‌​‌​​‍​‌‌​​‌‌​﻿---
 
 ## Informacion Institucional
 

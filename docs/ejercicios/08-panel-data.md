@@ -1,4 +1,4 @@
-# Modulo 06: Analisis de Datos de Panel
+# Modulo 06: Analisis de Datos de Panel﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​​‌‌​​​​‍​​‌‌​​​​‍​​‌‌​‌‌‌‍​​‌‌‌​​‌‍​‌‌​​​‌‌﻿
 
 > **Estado:** Disponible
 
@@ -6,7 +6,7 @@
 
 ## Descripcion General
 
-Aprenderemos econometria de datos de panel: la combinacion de datos de corte transversal
+Aprenderemos econometria de datos de panel: la combinacion de datos de corte transversal﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​​‌‌​​​​‍​​‌‌​​​​‍​​‌‌​‌‌‌‍​​‌‌‌​​‌‍​‌‌​​​‌‌﻿
 (paises, individuos) con series temporales (anios). Trabajaremos con modelos de Efectos Fijos,
 Efectos Aleatorios y Two-Way Fixed Effects aplicados a problemas reales de ciencias sociales.
 
@@ -176,7 +176,7 @@ Como complemento, puedes explorar un dashboard con analisis de panel aplicado al
 - Wooldridge, J. M. (2010). Econometric Analysis of Cross Section and Panel Data (2nd ed.). MIT Press.
 - Stock, J. H., & Watson, M. W. (2019). Introduction to Econometrics (4th ed.). Pearson.
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​​‌‌​​​​‍​​‌‌​​​​‍​​‌‌​‌‌‌‍​​‌‌‌​​‌‍​‌‌​​​‌‌﻿---
 
 **Curso:** Big Data con Python - De Cero a Produccion
 **Profesor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

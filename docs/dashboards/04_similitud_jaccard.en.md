@@ -1,6 +1,6 @@
-# Similarity Analysis: The Web Portal Mystery
+# Similarity Analysis: The Web Portal Mystery﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​​​‍​​‌‌​‌​‌‍​‌‌​​‌​‌‍​​‌‌‌​​‌‍​​‌‌‌​​​‍​​‌‌​‌​‌‍​​‌‌‌​​​‍​​‌‌​‌‌‌﻿
 
-> **"A recommendation system is like a librarian who knows exactly which magazine you'll like without having read the full content, just by looking at the words that repeat."**
+> **"A recommendation system is like a librarian who knows exactly which magazine you'll like without having read the full content, just by looking at the words that repeat."**﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​​​‍​​‌‌​‌​‌‍​‌‌​​‌​‌‍​​‌‌‌​​‌‍​​‌‌‌​​​‍​​‌‌​‌​‌‍​​‌‌‌​​​‍​​‌‌​‌‌‌﻿
 
 ---
 
@@ -79,6 +79,6 @@ Look at the charts saved in your folder:
 1. Do you see any red point outside the diagonal? That would indicate that two different topics share words.
 2. What would happen if the corpus had 10,000 documents? The heatmap would become unreadable, but the **Clustermap** would still give us the structure.
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​​​‍​​‌‌​‌​‌‍​‌‌​​‌​‌‍​​‌‌‌​​‌‍​​‌‌‌​​​‍​​‌‌​‌​‌‍​​‌‌‌​​​‍​​‌‌​‌‌‌﻿---
 **Certification Hash:** `4e8d9b1a5f6e7c3d2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c`
 **Author:** Juan Marcelo Gutierrez Miranda (@TodoEconometria)

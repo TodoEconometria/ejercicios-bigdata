@@ -1,4 +1,4 @@
-# Modulo 05: NLP y Text Mining
+# Modulo 05: NLP y Text Mining﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌‌‍​​‌‌​​‌​‍​‌‌​​​‌‌‍​​‌‌​‌‌​‍​​‌‌​​​​‍​‌‌​​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​​﻿
 
 > **Estado:** Disponible
 
@@ -6,7 +6,7 @@
 
 ## Descripcion General
 
-Introduccion al procesamiento de datos no estructurados mediante tecnicas de Natural Language Processing. Desde tokenizacion basica hasta analisis de sentimiento y similitud de documentos.
+Introduccion al procesamiento de datos no estructurados mediante tecnicas de Natural Language Processing. Desde tokenizacion basica hasta analisis de sentimiento y similitud de documentos.﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌‌‍​​‌‌​​‌​‍​‌‌​​​‌‌‍​​‌‌​‌‌​‍​​‌‌​​​​‍​‌‌​​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​​﻿
 
 **Nivel:** Intermedio-Avanzado
 **Tecnologias:** Python, NLTK, TF-IDF, Scikit-learn
@@ -106,7 +106,7 @@ Explora los resultados visualmente:
 - [Similitud de Jaccard](../dashboards/04_similitud_jaccard.md)
 - [Vectorizacion y Clustering](../dashboards/05_vectorizacion_y_clustering.md)
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌‌‍​​‌‌​​‌​‍​‌‌​​​‌‌‍​​‌‌​‌‌​‍​​‌‌​​​​‍​‌‌​​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​​﻿---
 
 **Curso:** Big Data con Python - De Cero a Produccion
 **Profesor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

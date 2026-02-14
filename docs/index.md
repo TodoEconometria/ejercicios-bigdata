@@ -1,4 +1,4 @@
-# CURSO COMPLETO DE BIG DATA
+# CURSO COMPLETO DE BIG DATA﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​‌​​‍​​‌‌​‌‌​‍​​‌‌‌​​​‍​​‌‌​​​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​​​‌‍​​‌‌‌​​​﻿
 
 <div style="text-align: center; padding: 30px 0;">
 <img src="assets/todoeconometria_logo.png" alt="TodoEconometria" style="width: 350px; max-width: 80%;">
@@ -38,7 +38,7 @@
 </div>
 
 <p style="text-align: center; color: #888; font-size: 0.9em;">
-Estos dashboards se actualizan automaticamente con datos reales de APIs publicas
+Estos dashboards se actualizan automaticamente con datos reales de APIs publicas﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​‌​​‍​​‌‌​‌‌​‍​​‌‌‌​​​‍​​‌‌​​​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​​​‌‍​​‌‌‌​​​﻿
 </p>
 
 ---
@@ -379,7 +379,7 @@ Este repositorio es open source. Si encuentras errores o quieres contribuir:
 <a href="ejercicios/" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 15px 40px; border-radius: 30px; text-decoration: none; font-size: 1.1em; font-weight: bold;">Comenzar Ahora</a>
 </div>
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​‌​​‍​​‌‌​‌‌​‍​​‌‌‌​​​‍​​‌‌​​​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​​​‌‍​​‌‌‌​​​﻿---
 
 <p style="text-align: center; color: #666;">
 <strong>Curso:</strong> Big Data con Python - De Cero a Produccion<br>

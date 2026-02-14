@@ -1,8 +1,8 @@
-# Modulo 08: Streaming de Datos con Apache Kafka
+# Modulo 08: Streaming de Datos con Apache Kafka﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌​‍​​‌‌​‌​​‍​​‌‌‌​​‌‍​​‌‌‌​​‌‍​‌‌​​​‌‌‍​‌‌​​​​‌‍​‌‌​​‌​​‍​‌‌​​​‌​﻿
 
 ## Introduccion
 
-El **streaming de datos** es el procesamiento continuo de datos en tiempo real, a diferencia del procesamiento por lotes (batch) donde los datos se acumulan y procesan periodicamente. En aplicaciones modernas como deteccion de fraudes, monitoreo de sensores IoT, o alertas sismicas, el tiempo de respuesta es critico.
+El **streaming de datos** es el procesamiento continuo de datos en tiempo real, a diferencia del procesamiento por lotes (batch) donde los datos se acumulan y procesan periodicamente. En aplicaciones modernas como deteccion de fraudes, monitoreo de sensores IoT, o alertas sismicas, el tiempo de respuesta es critico.﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌​‍​​‌‌​‌​​‍​​‌‌‌​​‌‍​​‌‌‌​​‌‍​‌‌​​​‌‌‍​‌‌​​​​‌‍​‌‌​​‌​​‍​‌‌​​​‌​﻿
 
 **Apache Kafka** es una plataforma distribuida de streaming que permite publicar, almacenar y procesar flujos de datos en tiempo real. Desarrollado originalmente por LinkedIn y donado a Apache, Kafka se ha convertido en el estandar de facto para arquitecturas de datos en streaming.
 
@@ -450,7 +450,7 @@ pip install confluent-kafka requests
 - Ultimo dia: `https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson`
 - Ultima semana: `https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson`
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌‌​‍​​‌‌​‌​​‍​​‌‌‌​​‌‍​​‌‌‌​​‌‍​‌‌​​​‌‌‍​‌‌​​​​‌‍​‌‌​​‌​​‍​‌‌​​​‌​﻿---
 
 **Curso:** Big Data con Python - De Cero a Produccion
 **Profesor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

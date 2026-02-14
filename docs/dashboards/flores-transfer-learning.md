@@ -1,8 +1,8 @@
-# Dashboard: Clasificación de Flores con Transfer Learning
+# Dashboard: Clasificación de Flores con Transfer Learning﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌‌‍​‌‌​​‌‌​‍​​‌‌​‌​‌‍​​‌‌​‌​​‍​​‌‌​​​​‍​‌‌​​​​‌‍​​‌‌​​​‌‍​​‌‌​​‌‌﻿
 
 ## Descripción
 
-Pipeline de **Computer Vision** que clasifica imágenes de flores usando **Transfer Learning** con MobileNetV2.
+Pipeline de **Computer Vision** que clasifica imágenes de flores usando **Transfer Learning** con MobileNetV2.﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌‌‍​‌‌​​‌‌​‍​​‌‌​‌​‌‍​​‌‌​‌​​‍​​‌‌​​​​‍​‌‌​​​​‌‍​​‌‌​​​‌‍​​‌‌​​‌‌﻿
 
 **¿Qué es Transfer Learning?** En lugar de entrenar una red neuronal desde cero (necesitaríamos millones de imágenes), usamos una red ya entrenada en ImageNet y la adaptamos a nuestro problema.
 
@@ -49,7 +49,7 @@ python 01_flores_transfer_learning.py
 
 **Requisitos:** TensorFlow (GPU recomendado pero funciona en CPU)
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌‌‍​‌‌​​‌‌​‍​​‌‌​‌​‌‍​​‌‌​‌​​‍​​‌‌​​​​‍​‌‌​​​​‌‍​​‌‌​​​‌‍​​‌‌​​‌‌﻿---
 **Curso:** Big Data con Python - De Cero a Producción
 **Profesor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria
 **Hash ID:** 4e8d9b1a5f6e7c3d2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c

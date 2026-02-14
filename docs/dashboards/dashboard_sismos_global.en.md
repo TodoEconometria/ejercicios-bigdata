@@ -1,4 +1,4 @@
-# Global Seismic Observatory
+# Global Seismic Observatory﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​​‍​​‌‌​​​​‍​‌‌​​‌​‌‍​​‌‌​​​​‍​​‌‌​​​​‍​​‌‌​‌‌​‍​​‌‌‌​​​﻿
 
 **Interactive dashboard of worldwide seismic activity in real time**
 
@@ -6,7 +6,7 @@
 
 ## Description
 
-This dashboard displays seismic activity from the last 24 hours using data
+This dashboard displays seismic activity from the last 24 hours using data﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​​‍​​‌‌​​​​‍​‌‌​​‌​‌‍​​‌‌​​​​‍​​‌‌​​​​‍​​‌‌​‌‌​‍​​‌‌‌​​​﻿
 from the **USGS Earthquake Hazards Program** (United States Geological Survey).
 
 ## Features
@@ -55,7 +55,7 @@ Data comes from the USGS public API:
 - **Plotly**: Interactive visualizations
 - **USGS API**: Official data source
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​​‍​​‌‌​​​​‍​‌‌​​‌​‌‍​​‌‌​​​​‍​​‌‌​​​​‍​​‌‌​‌‌​‍​​‌‌‌​​​﻿---
 
 **Course:** Big Data with Python - From Zero to Production
 **Professor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

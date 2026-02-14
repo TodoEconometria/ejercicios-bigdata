@@ -1,4 +1,4 @@
-# Capstone Project: Big Data Pipeline with Docker Infrastructure
+# Capstone Project: Big Data Pipeline with Docker Infrastructure﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​‌‌​‍​​‌‌​​‌‌‍​‌‌​​​‌​‍​‌‌​​​​‌‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​​​‍​​‌‌​​‌‌﻿
 
 **Course:** Big Data with Python - Prof. Juan Marcelo Gutierrez Miranda (@TodoEconometria)
 
@@ -6,7 +6,7 @@
 
 ## Objective
 
-Build **from scratch** a data processing infrastructure using Docker,
+Build **from scratch** a data processing infrastructure using Docker,﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​‌‌​‍​​‌‌​​‌‌‍​‌‌​​​‌​‍​‌‌​​​​‌‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​​​‍​​‌‌​​‌‌﻿
 Apache Spark, and PostgreSQL. Starting from the Quality of Government (QoG) dataset,
 design and execute an ETL + analysis pipeline that answers a research question
 formulated by you.
@@ -205,7 +205,7 @@ Copy the template from `trabajo_final/plantilla/` to your submission folder.
 - **QoG Codebook:** [qog.pol.gu.se](https://www.gu.se/en/quality-government/qog-data) (download codebook to see variables)
 - **Quick Start Guide:** `trabajo_final/GUIA_INICIO_RAPIDO.md`
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​‌‌​‍​​‌‌​​‌‌‍​‌‌​​​‌​‍​‌‌​​​​‌‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​​​‍​​‌‌​​‌‌﻿---
 
 **Course:** Big Data with Python - From Zero to Production
 **Instructor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

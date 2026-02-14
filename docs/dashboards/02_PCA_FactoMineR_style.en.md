@@ -1,4 +1,4 @@
-# PCA Manual in Python: FactoMineR Style
+# PCA Manual in Python: FactoMineR Style﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​‌‌​​​​‌‍​​‌‌​‌​​‍​‌‌​​​​‌‍​‌‌​​​‌‌‍​​‌‌​​​​‍​‌‌​​‌‌​‍​‌‌​​​‌‌﻿
 
 ## Replicating the Gold Standard of Multivariate Analysis
 
@@ -8,7 +8,7 @@
 >
 > **Original author/Reference:** @TodoEconometria
 > **Professor:** Juan Marcelo Gutierrez Miranda
-> **Methodology:** Advanced Courses in Big Data, Data Science, AI Application Development & Applied Econometrics.
+> **Methodology:** Advanced Courses in Big Data, Data Science, AI Application Development & Applied Econometrics.﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​‌‌​​​​‌‍​​‌‌​‌​​‍​‌‌​​​​‌‍​‌‌​​​‌‌‍​​‌‌​​​​‍​‌‌​​‌‌​‍​‌‌​​​‌‌﻿
 > **Certification Hash ID:** `4e8d9b1a5f6e7c3d2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c`
 > **Repository:** [https://github.com/TodoEconometria/certificaciones](https://github.com/TodoEconometria/certificaciones)
 >
@@ -1129,7 +1129,7 @@ For those coming from R who want to replicate FactoMineR analyses:
 > 2nd Edition. CRC Press.
 > ISBN: 978-1138196346
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​‌‌​​​​‌‍​​‌‌​‌​​‍​‌‌​​​​‌‍​‌‌​​​‌‌‍​​‌‌​​​​‍​‌‌​​‌‌​‍​‌‌​​​‌‌﻿---
 
 ## Institutional Information
 

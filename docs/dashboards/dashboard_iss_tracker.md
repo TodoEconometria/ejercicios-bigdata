@@ -1,4 +1,4 @@
-# ISS Tracker - Estacion Espacial Internacional
+# ISS Tracker - Estacion Espacial Internacional﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​​‌‍​​‌‌​​​‌‍​‌‌​​‌‌​‍​​‌‌​‌​​‍​‌‌​​​‌​‍​‌‌​​​‌​‍​‌‌​​‌​​‍​​‌‌‌​​‌﻿
 
 **Seguimiento en tiempo real de la Estacion Espacial Internacional**
 
@@ -6,7 +6,7 @@
 
 ## Descripcion
 
-Este dashboard permite rastrear la posicion de la **Estacion Espacial Internacional (ISS)**
+Este dashboard permite rastrear la posicion de la **Estacion Espacial Internacional (ISS)**﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​​‌‍​​‌‌​​​‌‍​‌‌​​‌‌​‍​​‌‌​‌​​‍​‌‌​​​‌​‍​‌‌​​​‌​‍​‌‌​​‌​​‍​​‌‌‌​​‌﻿
 en tiempo real, ver su trayectoria orbital, y predecir cuando pasara sobre tu ubicacion.
 
 ## Caracteristicas
@@ -63,7 +63,7 @@ Se ve como una **estrella brillante moviéndose rapidamente** a traves del cielo
 - **Kinesis**: Streaming de posiciones
 - **Plotly**: Visualizaciones interactivas
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​​‌‍​​‌‌​​​‌‍​‌‌​​‌‌​‍​​‌‌​‌​​‍​‌‌​​​‌​‍​‌‌​​​‌​‍​‌‌​​‌​​‍​​‌‌‌​​‌﻿---
 
 **Curso:** Big Data con Python - De Cero a Produccion
 **Profesor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

@@ -1,6 +1,6 @@
-# PRO Dashboard: ARIMA/SARIMA Time Series
+# PRO Dashboard: ARIMA/SARIMA Time Series﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌‌​​​‍​‌‌​​​‌‌‍​​‌‌​​‌​‍​​‌‌​‌​‌‍​​‌‌‌​​‌‍​‌‌​​​‌‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​﻿
 
-Interactive dashboard with a professional design inspired by Bloomberg-style financial terminals,
+Interactive dashboard with a professional design inspired by Bloomberg-style financial terminals,﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌‌​​​‍​‌‌​​​‌‌‍​​‌‌​​‌​‍​​‌‌​‌​‌‍​​‌‌‌​​‌‍​‌‌​​​‌‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​﻿
 for complete time series analysis following the Box-Jenkins methodology.
 
 [Open PRO Dashboard](dashboard_arima_pro.html){target="_blank" .md-button .md-button--primary}
@@ -57,7 +57,7 @@ This dashboard was created following best practices in financial visualization:
 - Dashboard exporter: `.profesor/soluciones/TRABAJO_FINAL/export_arima_pro.py`
 - Theoretical guide: [ARIMA Time Series](../ejercicios/07-series-temporales-arima.md)
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌‌​​​‍​‌‌​​​‌‌‍​​‌‌​​‌​‍​​‌‌​‌​‌‍​​‌‌‌​​‌‍​‌‌​​​‌‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​﻿---
 
 **Course:** Big Data with Python - From Zero to Production
 **Professor:** Juan Marcelo Gutierrez Miranda | @TodoEconometria

@@ -1,6 +1,6 @@
-# Ejercicio 03: Procesamiento Distribuido con Dask
+# Ejercicio 03: Procesamiento Distribuido con Dask﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌‌‍​​‌‌‌​​​‍​‌‌​​‌‌​‍​​‌‌​​​‌‍​​‌‌‌​​‌‍​​‌‌​​‌​‍​‌‌​​​‌‌‍​‌‌​​​​‌﻿
 
-En este módulo aprenderás a escalar tu capacidad de cómputo más allá de la memoria RAM de tu máquina, utilizando clusters locales.
+En este módulo aprenderás a escalar tu capacidad de cómputo más allá de la memoria RAM de tu máquina, utilizando clusters locales.﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​​‌‌‍​​‌‌‌​​​‍​‌‌​​‌‌​‍​​‌‌​​​‌‍​​‌‌‌​​‌‍​​‌‌​​‌​‍​‌‌​​​‌‌‍​‌‌​​​​‌﻿
 
 ![Ecosistemas de Datos Distribuidos](../assets/slides/m1_ecosistemas_p01.jpg)
 

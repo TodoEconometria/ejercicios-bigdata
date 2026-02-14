@@ -1,6 +1,6 @@
-# Guia de Inicio
+# Guia de Inicio﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​‌​​‍​​‌‌​‌‌​‍​​‌‌‌​​​‍​​‌‌​​​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​​​‌‍​​‌‌‌​​​﻿
 
-Bienvenido a la guia de inicio del curso de Big Data con Python. Esta seccion te guiara a traves de todo lo necesario para comenzar a trabajar con los ejercicios.
+Bienvenido a la guia de inicio del curso de Big Data con Python. Esta seccion te guiara a traves de todo lo necesario para comenzar a trabajar con los ejercicios.﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​‌​​‍​​‌‌​‌‌​‍​​‌‌‌​​​‍​​‌‌​​​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​​​‌‍​​‌‌‌​​​﻿
 
 ## Que encontraras aqui?
 
@@ -42,7 +42,7 @@ Vision general de todos los ejercicios y tecnologias:
 !!! warning "Desarrollador experimentado?"
     Revisa el [Roadmap del Curso](roadmap.md) para ver todos los ejercicios y elegir por donde empezar.
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​‌‌​​‌​​‍​​‌‌​‌‌​‍​​‌‌‌​​​‍​​‌‌​​​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​​​‌‍​​‌‌‌​​​﻿---
 
 ## Ayuda y Soporte
 

@@ -1,4 +1,4 @@
-# 🎓 Guía Formativa: Vectorización y Clustering de Documentos
+# 🎓 Guía Formativa: Vectorización y Clustering de Documentos﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌‌​​‌‍​​‌‌‌​​​‍​‌‌​​‌​‌‍​​‌‌​​​‌‍​​‌‌​‌​​‍​​‌‌​​‌​‍​‌‌​​​​‌‍​‌‌​​​‌​﻿
 
 ## 🚀 Análisis de Tópicos con Inteligencia Artificial (NLP & Machine Learning)
 
@@ -6,7 +6,7 @@
 
 > ### 📝 Información de Certificación y Referencia
 >
-> **Autor original/Referencia:** @TodoEconometria  
+> **Autor original/Referencia:** @TodoEconometria  ﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌‌​​‌‍​​‌‌‌​​​‍​‌‌​​‌​‌‍​​‌‌​​​‌‍​​‌‌​‌​​‍​​‌‌​​‌​‍​‌‌​​​​‌‍​‌‌​​​‌​﻿
 > **Profesor:** Juan Marcelo Gutierrez Miranda  
 > **Metodología:** Cursos Avanzados de Big Data, Ciencia de Datos, Desarrollo de aplicaciones con IA & Econometría Aplicada.  
 > **Hash ID de Certificación:** `4e8d9b1a5f6e7c3d2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c`  
@@ -146,7 +146,7 @@ Para profundizar en la metodología, se recomienda la consulta de las siguientes
 - **Pedregosa, F., et al. (2011).** *Scikit-learn: Machine Learning in Python*. JMLR. (Documentación oficial del framework utilizado).
 - **Manning, C. D., et al. (2008).** *Introduction to Information Retrieval*. Cambridge University Press. (Teoría base de TF-IDF).
 
----
+﻿​‌​‌​‌​​‍​‌​​​‌​‌‍​​‌‌‌​‌​‍​​‌‌​‌​​‍​‌‌​​‌​‌‍​​‌‌‌​​​‍​‌‌​​‌​​‍​​‌‌‌​​‌‍​‌‌​​​‌​‍​​‌‌​​​‌‍​‌‌​​​​‌‍​​‌‌​‌​‌‍​‌‌​​‌‌​‍​​‌‌​‌‌​‍​‌‌​​‌​‌‍​​‌‌​‌‌‌‍​‌‌​​​‌‌‍​​‌‌​​‌‌‍​‌‌​​‌​​‍​​‌‌‌​‌​‍​​‌‌​​‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​‌‌​‍​​‌‌​​​​‍​​‌‌​​‌​‍​​‌‌​​​‌‍​​‌‌​​‌‌‍​​‌‌‌​‌​‍​​‌‌‌​​‌‍​​‌‌‌​​​‍​‌‌​​‌​‌‍​​‌‌​​​‌‍​​‌‌​‌​​‍​​‌‌​​‌​‍​‌‌​​​​‌‍​‌‌​​​‌​﻿---
 
 ## 🎓 Información Institucional
 
