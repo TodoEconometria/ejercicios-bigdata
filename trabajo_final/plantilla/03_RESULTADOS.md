@@ -108,3 +108,9 @@ fig.write_html("outputs/dashboard/index.html", include_plotlyjs=True)
 El sistema detecta automaticamente archivos `.html` en tu entrega y los muestra
 en el ranking con un boton "Dashboard" para que cualquiera pueda ver tus resultados
 interactivos sin descargar nada.
+
+**Consejos para que tu dashboard se visualice correctamente:**
+
+- Usa `include_plotlyjs=True` en `write_html()` para embeber Plotly (mas fiable que CDN)
+- Si usas archivos externos (CSS, JS, datos), ponlos en una carpeta `assets/` junto al HTML
+- Evita rutas absolutas locales (`C:\Users\...`) - usa rutas relativas (`assets/datos.js`)
