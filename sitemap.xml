@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/faq/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/faq/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/faq/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/infraestructura/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/infraestructura/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/infraestructura/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ranking/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ranking/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ranking/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/dashboards/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/dashboards/02_PCA_FactoMineR_style/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/02_PCA_FactoMineR_style/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/02_PCA_FactoMineR_style/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/dashboards/02_pca_iris_clustering/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/02_pca_iris_clustering/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/02_pca_iris_clustering/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/dashboards/04_series_temporales_arima/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/04_series_temporales_arima/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/04_series_temporales_arima/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/dashboards/04_similitud_jaccard/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/04_similitud_jaccard/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/04_similitud_jaccard/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/dashboards/05_vectorizacion_y_clustering/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/05_vectorizacion_y_clustering/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/05_vectorizacion_y_clustering/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/dashboards/06_analisis_panel_qog/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/06_analisis_panel_qog/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/06_analisis_panel_qog/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/dashboards/EJERCICIO_01_CONTEO/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/EJERCICIO_01_CONTEO/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/EJERCICIO_01_CONTEO/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/dashboards/EJERCICIO_02_LIMPIEZA/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/EJERCICIO_02_LIMPIEZA/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/EJERCICIO_02_LIMPIEZA/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/dashboards/arima-sarima-pro/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/arima-sarima-pro/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/arima-sarima-pro/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/dashboards/dashboard_iss_tracker/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/dashboard_iss_tracker/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/dashboard_iss_tracker/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/dashboards/dashboard_sismos_global/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/dashboard_sismos_global/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/dashboard_sismos_global/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/dashboards/flores-transfer-learning/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/flores-transfer-learning/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/flores-transfer-learning/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/01-introduccion-sqlite/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/01-introduccion-sqlite/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/01-introduccion-sqlite/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/02-pipeline-etl-qog/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/02-pipeline-etl-qog/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/02-pipeline-etl-qog/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/02-postgresql-hr/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/02-postgresql-hr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/02-postgresql-hr/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/03-postgresql-jardineria/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/03-postgresql-jardineria/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/03-postgresql-jardineria/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/03-procesamiento-distribuido/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/03-procesamiento-distribuido/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/03-procesamiento-distribuido/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/04-machine-learning/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/04-machine-learning/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/04-machine-learning/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/04-migracion-sqlite-postgresql/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/04-migracion-sqlite-postgresql/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/04-migracion-sqlite-postgresql/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/05-nlp-mining/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/05-nlp-mining/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/05-nlp-mining/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/05-oracle-hr/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/05-oracle-hr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/05-oracle-hr/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/06-analisis-excel-python/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/06-analisis-excel-python/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/06-analisis-excel-python/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/06-trabajo-final-capstone/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/06-trabajo-final-capstone/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/06-trabajo-final-capstone/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/07-infraestructura-bigdata/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/07-infraestructura-bigdata/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/07-infraestructura-bigdata/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/07-series-temporales-arima/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/07-series-temporales-arima/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/07-series-temporales-arima/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/08-panel-data/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/08-panel-data/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/08-panel-data/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/08-streaming-kafka/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/08-streaming-kafka/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/08-streaming-kafka/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/09-cloud-localstack/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/09-cloud-localstack/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/09-cloud-localstack/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/entregas/guia-entregas/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/entregas/guia-entregas/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/entregas/guia-entregas/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/entregas/streaming-cloud/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/entregas/streaming-cloud/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/entregas/streaming-cloud/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/git-github/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/git-github/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/git-github/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/git-github/comandos-utiles/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/git-github/comandos-utiles/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/git-github/comandos-utiles/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/git-github/fork-clone/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/git-github/fork-clone/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/git-github/fork-clone/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/git-github/sincronizar-fork/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/git-github/sincronizar-fork/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/git-github/sincronizar-fork/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/guia-inicio/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/guia-inicio/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/guia-inicio/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/guia-inicio/instalacion/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/guia-inicio/instalacion/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/guia-inicio/instalacion/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/guia-inicio/primer-ejercicio/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/guia-inicio/primer-ejercicio/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/guia-inicio/primer-ejercicio/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/guia-inicio/roadmap/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/guia-inicio/roadmap/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/guia-inicio/roadmap/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/faq/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/faq/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/faq/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/infraestructura/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/infraestructura/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/infraestructura/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ranking/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ranking/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ranking/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/02_PCA_FactoMineR_style/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/02_PCA_FactoMineR_style/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/02_PCA_FactoMineR_style/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/02_pca_iris_clustering/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/02_pca_iris_clustering/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/02_pca_iris_clustering/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/04_series_temporales_arima/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/04_series_temporales_arima/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/04_series_temporales_arima/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/04_similitud_jaccard/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/04_similitud_jaccard/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/04_similitud_jaccard/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/05_vectorizacion_y_clustering/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/05_vectorizacion_y_clustering/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/05_vectorizacion_y_clustering/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/06_analisis_panel_qog/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/06_analisis_panel_qog/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/06_analisis_panel_qog/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/EJERCICIO_01_CONTEO/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/EJERCICIO_01_CONTEO/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/EJERCICIO_01_CONTEO/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/EJERCICIO_02_LIMPIEZA/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/EJERCICIO_02_LIMPIEZA/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/EJERCICIO_02_LIMPIEZA/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/arima-sarima-pro/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/arima-sarima-pro/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/arima-sarima-pro/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/dashboard_iss_tracker/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/dashboard_iss_tracker/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/dashboard_iss_tracker/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/dashboard_sismos_global/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/dashboard_sismos_global/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/dashboard_sismos_global/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/flores-transfer-learning/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/dashboards/flores-transfer-learning/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/dashboards/flores-transfer-learning/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/01-introduccion-sqlite/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/01-introduccion-sqlite/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/01-introduccion-sqlite/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/02-pipeline-etl-qog/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/02-pipeline-etl-qog/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/02-pipeline-etl-qog/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/02-postgresql-hr/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/02-postgresql-hr/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/02-postgresql-hr/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/03-postgresql-jardineria/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/03-postgresql-jardineria/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/03-postgresql-jardineria/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/03-procesamiento-distribuido/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/03-procesamiento-distribuido/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/03-procesamiento-distribuido/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/04-machine-learning/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/04-machine-learning/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/04-machine-learning/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/04-migracion-sqlite-postgresql/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/04-migracion-sqlite-postgresql/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/04-migracion-sqlite-postgresql/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/05-nlp-mining/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/05-nlp-mining/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/05-nlp-mining/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/05-oracle-hr/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/05-oracle-hr/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/05-oracle-hr/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/06-analisis-excel-python/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/06-analisis-excel-python/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/06-analisis-excel-python/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/06-trabajo-final-capstone/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/06-trabajo-final-capstone/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/06-trabajo-final-capstone/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/07-infraestructura-bigdata/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/07-infraestructura-bigdata/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/07-infraestructura-bigdata/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/07-series-temporales-arima/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/07-series-temporales-arima/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/07-series-temporales-arima/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/08-panel-data/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/08-panel-data/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/08-panel-data/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/08-streaming-kafka/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/08-streaming-kafka/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/08-streaming-kafka/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/09-cloud-localstack/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/ejercicios/09-cloud-localstack/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/ejercicios/09-cloud-localstack/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/entregas/guia-entregas/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/entregas/guia-entregas/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/entregas/guia-entregas/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/entregas/streaming-cloud/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/entregas/streaming-cloud/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/entregas/streaming-cloud/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/git-github/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/git-github/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/git-github/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/git-github/comandos-utiles/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/git-github/comandos-utiles/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/git-github/comandos-utiles/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/git-github/fork-clone/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/git-github/fork-clone/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/git-github/fork-clone/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/git-github/sincronizar-fork/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/git-github/sincronizar-fork/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/git-github/sincronizar-fork/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/guia-inicio/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/guia-inicio/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/guia-inicio/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/guia-inicio/instalacion/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/guia-inicio/instalacion/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/guia-inicio/instalacion/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/guia-inicio/primer-ejercicio/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/guia-inicio/primer-ejercicio/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/guia-inicio/primer-ejercicio/"/>
+    </url>
+    <url>
+        <loc>https://todoeconometria.github.io/ejercicios-bigdata/en/guia-inicio/roadmap/</loc>
+        <lastmod>2026-02-14</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://todoeconometria.github.io/ejercicios-bigdata/en/guia-inicio/roadmap/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://todoeconometria.github.io/ejercicios-bigdata/guia-inicio/roadmap/"/>
+    </url>
+</urlset>
