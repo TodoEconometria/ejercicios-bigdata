@@ -634,7 +634,7 @@
             } catch (error) {
                 // Fallback a Open Notify
                 try {
-                    const resp = await fetch('http://api.open-notify.org/astros.json');
+                    const resp = await fetch('https://api.open-notify.org/astros.json');
                     const data = await resp.json();
                     const issCrew = data.people.filter(p => p.craft === 'ISS');
                     document.getElementById('crew-count').textContent = issCrew.length;
