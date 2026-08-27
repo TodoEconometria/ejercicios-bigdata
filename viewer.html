@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Viewer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #1a1a2e; }
+  iframe { width: 100%; height: 100%; border: none; }
+  #loading {
+    position: fixed; inset: 0; display: flex; align-items: center;
+    justify-content: center; flex-direction: column; gap: 16px;
+    color: #e0e0e0; font-family: system-ui, sans-serif; background: #1a1a2e;
+  }
+  .spinner {
+    width: 48px; height: 48px; border: 4px solid #333;
+    border-top-color: #00d4ff; border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #error {
+    display: none; position: fixed; inset: 0; align-items: center;
+    justify-content: center; flex-direction: column; gap: 12px;
+    color: #ff6b6b; font-family: system-ui, sans-serif; background: #1a1a2e;
+    padding: 2rem; text-align: center;
+  }
+  #error a { color: #00d4ff; }
+</style>
+</head>
+<body>
+<div id="loading"><div class="spinner"></div><div>Cargando dashboard...</div></div>
+<div id="error"><div style="font-size:1.5rem">&#10007; Error al cargar</div><div id="errMsg"></div></div>
+<iframe id="frame" hidden></iframe>
+<script>
+(function() {
+  var ALLOWED = 'raw.githubusercontent.com';
+  var params = new URLSearchParams(location.search);
+  var url = params.get('url') || '';
+
+  if (!url) return showError('Falta el parametro ?url=');
+
+  try {
+    var parsed = new URL(url);
+    if (parsed.hostname !== ALLOWED)
+      return showError('Solo se permiten URLs de ' + ALLOWED);
+  } catch(e) {
+    return showError('URL no valida');
+  }
+
+  // Calcular base URL para rutas relativas del dashboard
+  // raw: https://raw.githubusercontent.com/USER/REPO/BRANCH/path/to/file.html
+  // cdn: https://cdn.jsdelivr.net/gh/USER/REPO@BRANCH/path/to/
+  // (jsdelivr sirve imagenes/JS con MIME correcto, solo HTML es text/plain)
+  var segments = url.replace('https://raw.githubusercontent.com/', '').split('/');
+  var user = segments[0];
+  var repo = segments[1];
+  var branch = segments[2];
+  var filePath = segments.slice(3).join('/');
+  var dirPath = filePath.substring(0, filePath.lastIndexOf('/') + 1);
+  var cdnBase = 'https://cdn.jsdelivr.net/gh/' + user + '/' + repo + '@' + branch + '/' + dirPath;
+
+  fetch(url)
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(function(html) {
+      // Inyectar <base> para que rutas relativas (imagenes, JS) resuelvan via jsdelivr
+      var baseTag = '<base href="' + cdnBase + '">';
+      if (/<head[^>]*>/i.test(html)) {
+        html = html.replace(/<head[^>]*>/i, '$&' + baseTag);
+      } else if (/<html[^>]*>/i.test(html)) {
+        html = html.replace(/<html[^>]*>/i, '$&<head>' + baseTag + '</head>');
+      } else {
+        html = baseTag + html;
+      }
+
+      document.getElementById('loading').style.display = 'none';
+      var frame = document.getElementById('frame');
+      frame.hidden = false;
+      frame.srcdoc = html;
+    })
+    .catch(function(e) {
+      showError('No se pudo cargar el dashboard: ' + e.message +
+        '<br><a href="' + url + '" target="_blank">Descargar HTML directamente</a>');
+    });
+
+  function showError(msg) {
+    document.getElementById('loading').style.display = 'none';
+    var err = document.getElementById('error');
+    err.style.display = 'flex';
+    document.getElementById('errMsg').innerHTML = msg;
+  }
+})();
+</script>
+</body>
+</html>

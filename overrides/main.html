@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="{{ config.theme.language }}" />
+  <meta property="og:site_name" content="{{ config.site_name }}" />
+  <meta property="article:author" content="https://www.facebook.com/groups/seriestemporales" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@todoeconometria" />
+  <meta name="twitter:creator" content="@todoeconometria" />
+
+  <!-- SEO -->
+  <meta name="keywords" content="big data, python, course, curso, apache spark, kafka, machine learning, NLP, ETL, docker, pandas, dask, postgresql, tensorflow, data science, data engineering, econometrics, panel data, free course, open source, bilingual" />
+  <meta name="author" content="Juan Marcelo Gutierrez Miranda" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "{{ config.site_name }}",
+    "description": "{{ config.site_description }}",
+    "provider": {
+      "@type": "Person",
+      "name": "Juan Marcelo Gutierrez Miranda",
+      "url": "https://www.todoeconometria.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/juangutierrezconsultor/",
+        "https://twitter.com/todoeconometria",
+        "https://www.youtube.com/channel/UC2ok03ltDHcVo1PZ1C8mGeg",
+        "https://www.facebook.com/groups/seriestemporales",
+        "https://www.facebook.com/groups/econometriaMCO",
+        "https://www.instagram.com/todoeconometria/",
+        "https://github.com/TodoEconometria"
+      ]
+    },
+    "educationalLevel": "University",
+    "programmingLanguage": "Python",
+    "inLanguage": "{{ config.theme.language }}",
+    "isAccessibleForFree": true,
+    "url": "{{ config.site_url }}",
+    "teaches": [
+      "Big Data",
+      "Apache Spark",
+      "Apache Kafka",
+      "Machine Learning",
+      "NLP",
+      "Docker",
+      "ETL Pipelines",
+      "Panel Data Econometrics",
+      "Cloud Computing",
+      "TensorFlow"
+    ]
+  }
+  </script>
+{% endblock %}
