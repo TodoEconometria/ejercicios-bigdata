@@ -491,8 +491,8 @@
         function initMap() {
             map = L.map('map', { center: [0, 0], zoom: 2, minZoom: 1, worldCopyJump: true });
 
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '© CARTO',
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+                attribution: '© Esri',
                 subdomains: 'abcd'
             }).addTo(map);
 
